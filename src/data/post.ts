@@ -2,7 +2,7 @@ import type { CollectionEntry } from "astro:content";
 import { getCollection } from "astro:content";
 
 /** Note: this function filters out draft posts based on the environment */
-export async function getAllPosts() {
+export async function getAllPosts(): Promise<Array<CollectionEntry<"post">>> {
 	return await getCollection("post", ({ data }) => {
 		return import.meta.env.PROD ? data.draft !== true : true;
 	});
