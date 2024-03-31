@@ -1,6 +1,6 @@
 ---
 author: Nick Hodges
-pubDatetime: 2023-07-25
+publishDate: 2023-07-25
 title: Some basic things I believe
 postSlug: stuffibelieve
 featured: true

@@ -1,6 +1,6 @@
 ---
 author: Nick Hodges
-pubDatetime: 2023-10-16
+publishDate: 2023-10-16
 title: The Get Off My Lawn Phase of Life
 postSlug: getoffmylawn
 featured: false

@@ -1,6 +1,6 @@
 ---
 author: Nick Hodges
-pubDatetime: 2023-07-25
+publishDate: 2023-07-25
 title: Need a title here
 postSlug: needaslughere
 featured: true

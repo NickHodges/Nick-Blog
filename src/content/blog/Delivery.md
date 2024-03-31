@@ -1,6 +1,6 @@
 ---
 author: Nick Hodges
-pubDatetime: 2024-01-28
+publishDate: 2024-01-28
 title: How to Be a Good Delivery Customer
 postSlug: deliveryfriendly
 featured: false

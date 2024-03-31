@@ -1,6 +1,6 @@
 ---
 author: Nick Hodges
-pubDatetime: 2023-05-27
+publishDate: 2023-05-27
 title: Four Thoughts on Memorial Day
 postSlug: memorialday
 featured: false

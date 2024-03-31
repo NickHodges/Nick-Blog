@@ -1,6 +1,6 @@
 ---
 author: Nick Hodges
-pubDatetime: 2023-06-08
+publishDate: 2023-06-08
 title: Thoughts on Greed
 postSlug: greed
 featured: false

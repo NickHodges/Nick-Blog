@@ -1,6 +1,6 @@
 ---
 author: Nick Hodges
-pubDatetime: 2023-08-26
+publishDate: 2023-08-26
 title: Do We Have a Right to Privacy?
 postSlug: privacy
 featured: false

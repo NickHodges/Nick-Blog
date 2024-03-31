@@ -1,6 +1,6 @@
 ---
 author: Nick Hodges
-pubDatetime: 2023-07-03
+publishDate: 2023-07-03
 title: The Content of Your Character
 postSlug: contentofcharacter
 featured: false

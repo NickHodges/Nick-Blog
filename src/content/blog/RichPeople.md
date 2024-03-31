@@ -1,6 +1,6 @@
 ---
 author: Nick Hodges
-pubDatetime: 2023-07-28
+publishDate: 2023-07-28
 title: Rich People
 postSlug: richpeople
 featured: false

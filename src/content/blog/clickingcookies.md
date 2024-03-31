@@ -1,6 +1,6 @@
 ---
 author: Nick Hodges
-pubDatetime: 2024-03-23
+publishDate: 2024-03-23
 title: Clicking on Those Awful Cookie Warnings
 postSlug: cookiewarnings
 featured: false

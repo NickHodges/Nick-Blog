@@ -1,6 +1,6 @@
 ---
 author: Nick Hodges
-pubDatetime: 2023-05-14
+publishDate: 2023-05-14
 title: How to Argue on the Internet
 postSlug: argueontheinternet
 featured: false

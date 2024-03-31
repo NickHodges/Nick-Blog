@@ -1,6 +1,6 @@
 ---
 author: Nick Hodges
-pubDatetime: 2023-06-17
+publishDate: 2023-06-17
 title: Primaries Suck
 postSlug: primariessuck
 featured: false

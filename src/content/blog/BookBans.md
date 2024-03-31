@@ -1,6 +1,6 @@
 ---
 author: Nick Hodges
-pubDatetime: 2024-03-23
+publishDate: 2024-03-23
 title: Some Thoughts on Book Banning
 postSlug: librariesandbookbanning
 featured: false

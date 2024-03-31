@@ -1,6 +1,6 @@
 ---
 author: Nick Hodges
-pubDatetime: 2023-05-14
+publishDate: 2023-05-14
 title: Nick's Four Point Plan for Reforming the Police
 postSlug: policereform
 featured: false

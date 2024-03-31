@@ -1,6 +1,6 @@
 ---
 author: Nick Hodges
-pubDatetime: 2024-01-03
+publishDate: 2024-01-03
 title: Say No to Configuring Infrastructure with Aptible
 postSlug: aptible
 featured: true

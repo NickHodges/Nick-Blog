@@ -1,6 +1,6 @@
 ---
 title: "Homelessness and Affordable Housing"
-pubDatetime: 2024-01-07
+publishDate: 2024-01-07
 description: "Affordable housing for everyone isn't that hard."
 tags:
   - policy

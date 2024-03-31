@@ -1,6 +1,6 @@
 ---
 author: Nick Hodges
-pubDatetime: 2023-06-18
+publishDate: 2023-06-18
 title: Kids and Social Media
 postSlug: kidsonline
 featured: false

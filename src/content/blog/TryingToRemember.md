@@ -1,6 +1,6 @@
 ---
 author: Nick Hodges
-pubDatetime: 2023-07-04
+publishDate: 2023-07-04
 title: Trying to Remember
 postSlug: remember
 featured: true

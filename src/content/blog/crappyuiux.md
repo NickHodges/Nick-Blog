@@ -1,6 +1,6 @@
 ---
 author: Nick Hodges
-pubDatetime: 2024-01-18
+publishDate: 2024-01-18
 title: Adventures in Crappy User Experiences and Interfaces
 postSlug: crappyuiux
 featured: true

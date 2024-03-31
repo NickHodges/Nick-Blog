@@ -1,6 +1,6 @@
 ---
 author: Nick Hodges
-pubDatetime: 2023-06-25
+publishDate: 2023-06-25
 title: The Path to Success
 postSlug: remember
 featured: false

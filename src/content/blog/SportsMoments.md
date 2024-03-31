@@ -1,6 +1,6 @@
 ---
 author: Nick Hodges
-pubDatetime: 2023-11-05
+publishDate: 2023-11-05
 title: My Top Ten Favorite Things in Sports
 postSlug: sportsmoments
 featured: false
