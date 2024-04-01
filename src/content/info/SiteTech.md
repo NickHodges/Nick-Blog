@@ -1,7 +1,4 @@
----
-title: "About The Tech Behind This Site"
-draft: false
----
+# About The Tech Behind This Site
 
 ## [Change Log](../ChangeLog)
 

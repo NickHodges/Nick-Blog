@@ -1,9 +1,7 @@
----
-title: "A Short Bio of Nick"
-draft: false
----
 
-I’m Nick Hodges. I’m a Software Developer Advocate, a friend, a Dad, a Grandfather, a former Naval Officer, a writer, and an aspiring web developer.
+# A Short Bio of Nick
+
+I’m Nick Hodges. I’m a Delphi developer, a columnist and writer, a friend, a Dad, a Grandfather, a former Naval Officer, and an aspiring web developer.
 
 Despite having lived all over the world, I still consider myself a Minnesotan. I root for Minnesota sports teams, still, and I go back whenever I can. My Dad and brother still live there. As I like to brag every chance I get, my [sister served as Mayor of Minneapolis](https://en.wikipedia.org/wiki/Betsy_Hodges). It’s a wonderful place.
 

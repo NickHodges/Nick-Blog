@@ -38,7 +38,7 @@ const info = defineCollection({
 	type: "content",
 	schema: ({}) =>
 		z.object({
-			title: z.string().max(60),
+			title: z.string().max(60).optional(),
 			author: z.string().optional().default("Nick"),
 			draft: z.boolean().default(false),
 			ogImage: z.string().optional(),
