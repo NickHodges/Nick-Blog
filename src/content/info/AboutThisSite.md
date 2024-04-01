@@ -1,6 +1,5 @@
 ---
 title: "About This Site"
-postSlug: "AboutThisSite"
 draft: false
 ---
 

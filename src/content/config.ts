@@ -34,4 +34,15 @@ const post = defineCollection({
 		}),
 });
 
-export const collections = { post };
+const info = defineCollection({
+	type: "content",
+	schema: ({}) =>
+		z.object({
+			title: z.string().max(60),
+			author: z.string().optional().default("Nick"),
+			draft: z.boolean().default(false),
+			ogImage: z.string().optional(),
+		}),
+});
+
+export const collections = { post, info };
