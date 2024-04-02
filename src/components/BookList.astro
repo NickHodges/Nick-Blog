@@ -1,16 +1,26 @@
 ---
 // Import the books data from the JSON file
+<<<<<<< HEAD
 import books from "@/pagedata/books.json";
 
 interface Book {
 	title: string;
 	author: string;
 	link: string;
+=======
+import books from "@data/books.json";
+
+interface Book {
+  title: string;
+  author: string;
+  link: string;
+>>>>>>> dev
 }
 ---
 
 <!-- Define your component's HTML here -->
 <div>
+<<<<<<< HEAD
 	<h1>Books</h1>
 	<ul>
 		{
@@ -26,4 +36,16 @@ interface Book {
 			))
 		}
 	</ul>
+=======
+  <h3>Books</h3>
+  <ul>
+    {
+      books.map((book: Book) => (
+        <li>
+          <strong><a href={book.link} target="_blank" rel="noopener noreferrer">{book.title}</a></strong> by {book.author}
+        </li>
+      ))
+    }
+  </ul>
+>>>>>>> dev
 </div>

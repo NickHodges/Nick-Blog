@@ -1,15 +1,25 @@
 ---
+<<<<<<< HEAD
 import quotes from "@/pagedata/quotes.json";
 
 interface Quote {
 	ID: number;
 	quote: string;
 	author: string;
+=======
+import quotes from "@data/quotes.json";
+
+interface Quote {
+  ID: number;
+  quote: string;
+  author: string;
+>>>>>>> dev
 }
 ---
 
 <!-- Define your component's HTML here -->
 <div>
+<<<<<<< HEAD
 	<ul>
 		{
 			quotes.map((quote: Quote) => (
@@ -23,4 +33,19 @@ interface Quote {
 			))
 		}
 	</ul>
+=======
+  <ul>
+    {
+      quotes.map((quote: Quote) => (
+        <div>
+          <div>
+            <a href={`/quotes/${quote.ID}`}>#</a>
+            <em>{quote.quote}</em>
+          </div>
+          <div> -- {quote.author}</div>
+        </div>
+      ))
+    }
+  </ul>
+>>>>>>> dev
 </div>
