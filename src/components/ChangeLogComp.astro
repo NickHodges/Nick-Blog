@@ -1,0 +1,65 @@
+---
+// Import the changelog data
+import changelogData from "@/pagedata/changelog.json";
+
+// Define TypeScript types for the changelog entries
+type ChangelogEntry = {
+	date: string;
+	event: string;
+	comments: string;
+};
+
+// Assert the imported data matches the ChangelogEntry type
+const data: ChangelogEntry[] = changelogData as ChangelogEntry[];
+---
+
+<style>
+	table {
+		width: 100%;
+		border-collapse: collapse;
+		border: 1px solid #ccc;
+	}
+	th {
+		border: 1px solid #ccc;
+		padding: 8px;
+		text-align: center;
+		font-weight: bold; /* Makes text bold */
+		font-size: 18px; /* Increases the font size to be slightly larger */
+		background-color: gray;
+	}
+	td {
+		border: 1px solid #ccc;
+		padding: 8px;
+		text-align: left;
+	}
+	tr:nth-child(odd) {
+		background-color: #e0e0e0;
+	}
+
+	th:first-child,
+	td:first-child {
+		min-width: 120px; /* Adjust the value as needed to prevent wrapping */
+		white-space: nowrap; /* This will ensure the content doesn't wrap */
+	}
+</style>
+
+<table>
+	<thead>
+		<tr>
+			<th>Date</th>
+			<th>Event</th>
+			<th>Comments</th>
+		</tr>
+	</thead>
+	<tbody>
+		{
+			data.map((entry: ChangelogEntry) => (
+				<tr>
+					<td>{entry.date}</td>
+					<td>{entry.event}</td>
+					<td>{entry.comments}</td>
+				</tr>
+			))
+		}
+	</tbody>
+</table>

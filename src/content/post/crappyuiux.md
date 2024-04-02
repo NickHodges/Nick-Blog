@@ -5,7 +5,7 @@ title: Adventures in Crappy User Experiences and Interfaces
 postSlug: crappyuiux
 featured: true
 tags:
-  - tech
+  - technology
   - uiux
   - opinion
 description: "The universe is filled with shitty apps, terrible user interfaces, and crappy user experiences"

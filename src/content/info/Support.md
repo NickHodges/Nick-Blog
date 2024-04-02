@@ -1,6 +1,5 @@
 ---
 title: "Support Me!"
-postSlug: "Support"
 draft: false
 ---
 

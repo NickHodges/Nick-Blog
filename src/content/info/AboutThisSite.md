@@ -1,10 +1,9 @@
 ---
 title: "About This Site"
-postSlug: "AboutThisSite"
 draft: false
 ---
 
-So, this site is my personal site. I have a [technical/professional site](https://nickhodges.dev)> where I'll deal with that side of my life.
+So, this site is my personal site. I have a [technical/professional site](https://nickhodges.dev) where I'll deal with that side of my life.
 
 This site is for all my other stuff. I'll write here about all kinds of different things, from general thoughts on life to public policy and political philosophy, futurism and cool technologies, and anything else that pops into my head. I probably won't write a lot (or any at all?) about strict politics -- and by that, I mean the crazed activities of politicians. I don't really pay much attention to that. I'd rather think about ways to help people and make the world a better place.
 

@@ -1,6 +1,5 @@
 ---
 title: "Contact Me"
-postSlug: "contact"
 draft: false
 ---
 
