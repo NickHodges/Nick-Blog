@@ -34,7 +34,6 @@ const post = defineCollection({
 		}),
 });
 
-<<<<<<< HEAD
 const info = defineCollection({
 	type: "content",
 	schema: ({}) =>
@@ -42,38 +41,8 @@ const info = defineCollection({
 			title: z.string().max(60).optional(),
 			author: z.string().optional().default("Nick"),
 			draft: z.boolean().default(false),
-=======
-const blog = defineCollection({
-	type: "content",
-	schema: ({ image }) =>
-		z.object({
-			title: z.string().max(60),
-			author: z.string().optional(),
-			description: z.string().min(20).max(160),
-			publishDate: z
-				.string()
-				.or(z.date())
-				.transform((val) => new Date(val)),
-			updatedDate: z
-				.string()
-				.optional()
-				.transform((str) => (str ? new Date(str) : undefined)),
-			coverImage: z
-				.object({
-					src: image(),
-					alt: z.string(),
-				})
-				.optional(),
-			draft: z.boolean().default(false),
-			tags: z.array(z.string()).default([]).transform(removeDupsAndLowerCase),
->>>>>>> dev
 			ogImage: z.string().optional(),
 		}),
 });
 
-<<<<<<< HEAD
 export const collections = { post, info };
-=======
-
-export const collections = { post, blog };
->>>>>>> dev
