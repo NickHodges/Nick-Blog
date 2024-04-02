@@ -1,0 +1,18 @@
+---
+import PageLayout from "@/layouts/Base.astro";
+import BookList from "@/components/BookList.astro";
+import MovieList from "@/components/MovieList.astro";
+---
+
+<PageLayout
+	meta={{
+		title: "Favorite Stuff",
+	}}
+>
+	<BookList />
+	<MovieList />
+	<em
+		>Any Amazon links on this page are affiliate links, and if you purchase anything using these
+		links, I will get a commission. But please feel free to use the links, as they cost you nothing.</em
+	>
+</PageLayout>
