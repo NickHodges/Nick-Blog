@@ -1,0 +1,35 @@
+---
+// src/pages/quotes/[id].astro
+import quotes from "@/pagedata/quotes.json";
+import PageLayout from "@/layouts/Base.astro";
+
+export async function getStaticPaths() {
+	// Generate paths for each quote based on its ID
+	return quotes.map((quote) => {
+		return {
+			params: {
+				id: quote.ID.toString(),
+			},
+		};
+	});
+}
+
+const { id } = Astro.params;
+const quote = quotes.find((q) => q.ID === parseInt(id, 10));
+
+if (!quote) {
+	return Astro.redirect("/404");
+}
+
+const frontmatter = {
+	title: `Quote ${id}`, // You can customize this title
+	description: quote.quote, // Optional: Add a description if you want
+};
+---
+
+<PageLayout meta={frontmatter}>
+	<article>
+		<p class="italic">{quote.quote}</p>
+		<p>— {quote.author}</p>
+	</article>
+</PageLayout>

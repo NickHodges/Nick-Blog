@@ -1,6 +1,5 @@
 ---
 title: "Site Disclaimer"
-postSlug: "Disclaimer"
 draft: false
 ---
 
