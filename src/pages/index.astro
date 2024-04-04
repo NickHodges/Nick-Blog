@@ -6,7 +6,7 @@ import { getAllPosts, sortMDByDate } from "@/data/post";
 
 const MAX_POSTS = 10;
 const allPosts = await getAllPosts();
-const allPostsByDateLimitedToMaxPostsValue = sortMDByDate(allPosts).slice(0, MAX_POSTS);
+const maxValuePosts = sortMDByDate(allPosts).slice(0, MAX_POSTS);
 ---
 
 <PageLayout meta={{ title: "Home" }}>
@@ -19,7 +19,7 @@ const allPostsByDateLimitedToMaxPostsValue = sortMDByDate(allPosts).slice(0, MAX
 		<h2 class="title mb-4 text-xl">Posts</h2>
 		<ul class="space-y-4">
 			{
-				allPostsByDateLimitedToMaxPostsValue.map((p) => (
+				maxValuePosts.map((p) => (
 					<li class="flex flex-col gap-x-2 sm:flex-row">
 						<PostPreview post={p} />
 					</li>
