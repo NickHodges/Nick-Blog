@@ -67,6 +67,9 @@ const socialImageURL = new URL(ogImage ? ogImage : "/social-card.png", Astro.url
 {/* RSS auto-discovery */}
 <link href="/rss.xml" rel="alternate" title={siteConfig.title} type="application/rss+xml" />
 
+<link rel="authorization_endpoint" href="https://indieauth.com/auth" />
+<link rel="me" href="https://github.com/nickhodges" />
+
 {/* Webmentions */}
 {
 	siteConfig.webmentions && (
