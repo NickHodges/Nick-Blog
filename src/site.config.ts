@@ -22,7 +22,8 @@ export const siteConfig: SiteConfig = {
 		},
 	},
 	webmentions: {
-		link: "https://nickhodges.com",
+		link: "https://webmention.io/www.nickhodges.com/webmention",
+		pingback: "https://webmention.io/www.nickhodges.com/xmlrpc",
 	},
 };
 
