@@ -32,4 +32,12 @@
 	body {
 		@apply mx-auto flex min-h-screen max-w-3xl flex-col bg-bgColor px-8 pt-16 font-mono text-sm font-normal text-textColor antialiased;
 	}
+
+	table {
+		@apply w-full border-collapse border border-gray-400;
+	}
+	th,
+	td {
+		@apply border border-gray-400 p-2;
+	}
 }
