@@ -22,7 +22,7 @@ export const siteConfig: SiteConfig = {
 		},
 	},
 	webmentions: {
-		link: "",
+		link: "https://nickhodges.com",
 	},
 };
 
