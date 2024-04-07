@@ -1,3 +1,8 @@
+---
+title: "Site Tech"
+draft: false
+---
+
 # About The Tech Behind This Site
 
 ## [Change Log](../ChangeLog)
