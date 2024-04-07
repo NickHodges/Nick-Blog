@@ -4,7 +4,9 @@ import { Content as AboutContent } from "./data/about.md";
 ---
 
 <PageLayout meta={{ title: "About Nick" }}>
-	<article class="prose">
+	<article
+		class="prose prose-sm prose-cactus mt-12 max-w-3xl prose-headings:font-semibold prose-headings:text-accent-2 prose-headings:before:absolute prose-headings:before:-ms-4 prose-headings:before:text-accent prose-headings:before:content-['#'] prose-th:before:content-none"
+	>
 		<AboutContent />
-	</article>
+	</>
 </PageLayout>
