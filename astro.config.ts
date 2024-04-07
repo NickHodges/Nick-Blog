@@ -46,6 +46,11 @@ export default defineConfig({
 	// https://docs.astro.build/en/guides/prefetch/
 	prefetch: true,
 	vite: {
+		resolve: {
+			alias: {
+				"@components": "/src/components",
+			},
+		},
 		plugins: [rawFonts([".ttf", ".woff"])],
 		optimizeDeps: {
 			exclude: ["@resvg/resvg-js"],

@@ -1,3 +1,7 @@
+---
+title: "Short Bio"
+draft: false
+---
 
 # A Short Bio of Nick
 

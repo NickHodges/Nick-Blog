@@ -22,7 +22,8 @@ export const siteConfig: SiteConfig = {
 		},
 	},
 	webmentions: {
-		link: "https://webmention.io/astro-cactus.chriswilliams.dev/webmention",
+		link: "https://webmention.io/www.nickhodges.com/webmention",
+		pingback: "https://webmention.io/www.nickhodges.com/xmlrpc",
 	},
 };
 
