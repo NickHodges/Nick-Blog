@@ -1,30 +1,27 @@
 ---
-import SocialList from "@/components/SocialList.astro";
-import PostPreview from "@/components/blog/PostPreview.astro";
-import PageLayout from "@/layouts/Base.astro";
-import { getAllPosts, sortMDByDate } from "@/data/post";
-
-const MAX_POSTS = 10;
-const allPosts = await getAllPosts();
-const maxValuePosts = sortMDByDate(allPosts).slice(0, MAX_POSTS);
+import SocialList from '@/components/SocialList.astro';
+import PostPreview from '@/components/blog/PostPreview.astro';
+import PageLayout from '@/layouts/Base.astro';
+import { getAllPosts, sortMDByDate } from '@/data/post';
 ---
 
-<PageLayout meta={{ title: "Home" }}>
-	<section>
-		<h1 class="title mb-6">Greetings Fellow Earthling!</h1>
-		<p class="mb-4">Hi, I’m Nick Hodges. I'm glad you stopped by.</p>
-		<SocialList />
-	</section>
-	<section aria-label="Blog post list" class="mt-16">
-		<h2 class="title mb-4 text-xl">Posts</h2>
-		<ul class="space-y-4">
-			{
-				maxValuePosts.map((p) => (
-					<li class="flex flex-col gap-x-2 sm:flex-row">
-						<PostPreview post={p} />
-					</li>
-				))
-			}
-		</ul>
-	</section>
+<PageLayout meta={{ title: 'Home' }}>
+  <section class="prose prose-cactus mb-4">
+    <h1 class="title mb-6">Greetings Fellow Earthling!</h1>
+    <p>Hi, I’m Nick Hodges. I'm glad you stopped by.</p>
+  </section>
+  <div class="prose prose-cactus mb-4">Other than here, you can find me in these places:</div>
+  <SocialList />
+  <section class="prose prose-cactus mt-4">
+    <p>I am here to share what little wisdom I have acquired over the years.</p>
+    <p>
+      I have written <a href="https://www.codingindelphi.com">three programming books on Delphi</a>.
+    </p>
+    <p>
+      My mighty mom <a href="https://thatmadgame.com">wrote a novel</a> and I published it before she passed. You can read about it <a href="https://www.thatmadgame.com/about">here on the book's website</a>.
+    </p>
+    <p>
+      <a href="https://www.infoworld.com/author/Nick-Hodges/">I write regularly for Infoworld</a>
+    </p>
+  </section>
 </PageLayout>
