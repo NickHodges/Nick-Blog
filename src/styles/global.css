@@ -34,11 +34,19 @@
 	}
 
 	table {
-		@apply w-full border-collapse border border-gray-400;
+		@apply w-full table-auto border border-gray-300 bg-white;
 	}
-	th,
+
+	thead {
+		@apply border border-gray-300 text-lg;
+	}
+
+	tr {
+		@apply odd:bg-white even:bg-gray-200 dark:odd:bg-gray-800 dark:even:bg-gray-700;
+	}
+
 	td {
-		@apply border border-gray-400 p-2;
+		@apply border border-gray-300 px-4 py-2;
 	}
 
 	tr:nth-child(odd) {
