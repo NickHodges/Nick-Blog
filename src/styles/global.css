@@ -48,4 +48,11 @@
 	td {
 		@apply border border-gray-300 px-4 py-2;
 	}
+
+	tr:nth-child(odd) {
+		@apply bg-gray-100; /* Light color for odd rows */
+	}
+	tr:nth-child(even) {
+		@apply bg-gray-200; /* Slightly darker color for even rows */
+	}
 }
