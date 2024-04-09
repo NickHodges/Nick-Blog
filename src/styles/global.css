@@ -40,4 +40,11 @@
 	td {
 		@apply border border-gray-400 p-2;
 	}
+
+	tr:nth-child(odd) {
+		@apply bg-gray-100; /* Light color for odd rows */
+	}
+	tr:nth-child(even) {
+		@apply bg-gray-200; /* Slightly darker color for even rows */
+	}
 }
