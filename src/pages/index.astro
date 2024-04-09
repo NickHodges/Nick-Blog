@@ -1,8 +1,6 @@
 ---
 import SocialList from '@/components/SocialList.astro';
-import PostPreview from '@/components/blog/PostPreview.astro';
 import PageLayout from '@/layouts/Base.astro';
-import { getAllPosts, sortMDByDate } from '@/data/post';
 ---
 
 <PageLayout meta={{ title: 'Home' }}>
@@ -10,8 +8,6 @@ import { getAllPosts, sortMDByDate } from '@/data/post';
     <h1 class="title mb-6">Greetings Fellow Earthling!</h1>
     <p>Hi, I’m Nick Hodges. I'm glad you stopped by.</p>
   </section>
-  <div class="prose prose-cactus mb-4">Other than here, you can find me in these places:</div>
-  <SocialList />
   <section class="prose prose-cactus mt-4">
     <p>I am here to share what little wisdom I have acquired over the years.</p>
     <p>
@@ -24,4 +20,6 @@ import { getAllPosts, sortMDByDate } from '@/data/post';
       <a href="https://www.infoworld.com/author/Nick-Hodges/">I write regularly for Infoworld</a>
     </p>
   </section>
+  <div class="prose prose-cactus mb-4 mt-4">Other than here on this site, you can find me in these places:</div>
+  <SocialList />
 </PageLayout>
