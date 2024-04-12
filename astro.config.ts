@@ -14,6 +14,10 @@ import { expressiveCodeOptions } from "./src/site.config";
 export default defineConfig({
 	// ! Please remember to replace the following site property with your own domain
 	site: "https://nickhodges.com/",
+	output: 'hybrid',
+	adapter: vercel({
+    webAnalytics: { enabled: true }
+  }),
 	markdown: {
 		remarkPlugins: [remarkUnwrapImages, remarkReadingTime],
 		rehypePlugins: [
