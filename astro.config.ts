@@ -9,14 +9,16 @@ import { remarkReadingTime } from "./src/utils/remark-reading-time";
 import icon from "astro-icon";
 import expressiveCode from "astro-expressive-code";
 import { expressiveCodeOptions } from "./src/site.config";
-
 import vercel from "@astrojs/vercel/serverless";
+
+import react from "@astrojs/react";
 
 // https://astro.build/config
 export default defineConfig({
   // ! Please remember to replace the following site property with your own domain
   site: "https://nickhodges.com/",
-	adapter: vercel(),
+  adapter: vercel(),
+  output: "hybrid",
   markdown: {
     remarkPlugins: [remarkUnwrapImages, remarkReadingTime],
     rehypePlugins: [[rehypeExternalLinks, {
@@ -31,7 +33,7 @@ export default defineConfig({
   },
   integrations: [expressiveCode(expressiveCodeOptions), icon(), tailwind({
     applyBaseStyles: false
-  }), sitemap(), mdx()],
+  }), sitemap(), mdx(), react()],
   image: {
     domains: ["webmention.io"]
   },
@@ -47,7 +49,7 @@ export default defineConfig({
     optimizeDeps: {
       exclude: ["@resvg/resvg-js"]
     }
-  },
+  }
 });
 function rawFonts(ext: Array<string>) {
   return {
