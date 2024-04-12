@@ -16,7 +16,6 @@ import vercel from "@astrojs/vercel/serverless";
 export default defineConfig({
   // ! Please remember to replace the following site property with your own domain
   site: "https://nickhodges.com/",
-  output: 'hybrid',
 	adapter: vercel(),
   markdown: {
     remarkPlugins: [remarkUnwrapImages, remarkReadingTime],
