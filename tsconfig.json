@@ -1,7 +1,7 @@
 {
   "extends": "astro/tsconfigs/strictest",
   "compilerOptions": {
-    "baseUrl": "C:/code/cactus",
+    "baseUrl": "./",
     "lib": [
       "es2022",
       "dom",
