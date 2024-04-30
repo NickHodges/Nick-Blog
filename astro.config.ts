@@ -15,7 +15,6 @@ import vercelStatic from '@astrojs/vercel/static';
 export default defineConfig({
 	// ! Please remember to replace the following site property with your own domain
 	site: "https://nickhodges.com/",
-	outDir: '/dist',
 	output: 'static',
     adapter: vercelStatic({
     webAnalytics: {
