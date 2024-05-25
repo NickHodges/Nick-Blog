@@ -1,8 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 
-import WebMentions from '@/components/blog/webmentions/index.astro';
-
 import BaseLayout from './Base.astro';
 
 interface Props {
@@ -22,7 +20,6 @@ const socialImage = ogImage ?? `/og-image/${slug}.png`;
     <article class="flex-grow break-words" data-pagefind-body>
       <div class="prose prose-cactus mt-12 max-w-3xl prose-headings:font-semibold prose-headings:text-accent-2 prose-headings:before:absolute prose-headings:before:-ms-4 prose-headings:before:text-accent prose-headings:before:content-['#'] prose-th:before:content-none">
         <slot />
-        <WebMentions />
       </div>
     </article>
   </div>

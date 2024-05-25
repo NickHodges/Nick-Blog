@@ -20,11 +20,7 @@ export const siteConfig: SiteConfig = {
       month: 'short',
       year: 'numeric',
     },
-  },
-  webmentions: {
-    link: 'https://webmention.io/www.nickhodges.com/webmention',
-    pingback: 'https://webmention.io/www.nickhodges.com/xmlrpc',
-  },
+  }
 };
 
 // Used to generate links in both the Header & Footer.
