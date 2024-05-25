@@ -47,6 +47,6 @@ Shoot, given all that, I say Bezos isn't wealthy enough.
 
 **Added**: I had a further thought on this: The fact that people have wealth harms no one, and helps a lot of people. Unless a rich person turns all their assets into cash, gold, or some other physical asset and hides that in vault or under the mattress, or something, the existence of their wealth harms no one. Now, they can do harmful things with their wealth, but that's a totally different matter. The actual existence of the wealth harms no one.
 
-**More Added**: An additional point here is that the only real way to prevent people from getting as rich as Jeff Bezos is today is to either limit the market capitalization of a company (literally limiting the stock price) or limiting how much of a given company anyone can own. Both are complex problems. And both, of course, will result if few jobs and few people willing to take the risks to create companies.
+**More Added**: An additional point here is that the only real way to prevent people from getting as rich as Jeff Bezos is today is to either limit the market capitalization of a company (literally limiting the stock price) or limiting how much of a given company anyone can own. Both are complex problems. And both, of course, will result in fewer jobs and fewer people willing to take the risks to create companies.
 
 In other words, if we don't let people get filthy rich, then everyone will be worse off.
