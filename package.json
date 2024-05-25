@@ -11,7 +11,7 @@
 		"prebuild": "npm run lint",
 		"postbuild": "pagefind --site .vercel/output/static/",
 		"preview": "astro preview",
-		"format": "prettier -w --cache . && prettier -w --cache **/*.astro",
+		"format": "prettier --write --cache '**/*.{js,jsx,ts,tsx,astro,html,css}'",
 		"check": "astro check"
 	},
 	"dependencies": {
@@ -47,8 +47,10 @@
 		"astro-eslint-parser": "^1.0.2",
 		"autoprefixer": "^10.4.19",
 		"eslint": "^8.57.0",
+		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-astro": "^1.2.0",
 		"eslint-plugin-markdown": "^5.0.0",
+		"eslint-plugin-prettier": "^5.1.3",
 		"mdast-util-to-string": "^4.0.0",
 		"pagefind": "^1.0.4",
 		"postcss": "^8.4.38",

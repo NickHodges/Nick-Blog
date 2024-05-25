@@ -13,10 +13,12 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:astro/recommended',
+    'plugin:prettier/recommended'
   ],
   plugins: [
     '@typescript-eslint',
     'astro',
+    'prettier'
   ],
   rules: {
     '@typescript-eslint/no-unused-vars': [
@@ -24,6 +26,8 @@ module.exports = {
       { ignoreRestSiblings: true, varsIgnorePattern: 'Props' },
     ],
     '@typescript-eslint/no-var-requires': 'warn',
+    'prettier/prettier': 'error'
+
   },
   overrides: [
     {
