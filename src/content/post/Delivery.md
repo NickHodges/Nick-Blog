@@ -6,7 +6,7 @@ postSlug: deliveryfriendly
 featured: false
 tags:
   - thoughts
-description: "How to be delivery driver friendly"
+description: 'How to be delivery driver friendly'
 ---
 
 A few nights a week, I deliver pizzas. I love it. It puts extra bucks in my pocket, it gets me out of the house, and the place I deliver for -- ([Mike's Pizza](http://www.mikespizzashoppe.com/)) -- is a great family run place. Often, I feel like Santa Claus when a kid yells "Pizza's here!!" It is also surprisingly good money.

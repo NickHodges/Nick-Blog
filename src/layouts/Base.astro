@@ -8,7 +8,6 @@ import Footer from '@/components/layout/Footer.astro';
 import Header from '@/components/layout/Header.astro';
 import { siteConfig } from '@/site-config';
 
-
 interface Props {
   meta: SiteMeta;
 }
@@ -28,7 +27,7 @@ const {
     <Header />
     <main id="main">
       <slot />
+      <Footer />
     </main>
-    <Footer />
   </body>
 </html>

@@ -1,12 +1,12 @@
 ---
 // Import the changelog data
-import changelogData from "@/pagedata/changelog.json";
+import changelogData from '@/data/changelog.json';
 
 // Define TypeScript types for the changelog entries
 type ChangelogEntry = {
-	date: string;
-	event: string;
-	comments: string;
+  date: string;
+  event: string;
+  comments: string;
 };
 
 // Assert the imported data matches the ChangelogEntry type
@@ -14,22 +14,22 @@ const data: ChangelogEntry[] = changelogData as ChangelogEntry[];
 ---
 
 <table>
-	<thead>
-		<tr>
-			<th>Date</th>
-			<th>Event</th>
-			<th>Comments</th>
-		</tr>
-	</thead>
-	<tbody>
-		{
-			data.map((entry: ChangelogEntry) => (
-				<tr>
-					<td>{entry.date}</td>
-					<td>{entry.event}</td>
-					<td>{entry.comments}</td>
-				</tr>
-			))
-		}
-	</tbody>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Event</th>
+      <th>Comments</th>
+    </tr>
+  </thead>
+  <tbody>
+    {
+      data.map((entry: ChangelogEntry) => (
+        <tr>
+          <td>{entry.date}</td>
+          <td>{entry.event}</td>
+          <td>{entry.comments}</td>
+        </tr>
+      ))
+    }
+  </tbody>
 </table>

@@ -1,0 +1,6 @@
+{
+  "printWidth": 1200,
+  "htmlWhitespaceSensitivity": "ignore",
+  "singleQuote": true,
+  "plugins": ["prettier-plugin-astro"]
+}

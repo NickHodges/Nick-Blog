@@ -1,16 +1,16 @@
 ---
 // Import the movies data from the JSON file
-import movies from "@/pagedata/movies.json";
+import movies from '@/data/movies.json';
 
 interface Movie {
-	title: string;
+  title: string;
 }
 ---
 
 <!-- Define your component's HTML here -->
 <div>
-	<h1>Movies</h1>
-	<ul>
-		{movies.map((movie: Movie) => <li>{movie.title}</li>)}
-	</ul>
+  <h1>Movies</h1>
+  <ul>
+    {movies.map((movie: Movie) => <li>{movie.title}</li>)}
+  </ul>
 </div>

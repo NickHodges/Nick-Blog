@@ -8,7 +8,7 @@ draft: true
 tags:
   - policy
   - opinion
-description: "Just a few things that I hold to be true at a low, root level"
+description: 'Just a few things that I hold to be true at a low, root level'
 ---
 
 1. As a general rule, money is better spent by private citizens than the government.

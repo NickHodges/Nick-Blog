@@ -1,5 +1,5 @@
 ---
-title: "Short Bio"
+title: 'Short Bio'
 draft: false
 ---
 

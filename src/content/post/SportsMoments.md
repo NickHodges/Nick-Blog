@@ -7,7 +7,7 @@ featured: false
 tags:
   - list
   - sports
-description: "Often unnoticed sports items and events that I really like"
+description: 'Often unnoticed sports items and events that I really like'
 ---
 
 1. The bat flip. The more arrogant and dramatic the better.

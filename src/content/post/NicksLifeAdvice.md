@@ -8,7 +8,7 @@ draft: true
 tags:
   - policy
   - opinion
-description: "Need a description here"
+description: 'Need a description here'
 ---
 
 Below is some wisdom I have collected over the years. I intend to keep updating this as time goes on and things occur to me.

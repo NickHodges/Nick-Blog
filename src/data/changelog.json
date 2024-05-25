@@ -1,0 +1,107 @@
+[
+  {
+    "date": "April 6, 2024",
+    "event": "Complete upgrade of site to new template.",
+    "comments": "Re-did the whole site to an Astro 4.0-based template found at https://github.com/chrismwilliams/astro-theme-cactus"
+  },
+  {
+    "date": "March 25, 2024",
+    "event": "Converted two components from React components to Astro components ",
+    "comments": "I want to Astro-ify this as much as possible.  Looking into how to convert the Search component which is a bit harder to do."
+  },
+  {
+    "date": "March 21, 2024",
+    "event": "Built up the info content collection.  ",
+    "comments": "I learned about Astro's Content Collections, and now all content is using them.  Great feature."
+  },
+  {
+    "date": "February 10, 2024",
+    "event": "Added Amazon affiliate links to books, as well as the disclaimer",
+    "comments": "Note: I make money if you click on one of these links and order anything at all during that session. So please feel free to do so."
+  },
+  {
+    "date": "February 3, 2024",
+    "event": "Simplified Layout structure",
+    "comments": "I was overcomplicating the layouts and not using them properly. Now things are a bit streamlined and simple.  I understand layouts a bit better "
+  },
+  {
+    "date": "December 24, 2023",
+    "event": "Added page for each quote.",
+    "comments": "Each quote now has its own link on the Quotes page, and it can display an individual quote on its own page."
+  },
+  {
+    "date": "December 13, 2023",
+    "event": "Added Quotes page back",
+    "comments": "Created component and added quotes back."
+  },
+  {
+    "date": "December 10, 2023",
+    "event": "Migrated site to Astro",
+    "comments": "Major overhaul.  I decided that Astro was a great framework and migrated my whole site to use it."
+  },
+  {
+    "date": "August 14, 2023",
+    "event": "Added Support page",
+    "comments": "This page lists a few ways to support me or otherwise give a little back to what I'm up to here."
+  },
+  {
+    "date": "July 31, 2023",
+    "event": "Added a footer to the layout",
+    "comments": "Just a simple copyright message for now.  I'd like to make it sticky at the bottom eventually."
+  },
+  {
+    "date": "July 18, 2023",
+    "event": "Converted the Favorite page to be JSON-based",
+    "comments": ""
+  },
+  {
+    "date": "July 18, 2023",
+    "event": "Converted this changelog to be JSON-based",
+    "comments": "Much easier to manage the data.  Should think in terms of JSON more."
+  },
+  {
+    "date": "July 14, 2023",
+    "event": "Now you can list and link to all blog categories",
+    "comments": "Yep, works for categories.  Thank you again, ChatGPT."
+  },
+  {
+    "date": "July 8, 2023",
+    "event": "Added pagination to blog",
+    "comments": "Don't have a lot of posts yet, but it works. Thank you ChatGPT."
+  },
+  {
+    "date": "July 5, 2023",
+    "event": "Added ability to serve pages from the /info directory",
+    "comments": "Now I can create pages without having to create NextPage objects in *.tsx files..."
+  },
+  {
+    "date": "July 3, 2023",
+    "event": "Added support for DOMPurify",
+    "comments": "Not strictly needed because there is no user input, but a good habit to have."
+  },
+  {
+    "date": "June 25, 2023",
+    "event": "Added non-published blog entries",
+    "comments": "Allows me to add pages via markdown, and not a component"
+  },
+  {
+    "date": "June 23, 2023",
+    "event": "Added (Quotes)[Quotes] page",
+    "comments": "This is a JSON-based page.  To add a quote, I just add it to the JSON file.  Cool. ChatGPT 4.0 wrote most of the code for me."
+  },
+  {
+    "date": "June 4, 2023",
+    "event": "Added this change log",
+    "comments": ""
+  },
+  {
+    "date": "May 20, 2023",
+    "event": "Added FavIcons",
+    "comments": "Created the FavIcons at the [Real Favicon Generator](https://realfavicongenerator.net/)"
+  },
+  {
+    "date": "Early April 2023",
+    "event": "Site debut",
+    "comments": "Shipped the very beginning stages.  Much to come!"
+  }
+]

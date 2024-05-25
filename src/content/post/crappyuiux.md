@@ -8,7 +8,7 @@ tags:
   - technology
   - uiux
   - opinion
-description: "The universe is filled with shitty apps, terrible user interfaces, and crappy user experiences"
+description: 'The universe is filled with shitty apps, terrible user interfaces, and crappy user experiences'
 ---
 
 _This will be an ongoing series of little posts that highlight the never ending stream if just spectacularly bad UI/UX that is everywhere I go._

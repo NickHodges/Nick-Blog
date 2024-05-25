@@ -8,7 +8,7 @@ tags:
   - life
   - opinion
   - uiux
-description: "Bad web user experience is starting to drive me nuts."
+description: 'Bad web user experience is starting to drive me nuts.'
 ---
 
 I think I'm entering the "Get off my lawn" phase of life, and it is centering around complaints about web design and user experience. Here is my latest.

@@ -9,7 +9,7 @@ tags:
   - politics
   - economics
   - opinion
-description: "What is greed anyway?  And what does it means for society?"
+description: 'What is greed anyway?  And what does it means for society?'
 ---
 
 I see a lot of folks arguing that they don't like capitalism because it "rewards greed" or something like that. Not always sure what the point is.

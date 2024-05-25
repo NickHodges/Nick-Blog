@@ -1,5 +1,5 @@
 ---
-title: "My Public PGP Key"
+title: 'My Public PGP Key'
 draft: false
 ---
 

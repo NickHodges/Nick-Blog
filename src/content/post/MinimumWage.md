@@ -8,7 +8,7 @@ draft: true
 tags:
   - policy
   - opinion
-description: "Need a description here"
+description: 'Need a description here'
 ---
 
 The minimum wage is a great example of an issue where it's proponents only see the upsides and refuse to even acknowledge a downside.

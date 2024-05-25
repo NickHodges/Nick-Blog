@@ -8,7 +8,7 @@ tags:
   - politics
   - opinion
   - policy
-description: "A primary election is probably the single worst way to choose candidates for office."
+description: 'A primary election is probably the single worst way to choose candidates for office.'
 ---
 
 I think we should get rid of primaries.

@@ -9,6 +9,5 @@ export default {
     'postcss-import': {},
     tailwindcss: {},
     '@tailwindcss/nesting': {},
-  }
+  },
 };
-

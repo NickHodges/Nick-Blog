@@ -2,16 +2,16 @@
 /// <reference path="../.astro/types.d.ts" />
 /// <reference types="astro/client" />
 
-declare module "@pagefind/default-ui" {
-	declare class PagefindUI {
-		constructor(arg: unknown);
-	}
+declare module '@pagefind/default-ui' {
+  declare class PagefindUI {
+    constructor(arg: unknown);
+  }
 }
 
 interface ImportMetaEnv {
-	readonly WEBMENTION_API_KEY: string;
+  readonly WEBMENTION_API_KEY: string;
 }
 
 interface ImportMeta {
-	readonly env: ImportMetaEnv;
+  readonly env: ImportMetaEnv;
 }

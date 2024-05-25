@@ -8,7 +8,7 @@ draft: false
 tags:
   - policy
   - opinion
-description: "I understand why people might question a book in the elementary school library."
+description: 'I understand why people might question a book in the elementary school library.'
 ---
 
 You know, I was thinking about all this book banning stuff, and a bit about why people vote for Trump. I think I understand a bit better than I did.

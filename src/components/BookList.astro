@@ -1,29 +1,29 @@
 ---
 // Import the books data from the JSON file
-import books from "@/pagedata/books.json";
+import books from '@/data/books.json';
 
 interface Book {
-	title: string;
-	author: string;
-	link: string;
+  title: string;
+  author: string;
+  link: string;
 }
 ---
 
 <!-- Define your component's HTML here -->
 <div>
-	<h1>Books</h1>
-	<ul>
-		{
-			books.map((book: Book) => (
-				<li>
-					<strong>
-						<a href={book.link} target="_blank" rel="noopener noreferrer">
-							{book.title}{" "}
-						</a>
-					</strong>
-					by {book.author}
-				</li>
-			))
-		}
-	</ul>
+  <h1>Books</h1>
+  <ul>
+    {
+      books.map((book: Book) => (
+        <li>
+          <strong>
+            <a href={book.link} target="_blank" rel="noopener noreferrer">
+              {book.title}{' '}
+            </a>
+          </strong>
+          by {book.author}
+        </li>
+      ))
+    }
+  </ul>
 </div>
