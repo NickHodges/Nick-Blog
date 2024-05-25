@@ -20,7 +20,7 @@ export const siteConfig: SiteConfig = {
       month: 'short',
       year: 'numeric',
     },
-  }
+  },
 };
 
 // Used to generate links in both the Header & Footer.
