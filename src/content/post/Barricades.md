@@ -8,7 +8,7 @@ draft: false
 tags:
   - policy
   - opinion
-description: "Stop shouting at the barricade and come out and talk."
+description: 'Stop shouting at the barricade and come out and talk.'
 ---
 
 We obviously have a problem in this country. We are very, very, very polarized. That's not good. I think most people realize this. I also think many people don't know what to do about it, or, for that matter, actually _*want*_ to do anything about it. It hasn't always been this way, but social structures ebb and flow, and I believe that we'll eventually get past this and the pendulum will swing back towards more normalcy.

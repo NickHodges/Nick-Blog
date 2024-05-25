@@ -7,7 +7,7 @@ featured: false
 tags:
   - internet
   - opinion
-description: "Making shit up and telling people they said it is no way to argue."
+description: 'Making shit up and telling people they said it is no way to argue.'
 ---
 
 You know, I've been arguing on the Internet for a long time. For a long time, I was really bad at it. But I've grown and learned, and now I think I'm pretty good at it. Maybe not as good as I think, but definitely better than I was.

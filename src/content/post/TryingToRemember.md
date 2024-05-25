@@ -7,7 +7,7 @@ featured: true
 tags:
   - thoughts
   - opinion
-description: "A few things that I always try to remember"
+description: 'A few things that I always try to remember'
 ---
 
 Today is July 4th. Here are some things that I try to remember on the celebration of the day that the greatest idea ever conceived was brought to fruition (however imperfectly that was done...)

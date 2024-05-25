@@ -1,5 +1,5 @@
 // Heavy inspiration from starlight: https://github.com/withastro/starlight/blob/main/packages/starlight/utils/generateToC.ts
-import type { MarkdownHeading } from "astro";
+import type { MarkdownHeading } from 'astro';
 
 export interface TocItem extends MarkdownHeading {
   children: TocItem[];

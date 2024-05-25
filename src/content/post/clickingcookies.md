@@ -8,7 +8,7 @@ draft: false
 tags:
   - internet
   - opinion
-description: "Those f-ing cookie warnings are a massive waste of time."
+description: 'Those f-ing cookie warnings are a massive waste of time.'
 ---
 
 Let's say there are 1 billion internet users every day -- probably a conservative number.

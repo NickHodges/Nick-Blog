@@ -7,7 +7,7 @@ featured: false
 tags:
   - life
   - opinion
-description: "Memorial Day is probably a little different than you think."
+description: 'Memorial Day is probably a little different than you think.'
 ---
 
 Here in the US, Memorial Day is the last Monday in May. Memorial Day is "a day of reflection and remembrance of those who died while serving in the U.S. military"

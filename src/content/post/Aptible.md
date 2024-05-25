@@ -57,7 +57,7 @@ That’s all really great, but the ease of getting things set up is just icing o
 
 The first step, of course, is to create an account on Aptible.com The have a simple sign up process that does require a username, email, password, as well as a company name. All fields are required.
 
-![Create an Aptible account](/assets/aptibleimages/image-1.png "The page for creating your new Aptible account")
+![Create an Aptible account](/assets/aptibleimages/image-1.png 'The page for creating your new Aptible account')
 
 Upon registering, you will be sent the standard email confirmation, and once clicked, your account will be up and ready to get started.
 
@@ -65,7 +65,7 @@ Once you click on the link in the verification email, you will be taken to your 
 
 **Step 3: Create an Environment**
 
-![Screen for creating an environment](/assets/aptibleimages/image-2.png "This screen is where you will see your environments listed")
+![Screen for creating an environment](/assets/aptibleimages/image-2.png 'This screen is where you will see your environments listed')
 
 From here, I’m going to create an Aptible environment and a simple application that tracks a CD collection. I’ve pre-built a simple REST-based application using Node and Expressjs that tracks CDs, the performing artist, and the year of release. This is served up via a standard REST API and JSON. It will all run inside Aptible where I could scale and manage it to my heart's content without worrying about any physical or virtual infrastructure.
 
@@ -75,7 +75,7 @@ This will allow me to choose the “Stack” and give my environment a name. The
 
 Normally, you will create an environment for the different stages of your application's development. A typical collection of environments might be for development, staging, and production. The stacks you choose for each will likely be different as well. Stacks are general isolated, but you can choose to connect stacks using Aptible’s Network Integration feature.
 
-![Screen to name your environment.](/assets/aptibleimages/image-3.png "This is the screen where you will give your new environment a name.")
+![Screen to name your environment.](/assets/aptibleimages/image-3.png 'This is the screen where you will give your new environment a name.')
 
 In Aptible, stacks are almost the same as what you might view as a "region," or more specifically, “the general area of the world where the servers your app will be located.” You can read all about stacks in the documentation ([https://www.aptible.com/docs/stacks](https://www.aptible.com/docs/stacks)) but basically the idea is that a stack is a collection of resources (virtual computers) that you will use to run your application. Stacks can be shared or dedicated. Typically, a production environment would use a dedicated stack, while “lesser” environments would leverage a shared stack. The beauty here is that you don’t have to worry about any of the logistics of this -- you just ask for what you need, and Aptible manages it all for you.
 
@@ -85,11 +85,11 @@ So if I fill out the form and press “Create Environment” I’ll have an envi
 
 Next, I’ll be asked to give a name to the application that the environment will host. Here I’ve called my application “cdcollection”
 
-![Name your app here](/assets/aptibleimages/image-4.png "This is the screen for naming your application")
+![Name your app here](/assets/aptibleimages/image-4.png 'This is the screen for naming your application')
 
 Pressing the “Create App” button has an interesting result -- I am asked to reenter my login credentials.
 
-![Reenter your credentials](/assets/aptibleimages/image-5.png "Here you have to prove who you are again.")
+![Reenter your credentials](/assets/aptibleimages/image-5.png 'Here you have to prove who you are again.')
 
 Selecting the dropdown entitled “Why do I need to elevate my credentials?” will tell you that in order to make environmental level changes, they just want to make sure that it really is you. It also notes that because you can actually deploy a new application by pushing code to GitHub (we’ll see that in a minute) you need an SSH key registered with GitHub and Aptible.
 
@@ -97,11 +97,11 @@ Entering your credentials then takes you to do that very thing -- give your publ
 
 **Step 5: Add your SSH key**
 
-![Copy your public SSH key](/assets/aptibleimages/image-6.png "The screen for entering your public SSH key so you can communicate with GitHub")
+![Copy your public SSH key](/assets/aptibleimages/image-6.png 'The screen for entering your public SSH key so you can communicate with GitHub')
 
 Paste your public (NOT YOUR PRIVATE!) SSH key into the edit box and press “Save Key.” That will let Aptible perform actions based on hooks in your GitHub repository (which we’ll set up in a minute).
 
-![Connect your repository to Aptible](/assets/aptibleimages/image-7.png "These are the commands for connecting your GitHub repository to Aptible.")
+![Connect your repository to Aptible](/assets/aptibleimages/image-7.png 'These are the commands for connecting your GitHub repository to Aptible.')
 
 Aptible will want you to set up a remote repository for your application to which your code can be pushed, built, and then deployed. What this means is that you can manage your code repository as you like on GitHub, but when you are ready to deploy, you can push your current code to the designated Aptible repository, and Aptible will build and deploy your code for you automatically and without any further effort on your part. Deploying a new version of your application becomes nothing more than a simple push to your Aptibile git repository.
 
@@ -125,7 +125,7 @@ Once you have the repository on your local machine and you are satisfied that it
 
 Once that happens, your application will be deployed to Aptible’s servers. Aptible will see this and then move on to the next step in the process, which will be to set up the database and the environmental variables needed to access the database.
 
-![Creating the Database](/assets/aptibleimages/image-8.png "The page for creating your database instance")
+![Creating the Database](/assets/aptibleimages/image-8.png 'The page for creating your database instance')
 
 Now, an important thing to note here is that the project has a Dockerfile included in it. Aptible uses that Dockerfile to contain and run your application.
 
@@ -139,11 +139,11 @@ Then I read a bit more carefully and saw that the environmental variable would b
 
 Then I pressed the “Save and Deploy” button, and Aptible began the process of setting up the database against my application. It took a few moments, but soon everything was deployed:
 
-![Saving and deploying](/assets/aptibleimages/image-9.png "The page shown as your application is deployed")
+![Saving and deploying](/assets/aptibleimages/image-9.png 'The page shown as your application is deployed')
 
 Now, things are pretty much set up. At this point, you can go to the main dashboard for the application. You can select the Database tab on the left and see your MongoDB has been provisioned:
 
-![Showing your database instance](/assets/aptibleimages/image-10.png "Here you can see your database instance")
+![Showing your database instance](/assets/aptibleimages/image-10.png 'Here you can see your database instance')
 
 But right now, there isn’t any way to get at our application, so we need to create an endpoint
 
@@ -151,7 +151,7 @@ But right now, there isn’t any way to get at our application, so we need to cr
 
 You might think you would do that on the Endpoint tab, but instead, endpoints are created inside the application tab. So, select “Apps” on the left, and then our `cdcollection app` from the presented list. From there, select the `Endpoints` sub-tab, and there you will find the `New Endpoint` button.
 
-![Creating an endpoint](/assets/aptibleimages/image-11.png "You need to create an endpoint for your data to be shown")
+![Creating an endpoint](/assets/aptibleimages/image-11.png 'You need to create an endpoint for your data to be shown')
 
 Here, you’ll need to do the following:
 
@@ -166,11 +166,11 @@ _What is an endpoint? An endpoint is the URL where REST actions can take place. 
 
 But once the endpoint is created, you should have a URL visible in the dashboard:
 
-![Your endpoint](/assets/aptibleimages/image-12.png "The endpoint has been created")
+![Your endpoint](/assets/aptibleimages/image-12.png 'The endpoint has been created')
 
 If you hit the little copy button and put that URL in your browser, you should see the “Hello Aptible User!!!” response from our app. It’s working!
 
-![The application running](/assets/aptibleimages/image-13.png "Here is the display from the applications root")
+![The application running](/assets/aptibleimages/image-13.png 'Here is the display from the applications root')
 
 **Step 9: Fill up the Data**
 
@@ -187,7 +187,7 @@ In order to do that, you need to do the following:
 
 Once that is done, there should be data in your application that you can view as JSON in the browser:
 
-![Application displaying data](/assets/aptibleimages/image-14.png "The basic JSON returned by the application")
+![Application displaying data](/assets/aptibleimages/image-14.png 'The basic JSON returned by the application')
 
 The app will even allow you to view individual entries via the ID. If you copy one of the `id` values and add it to the URL, you should see that individual entry in the browser. If I enter
 
@@ -195,7 +195,7 @@ The app will even allow you to view individual entries via the ID. If you copy o
 
 In my browser, I see the entry:
 
-![A specific item](/assets/aptibleimages/image-15.png "The application returning a specific item based on the URL")
+![A specific item](/assets/aptibleimages/image-15.png 'The application returning a specific item based on the URL')
 
 Now, the work of building and deploying your application is basically done. From here, you can focus on building your application and not worry about any of the infrastructure to deploy your application. As you write code and commit it to your GitHub repository, you can deploy to Aptible with a simple command line entry. Let’s take a look.
 
@@ -211,7 +211,7 @@ This will set into motion a flurry of activity in your command window, culminati
 
 Once it is done, you will see the new greeting at the root URL:
 
-![A new root message](/assets/aptibleimages/image-16.png "The root message has been changed and deployed")
+![A new root message](/assets/aptibleimages/image-16.png 'The root message has been changed and deployed')
 
 Now that you can update the application by pushing code to GitHub, you are all done!
 

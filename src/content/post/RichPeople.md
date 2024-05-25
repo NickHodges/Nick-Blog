@@ -8,7 +8,7 @@ tags:
   - economics
   - opinion
   - policy
-description: "Rich people add way more to society than they often get credit for"
+description: 'Rich people add way more to society than they often get credit for'
 ---
 
 I know a lot of people who get upset that there are rich people in the world. They seem to think that these folks don't deserve the wealth that they have or that they should do something to help the world, etc.

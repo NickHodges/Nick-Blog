@@ -7,7 +7,7 @@ featured: false
 tags:
   - policy
   - opinion
-description: "We have to be able to come to a consensus on issues like kids accessing things like Social Media."
+description: 'We have to be able to come to a consensus on issues like kids accessing things like Social Media.'
 ---
 
 Here's a link to a new law in Texas: [Texas will require parental consent for kids to use social media](https://arstechnica.com/tech-policy/2023/06/texas-will-require-parental-consent-for-kids-to-use-social-media/)

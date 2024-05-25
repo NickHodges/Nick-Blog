@@ -1,16 +1,16 @@
-import type { APIContext, InferGetStaticPropsType } from "astro";
-import satori, { type SatoriOptions } from "satori";
-import { html } from "satori-html";
-import { Resvg } from "@resvg/resvg-js";
-import { siteConfig } from "@/site-config";
-import { getFormattedDate } from "@/utils";
-import { getAllPosts } from "@/data/post";
+import type { APIContext, InferGetStaticPropsType } from 'astro';
+import satori, { type SatoriOptions } from 'satori';
+import { html } from 'satori-html';
+import { Resvg } from '@resvg/resvg-js';
+import { siteConfig } from '@/site-config';
+import { getFormattedDate } from '@/utils';
+import { getAllPosts } from '@/data/post';
 
 // After
-import type { ReactNode } from "react";
+import type { ReactNode } from 'react';
 
-import RobotoMono from "@/assets/roboto-mono-regular.ttf";
-import RobotoMonoBold from "@/assets/roboto-mono-700.ttf";
+import RobotoMono from '@/assets/roboto-mono-regular.ttf';
+import RobotoMonoBold from '@/assets/roboto-mono-700.ttf';
 
 const ogOptions: SatoriOptions = {
   width: 1200,
@@ -18,16 +18,16 @@ const ogOptions: SatoriOptions = {
   // debug: true,
   fonts: [
     {
-      name: "Roboto Mono",
+      name: 'Roboto Mono',
       data: Buffer.from(RobotoMono),
       weight: 400,
-      style: "normal",
+      style: 'normal',
     },
     {
-      name: "Roboto Mono",
+      name: 'Roboto Mono',
       data: Buffer.from(RobotoMonoBold),
       weight: 700,
-      style: "normal",
+      style: 'normal',
     },
   ],
 };
@@ -59,16 +59,16 @@ export async function GET(context: APIContext) {
   const { title, pubDate } = context.props as Props;
 
   const postDate = getFormattedDate(pubDate, {
-    weekday: "long",
-    month: "long",
+    weekday: 'long',
+    month: 'long',
   });
   //const svg = await satori(markup(title, postDate), ogOptions);
   const svg = await satori(markup(title, postDate) as unknown as ReactNode, ogOptions);
   const png = new Resvg(svg).render().asPng();
   return new Response(png, {
     headers: {
-      "Content-Type": "image/png",
-      "Cache-Control": "public, max-age=31536000, immutable",
+      'Content-Type': 'image/png',
+      'Cache-Control': 'public, max-age=31536000, immutable',
     },
   });
 }

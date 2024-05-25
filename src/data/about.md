@@ -1,8 +1,7 @@
 ---
-title: "About"
+title: 'About'
 draft: false
 ---
-
 
 I have a [general disclaimer](../info/disclaimer) about my blog.
 

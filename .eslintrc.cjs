@@ -9,25 +9,13 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module',
   },
-  extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:astro/recommended',
-    'plugin:prettier/recommended'
-  ],
-  plugins: [
-    '@typescript-eslint',
-    'astro',
-    'prettier'
-  ],
+  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'plugin:astro/recommended', 'plugin:prettier/recommended'],
+  plugins: ['@typescript-eslint', 'astro', 'prettier'],
   rules: {
-    '@typescript-eslint/no-unused-vars': [
-      'warn',
-      { ignoreRestSiblings: true, varsIgnorePattern: 'Props' },
-    ],
+    '@typescript-eslint/no-unused-vars': ['warn', { ignoreRestSiblings: true, varsIgnorePattern: 'Props' }],
     '@typescript-eslint/no-var-requires': 'warn',
-    'prettier/prettier': 'warn'
-
+    'prettier/prettier': 'warn',
+    quotes: ['warn', 'single', { avoidEscape: true }],
   },
   overrides: [
     {

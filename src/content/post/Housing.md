@@ -1,12 +1,12 @@
 ---
-title: "Homelessness and Affordable Housing"
+title: 'Homelessness and Affordable Housing'
 publishDate: 2024-01-07
 description: "Affordable housing for everyone isn't that hard."
 tags:
   - policy
   - economics
   - opinion
-author: "Nick Hodges"
+author: 'Nick Hodges'
 order: 17
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: "People I Admire and Like to Learn From"
+title: 'People I Admire and Like to Learn From'
 draft: false
 ---
 

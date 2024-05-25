@@ -7,7 +7,7 @@ featured: false
 tags:
   - life
   - opinion
-description: "What is wrong with preferring character over race?"
+description: 'What is wrong with preferring character over race?'
 ---
 
 One of the things I like to say, because I firmly believe it, is this:

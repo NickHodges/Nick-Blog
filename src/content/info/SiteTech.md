@@ -1,5 +1,5 @@
 ---
-title: "Site Tech"
+title: 'Site Tech'
 draft: false
 ---
 
