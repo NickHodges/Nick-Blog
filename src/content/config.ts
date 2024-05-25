@@ -36,7 +36,7 @@ const post = defineCollection({
 
 const info = defineCollection({
 	type: "content",
-	schema: ({}) =>
+	schema: () =>
 		z.object({
 			title: z.string().max(60).optional(),
 			author: z.string().optional().default("Nick"),
