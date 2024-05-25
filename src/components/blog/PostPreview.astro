@@ -1,7 +1,6 @@
 ---
-
 import type { CollectionEntry } from 'astro:content';
-import type { HTMLTag, Polymorphic } from 'astro:types'; 
+import type { HTMLTag, Polymorphic } from 'astro/types';
 
 import FormattedDate from '../FormattedDate.astro';
 
@@ -16,11 +15,11 @@ const postDate = post.data.updatedDate ?? post.data.publishDate;
 
 <div class="space-y-2">
   <FormattedDate class="min-w-[120px] text-gray-600 dark:text-gray-400" date={postDate} />
-  <div class="prose prose-cactus">
+  <Tag class="prose prose-cactus">
     {post.data.draft && <span class="text-red-500">(Draft) </span>}
     <a class="cactus-link" data-astro-prefetch href={`/posts/${post.slug}/`}>
       {post.data.title}
     </a>
-  </div>
+  </Tag>
   {withDesc && <q class="line-clamp-3 block italic">{post.data.description}</q>}
 </div>
