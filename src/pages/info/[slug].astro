@@ -1,8 +1,8 @@
 ---
-import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
 
-import InfoLayout from "@/layouts/InfoPost.astro";
-import { getAllInfoPosts } from "@/data/info";
+import InfoLayout from '@/layouts/InfoPost.astro';
+import { getAllInfoPosts } from '@/data/info';
 
 export const getStaticPaths = (async () => {
   const infoEntries = await getAllInfoPosts();
@@ -19,5 +19,5 @@ const { Content } = await entry.render();
 ---
 
 <InfoLayout info={entry}>
-  <Content />
+  <article class="prose prose-cactus"><Content /></article>
 </InfoLayout>
