@@ -1,0 +1,19 @@
+# Ignore all files in the node_modules directory
+node_modules
+
+# Ignore all files in the dist directory
+dist
+
+# Ignore specific files
+src/components/Search.astro
+src/components/ThemeProvider.astro
+src/components/ThemeToggle.astro
+src/components/layout/Header.astro
+src/layouts/BlogPost.astro
+src/layouts/InfoPost.astro
+
+# Ignore all .json files in the config directory
+config/*.json
+
+# Ignore all files with .min.js extension
+*.min.js

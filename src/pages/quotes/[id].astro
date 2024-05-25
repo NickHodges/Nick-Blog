@@ -1,7 +1,7 @@
 ---
 // src/pages/quotes/[id].astro
-import quotes from '@/data/quotes.json';
-import PageLayout from '@/layouts/Base.astro';
+import quotes from "@/data/quotes.json";
+import PageLayout from "@/layouts/Base.astro";
 
 export async function getStaticPaths() {
   // Generate paths for each quote based on its ID
@@ -18,7 +18,7 @@ const { id } = Astro.params;
 const quote = quotes.find((q) => q.ID === parseInt(id, 10));
 
 if (!quote) {
-  return Astro.redirect('/404');
+  return Astro.redirect("/404");
 }
 
 const frontmatter = {

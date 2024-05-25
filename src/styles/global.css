@@ -3,56 +3,56 @@
 @tailwind utilities;
 
 @layer base {
-	:root,
-	:root[data-theme="light"] {
-		color-scheme: light;
-		/* https://tailwindcss.com/docs/customizing-colors#using-css-variables */
-		--theme-bg: 0deg 0% 98%;
-		--theme-link: 172deg 18% 41%;
-		--theme-text: 203deg 11% 15%;
-		--theme-accent: 351deg 66% 48%;
-		--theme-accent-2: 0deg 0% 7%;
-		--theme-quote: 351deg 66% 48%;
-	}
+  :root,
+  :root[data-theme="light"] {
+    color-scheme: light;
+    /* https://tailwindcss.com/docs/customizing-colors#using-css-variables */
+    --theme-bg: 0deg 0% 98%;
+    --theme-link: 172deg 18% 41%;
+    --theme-text: 203deg 11% 15%;
+    --theme-accent: 351deg 66% 48%;
+    --theme-accent-2: 0deg 0% 7%;
+    --theme-quote: 351deg 66% 48%;
+  }
 
-	:root[data-theme="dark"] {
-		color-scheme: dark;
-		--theme-bg: 210deg 6% 12%;
-		--theme-link: 330deg 49% 67%;
-		--theme-text: 220deg 3% 79%;
-		--theme-accent: 159deg 64% 45%;
-		--theme-accent-2: 0deg 0% 93%;
-		--theme-quote: 102deg 100% 86%;
-	}
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --theme-bg: 210deg 6% 12%;
+    --theme-link: 330deg 49% 67%;
+    --theme-text: 220deg 3% 79%;
+    --theme-accent: 159deg 64% 45%;
+    --theme-accent-2: 0deg 0% 93%;
+    --theme-quote: 102deg 100% 86%;
+  }
 
-	html {
-		@apply scroll-smooth;
-	}
+  html {
+    @apply scroll-smooth;
+  }
 
-	body {
-		@apply mx-auto flex min-h-screen max-w-3xl flex-col bg-bgColor px-8 pt-16 font-mono text-sm font-normal text-textColor antialiased;
-	}
+  body {
+    @apply mx-auto flex min-h-screen max-w-3xl flex-col bg-bgColor px-8 pt-16 font-mono text-sm font-normal text-textColor antialiased;
+  }
 
-	table {
-		@apply w-full table-auto border border-gray-300 bg-white;
-	}
+  table {
+    @apply w-full table-auto border border-gray-300 bg-white;
+  }
 
-	thead {
-		@apply border border-gray-300 text-lg;
-	}
+  thead {
+    @apply border border-gray-300 text-lg;
+  }
 
-	tr {
-		@apply odd:bg-white even:bg-gray-200 dark:odd:bg-gray-800 dark:even:bg-gray-700;
-	}
+  tr {
+    @apply odd:bg-white even:bg-gray-200 dark:odd:bg-gray-800 dark:even:bg-gray-700;
+  }
 
-	td {
-		@apply border border-gray-300 px-4 py-2;
-	}
+  td {
+    @apply border border-gray-300 px-4 py-2;
+  }
 
-	tr:nth-child(odd) {
-		@apply bg-gray-100; /* Light color for odd rows */
-	}
-	tr:nth-child(even) {
-		@apply bg-gray-200; /* Slightly darker color for even rows */
-	}
+  tr:nth-child(odd) {
+    @apply bg-gray-100; /* Light color for odd rows */
+  }
+  tr:nth-child(even) {
+    @apply bg-gray-200; /* Slightly darker color for even rows */
+  }
 }

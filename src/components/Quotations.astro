@@ -2,25 +2,25 @@
 import quotes from "@/data/quotes.json";
 
 interface Quote {
-	ID: number;
-	quote: string;
-	author: string;
+  ID: number;
+  quote: string;
+  author: string;
 }
 ---
 
 <!-- Define your component's HTML here -->
 <div>
-	<ul>
-		{
-			quotes.map((quote: Quote) => (
-				<div class="mb-8">
-					<div>
-						<a href={`/quotes/${quote.ID}`}>#</a>
-						<em>{quote.quote}</em>
-					</div>
-					<div> -- {quote.author}</div>
-				</div>
-			))
-		}
-	</ul>
+  <ul>
+    {
+      quotes.map((quote: Quote) => (
+        <div class="mb-8">
+          <div>
+            <a href={`/quotes/${quote.ID}`}>#</a>
+            <em>{quote.quote}</em>
+          </div>
+          <div> -- {quote.author}</div>
+        </div>
+      ))
+    }
+  </ul>
 </div>

@@ -1,4 +1,5 @@
 {
   "printWidth": 1200,
-  "htmlWhitespaceSensitivity": "ignore"
+  "htmlWhitespaceSensitivity": "ignore",
+   "plugins": ["prettier-plugin-astro"]
 }

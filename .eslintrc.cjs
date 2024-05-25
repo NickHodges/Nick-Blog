@@ -26,7 +26,7 @@ module.exports = {
       { ignoreRestSiblings: true, varsIgnorePattern: 'Props' },
     ],
     '@typescript-eslint/no-var-requires': 'warn',
-    'prettier/prettier': 'error'
+    'prettier/prettier': 'warn'
 
   },
   overrides: [
