@@ -11,5 +11,12 @@
   "eslint.probe": ["astro", "javascript", "javascriptreact", "markdown", "typescript", "typescriptreact"],
   "[astro]": {
     "editor.defaultFormatter": "astro-build.astro-vscode"
-  }
+  },
+   "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "astro",
+    "typescript",
+    "typescriptreact"
+  ],
 }

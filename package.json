@@ -6,8 +6,7 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro check && astro build",
-    "lint": "eslint . --ext .ts,.tsx,.js,.jsx,.astro",
-    "lint:fix": "eslint . --ext .ts,.tsx,.js,.jsx,.astro --fix",
+    "lint": "prettier --write  \"**/*.{js,jsx,ts,tsx,md,mdx,astro}\" && eslint --fix \"src/**/*.{js,ts,jsx,tsx,astro}\"",
     "prebuild": "npm run lint",
     "postbuild": "pagefind --site .vercel/output/static/",
     "preview": "astro preview",
@@ -37,6 +36,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.7.0",
+    "@eslint/js": "^9.3.0",
     "@iconify-json/mdi": "^1.1.64",
     "@pagefind/default-ui": "^1.0.4",
     "@resvg/resvg-js": "^2.6.2",
@@ -49,8 +49,10 @@
     "eslint": "^9.3.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-astro": "^1.2.0",
+    "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-markdown": "^5.0.0",
     "eslint-plugin-prettier": "^5.1.3",
+    "globals": "^15.3.0",
     "mdast-util-to-string": "^4.0.0",
     "pagefind": "^1.0.4",
     "postcss": "^8.4.38",
@@ -62,7 +64,8 @@
     "reading-time": "^1.5.0",
     "remark-unwrap-images": "^4.0.0",
     "tailwindcss": "^3.4.3",
-    "typescript": "^5.4.3"
+    "typescript": "^5.4.3",
+    "typescript-eslint": "^7.10.0"
   },
   "packageManager": "pnpm@8.6.1"
 }

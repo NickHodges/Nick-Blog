@@ -1,4 +1,4 @@
-/** @type {import("@types/eslint").Linter.Config} */
+//create a new file called eslint.config.js in the root of your project and add the things that you need for typescript and astro
 module.exports = {
   env: {
     browser: true,
@@ -26,5 +26,13 @@ module.exports = {
         parser: '@typescript-eslint/parser',
       },
     },
+  ],
+  ignores: [
+    'node_modules/',
+    'dist/',
+    '.github',
+    '.vercel',
+    '.vscode',
+    // Add other patterns you need to ignore
   ],
 };
