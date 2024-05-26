@@ -1,14 +1,13 @@
 ---
-import PageLayout from '@/layouts/Base.astro';
-import BookList from '@/components/BookList.astro';
-import MovieList from '@/components/MovieList.astro';
+import PageLayout from '@layouts/Base.astro';
+import BookList from '@components/BookList.astro';
+import MovieList from '@components/MovieList.astro';
 ---
 
 <PageLayout
   meta={{
     title: 'Favorite Stuff',
-  }}
->
+  }}>
   <article class="prose prose-cactus">
     <BookList />
     <MovieList />

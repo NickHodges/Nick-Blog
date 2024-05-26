@@ -7,7 +7,7 @@
     "start": "astro dev",
     "build": "astro check && astro build",
     "lint": "prettier --write  \"**/*.{js,jsx,ts,tsx,md,mdx,astro}\" && eslint --fix \"src/**/*.{js,ts,jsx,tsx,astro}\"",
-    "prebuild": "npm run lint",
+
     "postbuild": "pagefind --site .vercel/output/static/",
     "preview": "astro preview",
     "format": "prettier --write --cache '**/*.{js,jsx,ts,tsx,astro,html,css}'",

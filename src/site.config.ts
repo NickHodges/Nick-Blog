@@ -1,4 +1,4 @@
-import type { SiteConfig } from '@/types';
+import type { SiteConfig } from '@types';
 import type { AstroExpressiveCodeOptions } from 'astro-expressive-code';
 
 export const siteConfig: SiteConfig = {

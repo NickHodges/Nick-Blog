@@ -2,15 +2,15 @@ import type { APIContext, InferGetStaticPropsType } from 'astro';
 import satori, { type SatoriOptions } from 'satori';
 import { html } from 'satori-html';
 import { Resvg } from '@resvg/resvg-js';
-import { siteConfig } from '@/site-config';
-import { getFormattedDate } from '@/utils';
-import { getAllPosts } from '@/data/post';
+import { siteConfig } from '@site-config';
+import { getFormattedDate } from '@utils';
+import { getAllPosts } from '@data/post';
 
 // After
 import type { ReactNode } from 'react';
 
-import RobotoMono from '@/assets/roboto-mono-regular.ttf';
-import RobotoMonoBold from '@/assets/roboto-mono-700.ttf';
+import RobotoMono from '@assets/roboto-mono-regular.ttf';
+import RobotoMonoBold from '@assets/roboto-mono-700.ttf';
 
 const ogOptions: SatoriOptions = {
   width: 1200,

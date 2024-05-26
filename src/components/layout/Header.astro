@@ -1,9 +1,9 @@
 ---
-import { menuLinks, siteConfig } from '@/site-config';
+import { menuLinks, siteConfig } from '@site-config';
 
 import Search from '../Search.astro';
 import ThemeToggle from '../ThemeToggle.astro';
-import nickImg from '@/assets/nick.png';
+import nickImg from '@assets/nick.png';
 import { Image } from 'astro:assets';
 
 const url = new URL(Astro.request.url);
@@ -41,7 +41,7 @@ const url = new URL(Astro.request.url);
   </mobile-button>
 
   <script>
-    import { toggleClass } from '@/utils';
+    import { toggleClass } from '@utils';
 
     class MobileNavBtn extends HTMLElement {
       private headerEl: HTMLElement;
