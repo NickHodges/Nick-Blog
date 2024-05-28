@@ -1,5 +1,4 @@
 ---
-// Import the books data from the JSON file
 import books from '@data/books.json';
 
 interface Book {
@@ -19,7 +18,7 @@ interface Book {
           <strong>
             <a href={book.link} target="_blank" rel="noopener noreferrer" style="display: inline-block">
               <span>{book.title}</span>
-            <a>
+            </a>
           </strong>
           by {book.author}
         </li>
