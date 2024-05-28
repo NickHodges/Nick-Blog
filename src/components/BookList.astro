@@ -17,8 +17,8 @@ interface Book {
       books.map((book: Book) => (
         <li>
           <strong>
-            <a href={book.link} target="_blank" rel="noopener noreferrer">
-              {book.title}{' '}
+            <a href={book.link} target="_blank" rel="noopener noreferrer" style="display: inline-block">
+              <span>{book.title}</span>
             </a>
           </strong>
           by {book.author}
