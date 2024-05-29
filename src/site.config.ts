@@ -38,9 +38,9 @@ export const menuLinks: Array<{ title: string; path: string }> = [
     path: '/posts/',
   },
   {
-   title: 'Support me',
-   path: '/info/support/',
-  }
+    title: 'Support me',
+    path: '/info/support/',
+  },
 ];
 
 // https://expressive-code.com/reference/configuration/

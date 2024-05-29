@@ -2,6 +2,7 @@
 title: 'About'
 draft: false
 ---
+
 Here is a [short bio](../info/shortbio) about me
 
 I have a [general disclaimer](../info/disclaimer) about my blog.
