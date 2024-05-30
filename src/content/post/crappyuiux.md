@@ -1,6 +1,7 @@
 ---
 author: Nick Hodges
-updatedDate: 2024-015-
+publishDate: 2023-01-18
+updatedDate: 2024-05-30
 title: Adventures in Crappy User Experiences and Interfaces
 postSlug: crappyuiux
 featured: true
@@ -20,7 +21,6 @@ _This will be an ongoing series of little posts that highlight the never ending 
 I wrote an article for InfoWorld called [The decline of the user interface](https://www.infoworld.com/article/3715333/the-decline-of-the-user-interface.html)
 
 Things are just getting worse.
-
 
 ## [The McDonalds App ](#the-mcdonalds-app)
 
