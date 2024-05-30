@@ -1,6 +1,6 @@
 ---
 author: Nick Hodges
-publishDate: 2024-01-18
+updatedDate: 2024-015-
 title: Adventures in Crappy User Experiences and Interfaces
 postSlug: crappyuiux
 featured: true
@@ -12,6 +12,15 @@ description: 'The universe is filled with shitty apps, terrible user interfaces,
 ---
 
 _This will be an ongoing series of little posts that highlight the never ending stream if just spectacularly bad UI/UX that is everywhere I go._
+
+## [InfoWord Article](#infoword-article)
+
+### 05-30-2024
+
+I wrote an article for InfoWorld called [The decline of the user interface](https://www.infoworld.com/article/3715333/the-decline-of-the-user-interface.html)
+
+Things are just getting worse.
+
 
 ## [The McDonalds App ](#the-mcdonalds-app)
 
