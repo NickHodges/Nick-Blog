@@ -1,5 +1,10 @@
 [
   {
+    "date": "June 2, 2024",
+    "event": "Added a Now page",
+    "comments": "Followed Derek Sivers' advice and added a Now page (https://nownownow.com/about)"
+  },
+  {
     "date": "April 6, 2024",
     "event": "Complete upgrade of site to new template.",
     "comments": "Re-did the whole site to an Astro 4.0-based template found at https://github.com/chrismwilliams/astro-theme-cactus"
