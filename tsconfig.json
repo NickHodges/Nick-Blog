@@ -8,6 +8,7 @@
       "@components/*": ["src/components/*"],
       "@data/*": ["src/data/*"],
       "@layouts/*": ["src/layouts/*"],
+      "@styles/*": ["src/styles/*"],
       "@utils": ["src/utils/index.ts"],
       "@types": ["src/types.ts"],
       "@site-config": ["src/site.config.ts"]
