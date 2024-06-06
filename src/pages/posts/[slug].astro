@@ -3,6 +3,7 @@ import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
 
 import PostLayout from '@layouts/BlogPost.astro';
 import { getAllPosts } from '@data/post';
+import 'astro-starlight-remark-asides/styles.css';
 
 export const getStaticPaths = (async () => {
   const blogEntries = await getAllPosts();

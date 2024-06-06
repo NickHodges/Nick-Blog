@@ -11,6 +11,9 @@ import expressiveCode from 'astro-expressive-code';
 import { expressiveCodeOptions } from './src/site.config';
 import vercelStatic from '@astrojs/vercel/static';
 
+import astroStarlightRemarkAsides from 'astro-starlight-remark-asides';
+import remarkDirective from 'remark-directive';
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://nickhodges.com/',
@@ -21,7 +24,7 @@ export default defineConfig({
     },
   }),
   markdown: {
-    remarkPlugins: [remarkUnwrapImages, remarkReadingTime],
+    remarkPlugins: [remarkUnwrapImages, remarkReadingTime, remarkDirective, astroStarlightRemarkAsides],
     rehypePlugins: [
       [
         rehypeExternalLinks,
