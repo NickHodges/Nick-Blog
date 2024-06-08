@@ -5,7 +5,7 @@ draft: false
 
 ## Introduction
 
-So, the purpose of this page is to provide you with a few ways that you can support me, or otherwise provide me with a little extra cabbage, if you are so inclined. Most of these suggestions here will cost you nothing extra on top of what you are already doing. And of course, I'm grateful for anything you can do here. Everything I do here is free, so if you feel the urge to give back in his direction a little, I'm very appreciative.
+So, the purpose of this page is to provide you with a few ways that you can support me, or otherwise provide me with a little extra cabbage, if you are so inclined. Most of these suggestions here will cost you nothing extra on top of what you are already doing. And of course, I'm grateful for anything you can do here. Everything I do here is free, so if you feel the urge to give back in this direction a little, I'm very appreciative.
 
 ## Privacy
 
@@ -25,9 +25,9 @@ Again, this is a strong recommendation/endorsement to use Privacy. You'll be ver
 
 ## Substack
 
-This is totally free, but it would be great if you [subscribed to my Substack Newsletter](https://thingsthatoccurtome.substack.com/). I keep track of the things that pop into my head -- some are insightful, some are strange, and some are funny (I hope) -- and when I gather up ten thoughts, I publish. I think it is worth it.
+This is totally free, but it would be great if you [subscribed to my Substack Newsletter](https://thingsthatoccurtome.com/). I keep track of the things that pop into my head -- some are insightful, some are strange, and some are funny (I hope) -- and when I gather up ten thoughts, I publish. I think it is worth it.
 
-Another thing you can do is tell a few friends about it. [Things That Occur to Me](https://thingsthatoccurtome.substack.com/)
+Another thing you can do is tell a few friends about it. [Things That Occur to Me](https://thingsthatoccurtome.com/)
 
 ## Medium
 
