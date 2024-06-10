@@ -6,7 +6,7 @@ import Pagination from '@components/Paginator.astro';
 import PostPreview from '@components/blog/PostPreview.astro';
 import PageLayout from '@layouts/Base.astro';
 import { getAllPosts, getUniqueTags, sortMDByDate } from '@data/post';
-import "astro-starlight-remark-asides/styles.css";
+import 'astro-starlight-remark-asides/styles.css';
 
 export const getStaticPaths = (async ({ paginate }) => {
   const allPosts = await getAllPosts();

@@ -16,7 +16,7 @@ Privacy is a virtual credit card service and is completely free. You can create 
 This is useful, as you can see. You can also create "throw-away" cards that can't be charged at all for those times when something you want to sign up for requires a card for some silly reason. You can cancel the card anytime you want for those times that some subscription makes it harder than average to stop.
 
 :::note[Perfect Use Case]
- Here is a perfect use case for Privacy that happened to me today. I gave a gift subscription to a friend for a magazine. I didn't and don't intend to renew it. But I used my bank debit card to pay for it, and of course they renewed it. But if I had used a one-time use virtual card from Privacy, they would not have been able to renew that subscription.
+Here is a perfect use case for Privacy that happened to me today. I gave a gift subscription to a friend for a magazine. I didn't and don't intend to renew it. But I used my bank debit card to pay for it, and of course they renewed it. But if I had used a one-time use virtual card from Privacy, they would not have been able to renew that subscription.
 :::
 
 The benefits are many, the cost is absolutely free, and if you sign up with [this link](https://app.privacy.com/join/LUZBW) we each get $5 when you actually use the service.
