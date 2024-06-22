@@ -15,7 +15,7 @@ I think we should get rid of primaries.
 
 The first thing to realize is something that might not have actually occurred to you: Political parties are private entities. They are not government entities. There is no law that establishes them. As with all private entities, they have the right to run things internal to their organization as the membership sees fit, including who gets to be a member. You don't get to tell the Knights of Columbus who its membership is, nor do you get to tell a political party. In addition, they get to choose who their leadership is and who represents and speaks for the organization.
 
-Next, realize that very (most?) often, the people voting in primaries aren't actually members of the party Sometimes people of opposing parties get to vote in a primary. Some states eve have open primaries, where literally anyone can vote in any primary. Sorry, but that is nuts.
+Next, realize that very (most?) often, the people voting in primaries aren't actually members of the party. Sometimes people of opposing parties get to vote in a primary. Some states even have open primaries, where literally anyone can vote in any primary. Sorry, but that is nuts.
 
 Third, literally anyone can run publicly in a primary. In most cases, all you have to do is gather a few signatures and pay a filing fee. The party usually can't even stop you from running. And then they can't stop you from winning.
 
