@@ -41,7 +41,7 @@ const markup = (title: string, pubDate: string) => html`
     </div>
     <div tw="flex items-center justify-between w-full p-10 border-t border-[#2bbc89] text-xl">
       <div tw="flex items-center">
-        <img src="${NickImage}" alt="My Image" height="60" />
+        <img src="${NickImage}" alt="Nick Image" height="60" />
         <p tw="ml-3 font-semibold">${siteConfig.title}</p>
       </div>
       <p>by ${siteConfig.author}</p>
