@@ -5,6 +5,8 @@ import PostLayout from '@layouts/BlogPost.astro';
 import { getAllPosts } from '@data/post';
 import 'astro-starlight-remark-asides/styles.css';
 
+import { FacebookShareButton, HackerNewsShareButton, LinkedInShareButton, RedditShareButton, TwitterShareButton, WhatsAppShareButton, SocialShare } from 'astro-social-share';
+
 export const getStaticPaths = (async () => {
   const blogEntries = await getAllPosts();
   return blogEntries.map((entry) => ({
@@ -15,10 +17,13 @@ export const getStaticPaths = (async () => {
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
+const BUTTONS = [TwitterShareButton, FacebookShareButton];
+
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 ---
 
 <PostLayout post={entry}>
+  <SocialShare buttons={BUTTONS} description="Description of the page/post" via="nickhodges" title="Page Title" />
   <article class="prose prose-cactus"><Content /></article>
 </PostLayout>
