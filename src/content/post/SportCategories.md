@@ -56,7 +56,7 @@ Anything involving pure brain power is not a sport.  Chess and poker?  Not sport
 
 Some sports are a little hard to categorize. What is tennis?  I could make the case for Category 1, but a match could turn on the in/out call of an umpire, causing it to lean towards Category 2.
 
-Weightlifting?  Either you life the weight or you don't, but every lift is judged and approved by a panel of judges.  I'd call that as "Just above the line of being a Category 1 sport".
+Weightlifting?  Either you lift the weight or you don't, but every lift is judged and approved by a panel of judges.  I'd call that as "Just above the line of being a Category 1 sport".
 
 Figure skating?  It’s a sport, but it is probably as close to the line as any sport gets because what is with the costumes? Judging controversies are not uncommon, and they openly speak about things like "It's her time..." and "They have to get a few more competitions under their belt".   On the other hand, I know a former professional figure skater, and holy hell is that woman strong and fit.
 
