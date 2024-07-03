@@ -1,6 +1,6 @@
 ---
-title: Sports Categories
-description: 'Sports can fall into three distinct categories.'
+title: The Three Categories of Sports
+description: 'Sports can fall into three distinct categories.  And what is a sport anyway?'
 publishDate: 03 July 2024
 tags:
   - sports
