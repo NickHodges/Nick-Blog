@@ -1,0 +1,27 @@
+---
+const colors = [
+  { name: 'NYTCrosswrd', hex: '#4d88f9' },
+  { name: 'NYTSudoku', hex: '#fb9b00' },
+  { name: 'NYTVertex', hex: '#00a2b3' },
+  { name: 'NYTTiles', hex: '#b5e352' },
+  { name: 'NYTLetterBoxed', hex: '#fc716b' },
+  { name: 'NYTConnections', hex: '#b4a8ff' },
+  { name: 'NYTStrands', hex: '#c0ddd9' },
+  { name: 'NYTWordle', hex: '#e3e3e1' },
+  { name: 'NYTSpellingBee', hex: '#f7da21' },
+];
+---
+
+<div class="max-w-full p-4">
+  <h1>{}</h1>
+  <div class="grid grid-cols-3 gap-4">
+    {
+      colors.map((color) => (
+        <div class="flex flex-col items-center justify-center h-32" style={`background-color: ${color.hex};`}>
+          <span class="text-white">{color.name}</span>
+          <span class="text-white">{color.hex}</span>
+        </div>
+      ))
+    }
+  </div>
+</div>
