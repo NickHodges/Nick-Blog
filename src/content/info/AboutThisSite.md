@@ -15,4 +15,4 @@ This site is for all my other stuff. I'll write here about all kinds of differen
 - I am 100% happy to be wrong. I'm happy to admit that I am wrong. I'm delighted at the notion that there is new information that will change my mind. So please, feel free to correct me if I am wrong.
 - I have notions about the way things are. I have vague memories of studies that I may have read. I will feel no obligation whatsoever to back my statements up with references or links. If you have a link you want me to read, I'll probably read it. But basically, I'm going to say what I want without feeling any need to back up what I say. That's what we all get to do here on the Internet. :-)
 - I don't have comments here. Feel free to email me at [nickhodges@gmail.com](mailto:nickhodges@gmail.com) or better, engage with me on Facebook. I think a public conversation is much better.
-- Finally, any links to Amazon are affiliate links.  Using them will cost you nothing, and I will get a commission on anything you buy when you do so.
+- Finally, any links to Amazon are affiliate links. Using them will cost you nothing, and I will get a commission on anything you buy when you do so.
