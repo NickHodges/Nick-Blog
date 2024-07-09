@@ -1,13 +1,14 @@
 ---
 import { menuLinks, siteConfig } from '@site-config';
+import GoogleAds from '@components/GoogleAds.astro'
 
 const year = new Date().getFullYear();
 ---
 
 <footer class="mt-auto flex w-full flex-col items-center justify-center gap-y-2 pb-4 pt-20 text-center font-semibold text-gray-600 dark:text-gray-400 sm:text-xs">
+  <GoogleAds />
   <div class="mb-4 text-center">
     Any links to Amazon on this site are affiliate links. Using them costs you nothing, and I will earn a small commission on anything you buy if you use them. Thanks for your support!
-
     <div class="mt-4">Copyright &copy; {year} by {siteConfig.author} All Rights Reserved</div>
   </div>
   <nav aria-label="More on this site" class="flex justify-center gap-x-2 sm:gap-x-0 sm:divide-x sm:divide-gray-500">
