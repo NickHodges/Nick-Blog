@@ -8,7 +8,9 @@ declare module '@pagefind/default-ui' {
   }
 }
 
-interface ImportMetaEnv {}
+interface ImportMetaEnv {
+  readonly VITE_API_URL: string;
+}
 
 interface ImportMeta {
   readonly env: ImportMetaEnv;
