@@ -1,13 +1,27 @@
 {/* Inlined to avoid FOUC. */}
 <script is:inline>
   const lightModePref = window.matchMedia('(prefers-color-scheme: light)');
+  const THEME_KEY = 'theme';
+  const THEME_SYNC_KEY = 'theme-sync-with-os';
 
   function getUserPref() {
-    const storedTheme = typeof localStorage !== 'undefined' && localStorage.getItem('theme');
+    if (typeof localStorage === 'undefined') {
+      return lightModePref.matches ? 'light' : 'dark';
+    }
+    
+    // Check if we should sync with system preferences
+    const syncWithOS = localStorage.getItem(THEME_SYNC_KEY) === 'true';
+    
+    if (syncWithOS) {
+      return lightModePref.matches ? 'light' : 'dark';
+    }
+    
+    // Use stored theme or fall back to system preference
+    const storedTheme = localStorage.getItem(THEME_KEY);
     return storedTheme || (lightModePref.matches ? 'light' : 'dark');
   }
 
-  function setTheme(newTheme) {
+  function setTheme(newTheme, syncWithOS = false) {
     if (newTheme !== 'light' && newTheme !== 'dark') {
       return console.warn(`Invalid theme value '${newTheme}' received. Expected 'light' or 'dark'.`);
     }
@@ -24,8 +38,10 @@
     const colorThemeMetaTag = document.querySelector("meta[name='theme-color']");
     const bgColour = getComputedStyle(document.body).getPropertyValue('--theme-bg');
     colorThemeMetaTag.setAttribute('content', `hsl(${bgColour})`);
+    
     if (typeof localStorage !== 'undefined') {
-      localStorage.setItem('theme', newTheme);
+      localStorage.setItem(THEME_KEY, newTheme);
+      localStorage.setItem(THEME_SYNC_KEY, String(syncWithOS));
     }
   }
 
@@ -37,9 +53,33 @@
 
   // listen for theme-change custom event, fired in src/components/ThemeToggle.astro
   document.addEventListener('theme-change', (e) => {
-    setTheme(e.detail.theme);
+    setTheme(e.detail.theme, e.detail.syncWithOS || false);
   });
 
-  // listen for prefers-color-scheme change.
-  lightModePref.addEventListener('change', (e) => setTheme(e.matches ? 'light' : 'dark'));
+  // listen for prefers-color-scheme change
+  lightModePref.addEventListener('change', (e) => {
+    // Only auto-update if sync with OS is enabled
+    if (typeof localStorage !== 'undefined' && localStorage.getItem(THEME_SYNC_KEY) === 'true') {
+      setTheme(e.matches ? 'light' : 'dark', true);
+    }
+  });
+
+  // Expose theme functions to window
+  window.themeUtils = {
+    getTheme: () => document.documentElement.getAttribute('data-theme'),
+    setTheme,
+    isSyncingWithOS: () => localStorage.getItem(THEME_SYNC_KEY) === 'true',
+    toggleSyncWithOS: () => {
+      const currentSync = localStorage.getItem(THEME_SYNC_KEY) === 'true';
+      const newSync = !currentSync;
+      localStorage.setItem(THEME_SYNC_KEY, String(newSync));
+      
+      // If enabling sync, immediately sync with system
+      if (newSync) {
+        setTheme(lightModePref.matches ? 'light' : 'dark', true);
+      }
+      
+      return newSync;
+    }
+  };
 </script>

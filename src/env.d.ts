@@ -15,3 +15,12 @@ interface ImportMetaEnv {
 interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
+
+interface Window {
+  themeUtils?: {
+    getTheme: () => string | null;
+    setTheme: (theme: string, syncWithOS?: boolean) => void;
+    isSyncingWithOS: () => boolean;
+    toggleSyncWithOS: () => boolean;
+  };
+}

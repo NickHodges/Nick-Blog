@@ -2,6 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  /* Theme toggle dropdown styles */
+  #theme-dropdown {
+    @apply z-50 transition-all duration-200 transform;
+    transform-origin: top right;
+  }
+  
+  #theme-dropdown.hidden {
+    @apply opacity-0 scale-95 pointer-events-none;
+  }
+  
+  #theme-dropdown:not(.hidden) {
+    @apply opacity-100 scale-100 pointer-events-auto;
+  }
+  
+  /* Active theme indicator */
+  .theme-active-indicator::before {
+    content: "✓";
+    @apply mr-1;
+  }
+}
+
 @layer base {
   :root,
   :root[data-theme='light'] {
@@ -27,32 +49,5 @@
 
   html {
     @apply scroll-smooth;
-  }
-
-  body {
-    @apply mx-auto flex min-h-screen max-w-3xl flex-col bg-bgColor px-8 pt-16 font-mono text-sm font-normal text-textColor antialiased;
-  }
-
-  table {
-    @apply w-full table-auto border border-gray-300 bg-white;
-  }
-
-  thead {
-    @apply border border-gray-300 text-lg;
-  }
-
-  tr {
-    @apply odd:bg-white even:bg-gray-200 dark:odd:bg-gray-800 dark:even:bg-gray-700;
-  }
-
-  td {
-    @apply border border-gray-300 px-4 py-2;
-  }
-
-  tr:nth-child(odd) {
-    @apply bg-gray-100; /* Light color for odd rows */
-  }
-  tr:nth-child(even) {
-    @apply bg-gray-200; /* Slightly darker color for even rows */
   }
 }

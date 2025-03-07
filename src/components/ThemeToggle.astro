@@ -1,24 +1,61 @@
 <theme-toggle class="ms-2 sm:ms-4">
-  <button class="relative h-9 w-9 rounded-md p-2 ring-zinc-400 transition-all hover:ring-2" type="button">
-    <span class="sr-only">Dark Theme</span>
-    <svg aria-hidden="true" class="absolute start-1/2 top-1/2 h-7 w-7 -translate-x-1/2 -translate-y-1/2 scale-100 opacity-100 transition-all dark:scale-0 dark:opacity-0" fill="none" focusable="false" id="sun-svg" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path d="M12 18C15.3137 18 18 15.3137 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-      <path d="M22 12L23 12" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-      <path d="M12 2V1" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-      <path d="M12 23V22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-      <path d="M20 20L19 19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-      <path d="M20 4L19 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-      <path d="M4 20L5 19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-      <path d="M4 4L5 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-      <path d="M1 12L2 12" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-    </svg>
-    <svg aria-hidden="true" class="absolute start-1/2 top-1/2 h-7 w-7 -translate-x-1/2 -translate-y-1/2 scale-0 opacity-0 transition-all dark:scale-100 dark:opacity-100" fill="none" focusable="false" id="moon-svg" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
-      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"></path>
-      <path d="M17 4a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2"></path>
-      <path d="M19 11h2m-1 -1v2"></path>
-    </svg>
-  </button>
+  <div class="relative">
+    <button class="relative h-9 w-9 rounded-md p-2 ring-zinc-400 transition-all hover:ring-2" type="button" id="theme-button" aria-label="Toggle theme" aria-haspopup="true">
+      <svg aria-hidden="true" class="absolute start-1/2 top-1/2 h-7 w-7 -translate-x-1/2 -translate-y-1/2 scale-100 opacity-100 transition-all dark:scale-0 dark:opacity-0" fill="none" focusable="false" id="sun-svg" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 18C15.3137 18 18 15.3137 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+        <path d="M22 12L23 12" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+        <path d="M12 2V1" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+        <path d="M12 23V22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+        <path d="M20 20L19 19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+        <path d="M20 4L19 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+        <path d="M4 20L5 19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+        <path d="M4 4L5 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+        <path d="M1 12L2 12" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+      <svg aria-hidden="true" class="absolute start-1/2 top-1/2 h-7 w-7 -translate-x-1/2 -translate-y-1/2 scale-0 opacity-0 transition-all dark:scale-100 dark:opacity-100" fill="none" focusable="false" id="moon-svg" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+        <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"></path>
+        <path d="M17 4a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2"></path>
+        <path d="M19 11h2m-1 -1v2"></path>
+      </svg>
+    </button>
+    
+    <div id="theme-dropdown" class="absolute right-0 mt-1 hidden w-48 rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 dark:bg-zinc-800" style="transform-origin: top right;">
+      <div class="px-4 py-2 text-sm text-gray-700 dark:text-gray-200">Theme settings</div>
+      <div class="border-t border-gray-200 dark:border-gray-700"></div>
+      
+      <button id="light-theme-option" class="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-zinc-700">
+        <span class="flex items-center">
+          <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="5" stroke-width="2"></circle>
+            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke-width="2"></path>
+          </svg>
+          Light
+        </span>
+      </button>
+      
+      <button id="dark-theme-option" class="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-zinc-700">
+        <span class="flex items-center">
+          <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" stroke-width="2"></path>
+          </svg>
+          Dark
+        </span>
+      </button>
+      
+      <div class="border-t border-gray-200 dark:border-gray-700"></div>
+      
+      <button id="system-sync-option" class="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-zinc-700">
+        <span class="flex items-center">
+          <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-width="2"></path>
+          </svg>
+          <span id="system-sync-text">Sync with system</span>
+        </span>
+        <span id="system-sync-indicator" class="ml-2 inline-block h-4 w-4 rounded-full"></span>
+      </button>
+    </div>
+  </div>
 </theme-toggle>
 
 <script>
@@ -27,33 +64,104 @@
 
   class ThemeToggle extends HTMLElement {
     #controller: AbortController | undefined;
+    #button: HTMLButtonElement;
+    #dropdown: HTMLElement;
+    #lightOption: HTMLButtonElement;
+    #darkOption: HTMLButtonElement;
+    #systemOption: HTMLButtonElement;
+    #systemText: HTMLElement;
+    #systemIndicator: HTMLElement;
 
     connectedCallback() {
-      const button = this.querySelector('button')!;
-      // set aria role value
-      button.setAttribute('role', 'switch');
-      button.setAttribute('aria-checked', String(rootInDarkMode()));
+      this.#button = this.querySelector('#theme-button')!;
+      this.#dropdown = this.querySelector('#theme-dropdown')!;
+      this.#lightOption = this.querySelector('#light-theme-option')!;
+      this.#darkOption = this.querySelector('#dark-theme-option')!;
+      this.#systemOption = this.querySelector('#system-sync-option')!;
+      this.#systemText = this.querySelector('#system-sync-text')!;
+      this.#systemIndicator = this.querySelector('#system-sync-indicator')!;
+      
+      // Set aria role value
+      this.#button.setAttribute('role', 'switch');
+      this.#button.setAttribute('aria-checked', String(rootInDarkMode()));
+      
       // Abort signal
       const { signal } = (this.#controller = new AbortController());
-
-      // button event
-      button.addEventListener(
-        'click',
-        () => {
-          // invert theme
-          let themeChangeEvent = new CustomEvent('theme-change', {
-            detail: {
-              theme: rootInDarkMode() ? 'light' : 'dark',
-            },
-          });
-          // dispatch event -> ThemeProvider.astro
-          document.dispatchEvent(themeChangeEvent);
-
-          // set the aria-checked attribute
-          button.setAttribute('aria-checked', String(rootInDarkMode()));
+      
+      // Check if theme sync is enabled
+      this.updateSyncStatus();
+      
+      // Toggle dropdown
+      this.#button.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isHidden = this.#dropdown.classList.contains('hidden');
+        
+        // Always update status before showing dropdown
+        if (isHidden) {
+          this.updateSyncStatus();
+        }
+        
+        this.#dropdown.classList.toggle('hidden');
+      }, { signal });
+      
+      // Handle option clicks
+      this.#lightOption.addEventListener('click', () => this.setTheme('light', false), { signal });
+      this.#darkOption.addEventListener('click', () => this.setTheme('dark', false), { signal });
+      this.#systemOption.addEventListener('click', this.toggleSystemSync.bind(this), { signal });
+      
+      // Close dropdown when clicking outside
+      document.addEventListener('click', this.handleOutsideClick.bind(this), { signal });
+    }
+    
+    handleOutsideClick(e: Event) {
+      if (!this.contains(e.target as Node) && !this.#dropdown.classList.contains('hidden')) {
+        this.#dropdown.classList.add('hidden');
+      }
+    }
+    
+    updateSyncStatus() {
+      const isSyncing = window.themeUtils?.isSyncingWithOS() || false;
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      
+      // Update sync status
+      this.#systemText.textContent = `Sync with system ${isSyncing ? '(on)' : '(off)'}`;
+      this.#systemIndicator.classList.toggle('bg-green-500', isSyncing);
+      this.#systemIndicator.classList.toggle('bg-gray-300', !isSyncing);
+      
+      // Update active theme indicators
+      if (currentTheme === 'light') {
+        this.#lightOption.classList.add('theme-active-indicator');
+        this.#darkOption.classList.remove('theme-active-indicator');
+      } else {
+        this.#lightOption.classList.remove('theme-active-indicator');
+        this.#darkOption.classList.add('theme-active-indicator');
+      }
+    }
+    
+    toggleSystemSync() {
+      if (window.themeUtils) {
+        window.themeUtils.toggleSyncWithOS();
+        this.updateSyncStatus();
+        this.#button.setAttribute('aria-checked', String(rootInDarkMode()));
+        this.#dropdown.classList.add('hidden');
+      }
+    }
+    
+    setTheme(theme: string, syncWithOS = false) {
+      let themeChangeEvent = new CustomEvent('theme-change', {
+        detail: {
+          theme,
+          syncWithOS
         },
-        { signal },
-      );
+      });
+      
+      // Dispatch event -> ThemeProvider.astro
+      document.dispatchEvent(themeChangeEvent);
+      
+      // Set the aria-checked attribute
+      this.#button.setAttribute('aria-checked', String(rootInDarkMode()));
+      this.#dropdown.classList.add('hidden');
+      this.updateSyncStatus();
     }
 
     disconnectedCallback() {
@@ -62,4 +170,14 @@
   }
 
   customElements.define('theme-toggle', ThemeToggle);
+  
+  // TypeScript interface for window.themeUtils
+  interface Window {
+    themeUtils?: {
+      getTheme: () => string | null;
+      setTheme: (theme: string, syncWithOS?: boolean) => void;
+      isSyncingWithOS: () => boolean;
+      toggleSyncWithOS: () => boolean;
+    };
+  }
 </script>
