@@ -64,13 +64,13 @@
 
   class ThemeToggle extends HTMLElement {
     #controller: AbortController | undefined;
-    #button: HTMLButtonElement;
-    #dropdown: HTMLElement;
-    #lightOption: HTMLButtonElement;
-    #darkOption: HTMLButtonElement;
-    #systemOption: HTMLButtonElement;
-    #systemText: HTMLElement;
-    #systemIndicator: HTMLElement;
+    #button!: HTMLButtonElement;
+    #dropdown!: HTMLElement;
+    #lightOption!: HTMLButtonElement;
+    #darkOption!: HTMLButtonElement;
+    #systemOption!: HTMLButtonElement;
+    #systemText!: HTMLElement;
+    #systemIndicator!: HTMLElement;
 
     connectedCallback() {
       this.#button = this.querySelector('#theme-button')!;
@@ -172,12 +172,14 @@
   customElements.define('theme-toggle', ThemeToggle);
   
   // TypeScript interface for window.themeUtils
-  interface Window {
-    themeUtils?: {
-      getTheme: () => string | null;
-      setTheme: (theme: string, syncWithOS?: boolean) => void;
-      isSyncingWithOS: () => boolean;
-      toggleSyncWithOS: () => boolean;
-    };
+  declare global {
+    interface Window {
+      themeUtils?: {
+        getTheme: () => string | null;
+        setTheme: (theme: string, syncWithOS?: boolean) => void;
+        isSyncingWithOS: () => boolean;
+        toggleSyncWithOS: () => boolean;
+      };
+    }
   }
 </script>

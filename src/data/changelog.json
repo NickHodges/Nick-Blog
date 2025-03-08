@@ -1,5 +1,10 @@
 [
   {
+    "date": "March 8, 2025",
+    "event": "Big Changes",
+    "comments": "Haven't worked on this in a while.  Now I have ClaudeCode helping me, and now we have dark/light theme peristence,"
+  },
+  {
     "date": "June 2, 2024",
     "event": "Added a Now page",
     "comments": "Followed Derek Sivers' advice and added a Now page (https://nownownow.com/about)"

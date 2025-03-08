@@ -9,7 +9,7 @@ import { remarkReadingTime } from './src/utils/remark-reading-time';
 import icon from 'astro-icon';
 import expressiveCode from 'astro-expressive-code';
 import { expressiveCodeOptions } from './src/site.config';
-import vercelAdapter from '@astrojs/vercel';
+// import vercelAdapter from '@astrojs/vercel';
 
 import astroStarlightRemarkAsides from 'astro-starlight-remark-asides';
 import remarkDirective from 'remark-directive';
@@ -18,11 +18,13 @@ import remarkDirective from 'remark-directive';
 export default defineConfig({
   site: 'https://nickhodges.com/',
   output: 'static',
-  adapter: vercelAdapter({
-    webAnalytics: {
-      enabled: true,
-    },
-  }),
+  // Comment out adapter for local builds - uncomment for deployment
+  // adapter: vercelAdapter({
+  //   webAnalytics: {
+  //     enabled: true,
+  //   },
+  //   analytics: true,
+  // }),
   markdown: {
     remarkPlugins: [remarkUnwrapImages, remarkReadingTime, remarkDirective, astroStarlightRemarkAsides],
     rehypePlugins: [
