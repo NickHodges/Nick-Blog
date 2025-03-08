@@ -24,10 +24,12 @@ const {
   <body>
     <ThemeProvider />
     <SkipLink />
-    <Header />
-    <main id="main">
-      <slot />
-      <Footer />
-    </main>
+    <div class="mx-auto max-w-3xl px-4 sm:px-8">
+      <Header />
+      <main id="main" class="pb-12">
+        <slot />
+        <Footer />
+      </main>
+    </div>
   </body>
 </html>
