@@ -6,7 +6,8 @@
 - `npm run build` - Run checks and build for production
 - `npm run preview` - Preview production build
 - `npm run lint` - Run Prettier and ESLint to fix files
-- `npm run format` - Format files with Prettier
+- `npm run format` - Format files with Prettier (JS, TS, Astro)
+- `npm run format:all` - Format all files, including HTML and CSS
 - `npm run check` - Run Astro type checking
 
 ## Code Style
