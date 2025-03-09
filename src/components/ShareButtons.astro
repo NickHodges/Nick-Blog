@@ -28,14 +28,26 @@ const emailUrl = `mailto:?subject=${encodedTitle}&body=${encodedDescription}%0A%
 <div class="not-prose share-buttons mt-10 border-t border-gray-200 pt-8 dark:border-gray-700">
   <h3 class="mb-4 text-lg font-medium text-accent-2">Share this post</h3>
   <div class="flex flex-wrap gap-3">
+    <button 
+      id="web-share-btn" 
+      class="inline-flex items-center rounded-md bg-accent-2 px-4 py-2 text-sm text-white transition hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-accent-1 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+      aria-label="Share this post"
+      data-title={title}
+      data-description={description}
+      data-url={fullUrl}
+    >
+      <Icon name="mdi:share" class="mr-2 h-5 w-5" aria-hidden="true" />
+      <span>Share</span>
+    </button>
+    
     <a 
       href={twitterUrl} 
       target="_blank" 
       rel="noopener noreferrer" 
-      class="inline-flex items-center rounded-md bg-[#000000] px-4 py-2 text-sm text-white transition hover:bg-opacity-90"
+      class="inline-flex items-center rounded-md bg-[#000000] px-4 py-2 text-sm text-white transition hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-accent-1 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
       aria-label="Share on Twitter"
     >
-      <Icon name="mdi:twitter" class="mr-2 h-5 w-5" />
+      <Icon name="mdi:twitter" class="mr-2 h-5 w-5" aria-hidden="true" />
       <span>X / Twitter</span>
     </a>
     
@@ -43,10 +55,10 @@ const emailUrl = `mailto:?subject=${encodedTitle}&body=${encodedDescription}%0A%
       href={facebookUrl} 
       target="_blank" 
       rel="noopener noreferrer" 
-      class="inline-flex items-center rounded-md bg-[#1877F2] px-4 py-2 text-sm text-white transition hover:bg-opacity-90"
+      class="inline-flex items-center rounded-md bg-[#1877F2] px-4 py-2 text-sm text-white transition hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-accent-1 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
       aria-label="Share on Facebook"
     >
-      <Icon name="mdi:facebook" class="mr-2 h-5 w-5" />
+      <Icon name="mdi:facebook" class="mr-2 h-5 w-5" aria-hidden="true" />
       <span>Facebook</span>
     </a>
     
@@ -54,20 +66,61 @@ const emailUrl = `mailto:?subject=${encodedTitle}&body=${encodedDescription}%0A%
       href={linkedinUrl} 
       target="_blank" 
       rel="noopener noreferrer" 
-      class="inline-flex items-center rounded-md bg-[#0A66C2] px-4 py-2 text-sm text-white transition hover:bg-opacity-90"
+      class="inline-flex items-center rounded-md bg-[#0A66C2] px-4 py-2 text-sm text-white transition hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-accent-1 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
       aria-label="Share on LinkedIn"
     >
-      <Icon name="mdi:linkedin" class="mr-2 h-5 w-5" />
+      <Icon name="mdi:linkedin" class="mr-2 h-5 w-5" aria-hidden="true" />
       <span>LinkedIn</span>
     </a>
     
     <a 
       href={emailUrl}
-      class="inline-flex items-center rounded-md bg-[#4CAF50] px-4 py-2 text-sm text-white transition hover:bg-opacity-90"
+      class="inline-flex items-center rounded-md bg-[#4CAF50] px-4 py-2 text-sm text-white transition hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-accent-1 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
       aria-label="Share via email"
     >
-      <Icon name="mdi:email" class="mr-2 h-5 w-5" />
+      <Icon name="mdi:email" class="mr-2 h-5 w-5" aria-hidden="true" />
       <span>Email</span>
     </a>
   </div>
 </div>
+
+<script>
+  // Web Share API support
+  const shareButton = document.getElementById('web-share-btn');
+  
+  if (navigator.share) {
+    shareButton.addEventListener('click', async () => {
+      try {
+        const title = shareButton.dataset.title;
+        const description = shareButton.dataset.description;
+        const url = shareButton.dataset.url;
+        
+        await navigator.share({
+          title,
+          text: description,
+          url
+        });
+      } catch (err) {
+        console.error('Share failed:', err);
+      }
+    });
+  } else {
+    shareButton.style.display = 'none';
+  }
+
+  // Enhanced link behavior for social sharing
+  document.querySelectorAll('.share-buttons a').forEach(link => {
+    link.addEventListener('click', (e) => {
+      try {
+        // If it's not the email link, prevent default and open in popup
+        if (!link.href.startsWith('mailto:')) {
+          e.preventDefault();
+          window.open(link.href, 'share-popup', 'width=600,height=480');
+        }
+      } catch (err) {
+        console.error('Share error:', err);
+        // Don't prevent default - let the link work normally as fallback
+      }
+    });
+  });
+</script>

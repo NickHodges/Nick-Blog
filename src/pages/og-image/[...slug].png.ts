@@ -11,6 +11,8 @@ import type { ReactNode } from 'react';
 
 import RobotoMono from '@assets/roboto-mono-regular.ttf';
 import RobotoMonoBold from '@assets/roboto-mono-700.ttf';
+import fs from 'node:fs';
+import path from 'node:path';
 
 const ogOptions: SatoriOptions = {
   width: 1200,
@@ -32,6 +34,11 @@ const ogOptions: SatoriOptions = {
   ],
 };
 
+// Load the nick avatar image as base64
+const avatarImagePath = path.join(process.cwd(), 'src', 'assets', 'nick.png');
+const avatarImageData = fs.readFileSync(avatarImagePath);
+const avatarBase64 = `data:image/png;base64,${avatarImageData.toString('base64')}`;
+
 const markup = (title: string, pubDate: string) => html`
   <div tw="flex flex-col w-full h-full bg-[#1d1f21] text-[#c9cacc]">
     <div tw="flex flex-col flex-1 w-full p-10 justify-center">
@@ -40,7 +47,7 @@ const markup = (title: string, pubDate: string) => html`
     </div>
     <div tw="flex items-center justify-between w-full p-10 border-t border-[#2bbc89] text-xl">
       <div tw="flex items-center">
-        <img src="https://www.nickhodges.com/assets/favicons/apple-icon.png" alt="Nick Image" height="60" />
+        <img src="${avatarBase64}" width="60" height="60" alt="Nick Image" tw="rounded-full" />
         <p tw="ml-3 font-semibold">${siteConfig.title}</p>
       </div>
       <p>by ${siteConfig.author}</p>
