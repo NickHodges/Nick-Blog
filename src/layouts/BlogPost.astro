@@ -3,6 +3,7 @@ import type { CollectionEntry } from 'astro:content';
 
 import BlogHero from '@components/blog/Hero.astro';
 import TOC from '@components/blog/TOC.astro';
+import ShareButtons from '@components/ShareButtons.astro';
 
 import BaseLayout from './Base.astro';
 
@@ -17,6 +18,7 @@ const {
 } = post;
 const socialImage = ogImage ?? `/og-image/${slug}.png`;
 const articleDate = updatedDate?.toISOString() ?? publishDate.toISOString();
+const postUrl = `posts/${slug}`;
 
 const { headings } = await post.render();
 ---
@@ -30,6 +32,8 @@ const { headings } = await post.render();
       <div class="prose prose-cactus mt-12 max-w-3xl">
         <slot />
       </div>
+      
+      <ShareButtons title={title} url={postUrl} description={description} />
     </article>
   </div>
 
