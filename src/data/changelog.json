@@ -1,5 +1,11 @@
 [
   {
+    "date": "March 15, 2025",
+    "event": "Added a changelog",
+    "comments": "I've added Google Adsense ads to the site.  I wanted a narrower ad, but they seem
+    insistent.  I'll keep working on it."
+  },
+  {
     "date": "March 8, 2025",
     "event": "Big Changes",
     "comments": "Haven't worked on this in a while.  Now I have ClaudeCode helping me, and now we have dark/light theme peristence, and social share buttons."
