@@ -8,6 +8,10 @@ export type SiteConfig = {
     locale: string | string[] | undefined;
     options: Intl.DateTimeFormatOptions;
   };
+  adsense: {
+    clientId: string;
+    adSlot: string;
+  };
 };
 
 export type PaginationLink = {

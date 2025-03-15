@@ -21,6 +21,11 @@ export const siteConfig: SiteConfig = {
       year: 'numeric',
     },
   },
+  // Google AdSense Configuration
+  adsense: {
+    clientId: 'ca-pub-9957327027530940', // Replace with your AdSense publisher ID
+    adSlot: '6617379235', // Replace with your ad slot ID
+  },
 };
 
 // Used to generate links in both the Header & Footer.
