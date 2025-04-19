@@ -18,6 +18,8 @@ import RobotoMonoBold from '@assets/roboto-mono-700.ttf';
 // Use a simple placeholder image instead of reading from file system
 // This avoids file path issues during build
 const nickImageBase64 = `data:image/svg+xml;base64,${Buffer.from('<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><circle cx="30" cy="30" r="25" fill="#2bbc89"/><text x="30" y="35" font-size="20" text-anchor="middle" fill="white">NH</text></svg>').toString('base64')}`;
+import fs from 'node:fs';
+import path from 'node:path';
 
 const ogOptions: SatoriOptions = {
   width: 1200,
@@ -38,6 +40,11 @@ const ogOptions: SatoriOptions = {
     },
   ],
 };
+
+// Load the nick avatar image as base64
+const avatarImagePath = path.join(process.cwd(), 'src', 'assets', 'nick.png');
+const avatarImageData = fs.readFileSync(avatarImagePath);
+const avatarBase64 = `data:image/png;base64,${avatarImageData.toString('base64')}`;
 
 const markup = (title: string, pubDate: string) => html`
   <div tw="flex flex-col w-full h-full bg-[#1d1f21] text-[#c9cacc]">
