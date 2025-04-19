@@ -1,416 +1,71 @@
 {
-
-
-
-
-
   "name": "nickhodgesblog",
-
-
-
-
-
   "version": "1.0.0",
-
-
-
-
-
   "private": true,
-
-
-
-
-
   "scripts": {
-
-
-
-
-
     "dev": "astro dev",
-
-
-
-
-
     "start": "astro dev",
-
-
-
-
-
     "build": "astro build",
-
-
-
-
-
     "build:check": "astro check && astro build",
-
-
-
-
-
     "lint": "prettier --write  \"**/*.{js,jsx,ts,tsx,md,mdx,astro}\" && eslint --fix \"src/**/*.{js,ts,jsx,tsx,astro}\"",
-
-
-
-
-
     "prebuild:check": "npm run lint",
-
-
-
-
-
     "postbuild": "pagefind --site dist/",
-
-
-
-
-
     "preview": "astro preview",
-
-
-
-
-
     "format": "prettier --write --cache '**/*.{js,jsx,ts,tsx,astro,html,css}'",
-
-
-
-
-
     "check": "astro check",
     "vercel-build": "mkdir -p .vercel/output/static/ && npm run build"
-
-
-
-
-
   },
-
-
-
-
-
   "dependencies": {
-
-
-
-
-
     "@astrojs/mdx": "^4.1.0",
-
-
-
-
-
     "@astrojs/react": "^4.2.1",
-
-
-
-
-
     "@astrojs/rss": "^4.0.11",
-
-
-
-
-
     "@astrojs/sitemap": "^3.2.1",
-
-
-
-
-
     "@astrojs/tailwind": "^6.0.0",
-
-
-
-
-
     "@astrojs/vercel": "^8.1.1",
-
-
-
-
-
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
-
-
-
-
-
     "@types/react": "^18.2.77",
-
-
-
-
-
     "@types/react-dom": "^18.2.25",
-
-
-
-
-
     "@vercel/analytics": "^1.2.2",
-
-
-
-
-
     "astro": "^5.4.2",
-
-
-
-
-
     "astro-expressive-code": "^0.40.2",
-
-
-
-
-
     "astro-icon": "^1.1.5",
-
-
-
-
-
     "astro-social-share": "^2.1.0",
-
-
-
-
-
     "astro-starlight-remark-asides": "^0.0.7",
-
-
-
-
-
     "react": "^18.2.0",
-
-
-
-
-
     "react-dom": "^18.2.0",
-
-
-
-
-
     "rehype-external-links": "^3.0.0",
-
-
-
-
-
     "remark-directive": "^3.0.0",
-
-
-
-
-
     "satori": "^0.12.1",
-
-
-
-
-
     "satori-html": "^0.3.2",
-
-
-
-
-
     "sharp": "^0.33.3",
-
-
-
-
-
     "typescript-eslint": "^8.8.1"
-
-
-
-
-
   },
-
-
-
-
-
   "devDependencies": {
-
-
-
-
-
     "@astrojs/check": "^0.9.4",
-
-
-
-
-
     "@eslint/js": "^9.3.0",
-
-
-
-
-
     "@iconify-json/mdi": "^1.1.64",
-
-
-
-
-
     "@pagefind/default-ui": "^1.0.4",
-
-
-
-
-
     "@resvg/resvg-js": "^2.6.2",
-
-
-
-
-
     "@tailwindcss/aspect-ratio": "^0.4.2",
-
-
-
-
-
     "@tailwindcss/typography": "^0.5.12",
-
-
-
-
-
     "@typescript-eslint/eslint-plugin": "^8.8.1",
-
-
-
-
-
     "@typescript-eslint/parser": "^8.8.1",
-
-
-
-
-
     "autoprefixer": "^10.4.19",
-
-
-
-
-
     "eslint": "^9.11.1",
-
-
-
-
-
     "eslint-plugin-astro": "^1.3.1",
-
-
-
-
-
     "globals": "^15.3.0",
-
-
-
-
-
     "mdast-util-to-string": "^4.0.0",
-
-
-
-
-
     "pagefind": "^1.0.4",
-
-
-
-
-
     "postcss": "^8.4.38",
-
-
-
-
-
     "postcss-html": "^1.6.0",
-
-
-
-
-
     "postcss-import": "^16.1.0",
-
-
-
-
-
     "prettier": "^3.2.5",
-
-
-
-
-
     "prettier-plugin-astro": "^0.14.1",
-
-
-
-
-
     "prettier-plugin-tailwindcss": "^0.6.5",
-
-
-
-
-
     "reading-time": "^1.5.0",
-
-
-
-
-
     "remark-unwrap-images": "^4.0.0",
-
-
-
-
-
     "tailwindcss": "^3.4.3",
-
-
-
-
-
     "typescript": "^5.4.3"
-
-
-
-
-
   },
-
-
-
-
-
   "packageManager": "pnpm@8.15.4"
-
-
-
-
-
 }

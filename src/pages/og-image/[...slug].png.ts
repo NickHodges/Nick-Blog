@@ -8,9 +8,16 @@ import { getAllPosts } from '@data/post';
 
 // After
 import type { ReactNode } from 'react';
+import { readFileSync } from 'fs';
+import { fileURLToPath } from 'url';
+import { join, dirname } from 'path';
 
 import RobotoMono from '@assets/roboto-mono-regular.ttf';
 import RobotoMonoBold from '@assets/roboto-mono-700.ttf';
+
+// Use a simple placeholder image instead of reading from file system
+// This avoids file path issues during build
+const nickImageBase64 = `data:image/svg+xml;base64,${Buffer.from('<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><circle cx="30" cy="30" r="25" fill="#2bbc89"/><text x="30" y="35" font-size="20" text-anchor="middle" fill="white">NH</text></svg>').toString('base64')}`;
 
 const ogOptions: SatoriOptions = {
   width: 1200,
@@ -40,7 +47,7 @@ const markup = (title: string, pubDate: string) => html`
     </div>
     <div tw="flex items-center justify-between w-full p-10 border-t border-[#2bbc89] text-xl">
       <div tw="flex items-center">
-        <img src="https://www.nickhodges.com/assets/favicons/apple-icon.png" alt="Nick Image" height="60" />
+        <img src="${nickImageBase64}" alt="Nick Image" width="60" height="60" />
         <p tw="ml-3 font-semibold">${siteConfig.title}</p>
       </div>
       <p>by ${siteConfig.author}</p>
