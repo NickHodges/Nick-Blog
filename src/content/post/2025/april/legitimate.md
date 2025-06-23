@@ -14,7 +14,7 @@ description: 'There are legitimate concerns about voting on all sides'
 
 **Dear Right of Center People**: Being concerned about voter suppression, the integrity of the ballot box, and making sure everyone can vote are legitimate concerns.
 
-**Dear Left of Center People**:  Wanting people to have to show ID to vote is a legtimate and reasonable position to hold.
+**Dear Left of Center People**:  Wanting people to have to show ID to vote is a legitimate and reasonable position to hold.
 
 **Dear Right of Center People**:  Being concerned that people don't have ID and thus can't vote is a legitimate and reasonable position to hold.
 
