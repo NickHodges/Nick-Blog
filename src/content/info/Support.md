@@ -7,7 +7,7 @@ draft: false
 
 So, the purpose of this page is to provide you with a few ways that you can support me, or otherwise provide me with a little extra cabbage, if you are so inclined. Most of these suggestions here will cost you nothing extra on top of what you are already doing. And of course, I'm grateful for anything you can do here. Everything I do here is free, so if you feel the urge to give back in this direction a little, I'm very appreciative.
 
-## Privacy
+## Privacy.com
 
 I have put this first, because not only can we each make $5 if [you sign up and use the service](https://app.privacy.com/join/LUZBW), I also am a truly strong believer that everyone should be using this for almost every online subscription you have.
 
