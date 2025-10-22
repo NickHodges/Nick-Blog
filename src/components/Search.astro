@@ -34,10 +34,10 @@ import '@pagefind/default-ui/css/ui.css';
 
 <script>
   class SiteSearch extends HTMLElement {
-    private closeBtn: HTMLButtonElement;
-    private dialog: HTMLDialogElement;
-    private dialogFrame: HTMLDivElement;
-    private openBtn: HTMLButtonElement;
+    private closeBtn!: HTMLButtonElement;
+    private dialog!: HTMLDialogElement;
+    private dialogFrame!: HTMLDivElement;
+    private openBtn!: HTMLButtonElement;
 
     closeModal = () => {
       if (this.dialog.open) {
@@ -70,10 +70,21 @@ import '@pagefind/default-ui/css/ui.css';
 
     constructor() {
       super();
-      this.openBtn = this.querySelector<HTMLButtonElement>('button[data-open-modal]')!;
-      this.closeBtn = this.querySelector<HTMLButtonElement>('button[data-close-modal]')!;
-      this.dialog = this.querySelector('dialog')!;
-      this.dialogFrame = this.querySelector('.dialog-frame')!;
+
+      const openBtn = this.querySelector<HTMLButtonElement>('button[data-open-modal]');
+      const closeBtn = this.querySelector<HTMLButtonElement>('button[data-close-modal]');
+      const dialog = this.querySelector('dialog');
+      const dialogFrame = this.querySelector('.dialog-frame');
+
+      if (!openBtn || !closeBtn || !dialog || !dialogFrame) {
+        console.error('Search component elements not found');
+        return;
+      }
+
+      this.openBtn = openBtn;
+      this.closeBtn = closeBtn;
+      this.dialog = dialog;
+      this.dialogFrame = dialogFrame as HTMLDivElement;
 
       this.openBtn.addEventListener('click', this.openModal);
       this.openBtn.disabled = false;

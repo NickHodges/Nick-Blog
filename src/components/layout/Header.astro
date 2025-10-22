@@ -53,11 +53,11 @@ const url = new URL(Astro.request.url);
     import { toggleClass } from '@utils';
 
     class MobileNavBtn extends HTMLElement {
-      private headerEl: HTMLElement;
+      private headerEl!: HTMLElement;
 
-      private menuOpen: boolean;
+      private menuOpen!: boolean;
 
-      private mobileButtonEl: HTMLButtonElement;
+      private mobileButtonEl!: HTMLButtonElement;
 
       toggleMobileMenu = () => {
         toggleClass(this.headerEl, 'menu-open');
@@ -70,9 +70,19 @@ const url = new URL(Astro.request.url);
       constructor() {
         super();
 
-        this.headerEl = document.getElementById('main-header')!;
+        const headerEl = document.getElementById('main-header');
+        if (!headerEl) {
+          console.error('Header element not found');
+          return;
+        }
+        this.headerEl = headerEl;
 
-        this.mobileButtonEl = this.querySelector('button') as HTMLButtonElement;
+        const mobileButtonEl = this.querySelector('button');
+        if (!mobileButtonEl) {
+          console.error('Mobile button not found');
+          return;
+        }
+        this.mobileButtonEl = mobileButtonEl as HTMLButtonElement;
 
         this.menuOpen = false;
 

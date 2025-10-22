@@ -1,30 +1,25 @@
 ---
-import { siteConfig } from '../site.config';
 const isProd = import.meta.env.PROD;
-const { clientId, adSlot } = siteConfig.adsense;
 ---
 
 <div class="ad-container">
-  {isProd ? (
-    <>
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9957327027530940"
-     crossorigin="anonymous"></script>
-<!-- NickAd -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-9957327027530940"
-     data-ad-slot="6923999981"
-     data-ad-format="horizontal"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-    </>
-  ) : (
-    <div class="ad-placeholder">
-      <span>Advertisement Placeholder (728x90)</span>
-    </div>
-  )}
+  {
+    isProd ? (
+      <>
+        <script is:inline async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9957327027530940" crossorigin="anonymous" />
+        {/* NickAd */}
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9957327027530940" data-ad-slot="6923999981" data-ad-format="horizontal" data-full-width-responsive="true" />
+        <script is:inline>
+          {/* @ts-ignore */}
+          (window.adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </>
+    ) : (
+      <div class="ad-placeholder">
+        <span>Advertisement Placeholder (728x90)</span>
+      </div>
+    )
+  }
 </div>
 
 <style>
