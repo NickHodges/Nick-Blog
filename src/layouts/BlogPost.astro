@@ -4,6 +4,7 @@ import type { CollectionEntry } from 'astro:content';
 import BlogHero from '@components/blog/Hero.astro';
 import TOC from '@components/blog/TOC.astro';
 import ShareButtons from '@components/ShareButtons.astro';
+import NewsletterSignup from '@components/NewsletterSignup.astro';
 
 import BaseLayout from './Base.astro';
 
@@ -34,6 +35,8 @@ const { headings } = await post.render();
       </div>
 
       <ShareButtons title={title} url={postUrl} description={description} />
+
+      <NewsletterSignup />
     </article>
   </div>
 
