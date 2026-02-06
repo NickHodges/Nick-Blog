@@ -45,4 +45,4 @@ And if you have thoughts — about what it gets right, where it misses the mark,
 
 Thanks for reading, and here’s to better, richer,and politer online discussion.
 
-Please feel free to reach out to us directly at [admin@repsectify.ai](mailto:admin@repsectify.ai)
+Please feel free to reach out to us directly at [admin@respectify.ai](mailto:admin@respectify.ai)
