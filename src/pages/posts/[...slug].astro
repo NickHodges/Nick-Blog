@@ -3,11 +3,15 @@ import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
 
 import PostLayout from '@layouts/BlogPost.astro';
 import { getAllPosts } from '@data/post';
+import { getAllDelphiPosts } from '@data/delphi';
 import 'astro-starlight-remark-asides/styles.css';
 
 export const getStaticPaths = (async () => {
-  const blogEntries = await getAllPosts();
-  return blogEntries.map((entry) => ({
+  const postEntries = await getAllPosts();
+  const delphiEntries = await getAllDelphiPosts();
+  const allEntries = [...postEntries, ...delphiEntries];
+
+  return allEntries.map((entry) => ({
     params: { slug: entry.slug },
     props: { entry },
   }));

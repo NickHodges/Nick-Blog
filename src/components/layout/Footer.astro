@@ -1,5 +1,5 @@
 ---
-import GoogleAds from '@components/GoogleAds.astro';
+import AdSense from '@components/AdSense.astro';
 import { menuLinks, siteConfig } from '@site-config';
 
 const year = new Date().getFullYear();
@@ -7,7 +7,7 @@ const year = new Date().getFullYear();
 
 <footer class="mt-auto flex w-full flex-col items-center justify-center gap-y-2 pb-4 pt-20 text-center font-semibold text-gray-600 dark:text-gray-400 sm:text-xs">
   <div>
-    <GoogleAds />
+    <AdSense slot="6718766952" format="fluid" layout="in-article" />
   </div>
   <div class="mb-4 text-center">
     Any links to Amazon on this site are affiliate links. Using them costs you nothing, and I will earn a small commission on anything you buy if you use them. Thanks for your support!

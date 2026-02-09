@@ -1,38 +1,64 @@
 ---
+interface Props {
+  slot: string;
+  format?: 'horizontal' | 'fluid' | 'auto';
+  layout?: 'in-article' | undefined;
+  showInDev?: boolean;
+}
+
+const {
+  slot,
+  format = 'auto',
+  layout,
+  showInDev = false,
+} = Astro.props;
+
 const isProd = import.meta.env.PROD;
+const shouldShow = isProd || showInDev;
+
+// AdSense client ID
+const CLIENT_ID = 'ca-pub-9957327027530940';
+
+// Determine ad display style and attributes
+const isHorizontal = format === 'horizontal';
+const displayStyle = isHorizontal ? 'display:block' : 'display:block; text-align:center;';
+const dataAdFormat = format === 'fluid' ? 'fluid' : format;
 ---
 
-<div class="ad-container">
-  {
-    isProd ? (
-      <>
-        <script is:inline async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9957327027530940" crossorigin="anonymous" />
-        {/* NickAd */}
-        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9957327027530940" data-ad-slot="6923999981" data-ad-format="horizontal" data-full-width-responsive="true" />
-        <script is:inline>
-          {/* @ts-ignore */}
-          (window.adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-      </>
-    ) : (
-      <div class="ad-placeholder">
-        <span>Advertisement Placeholder (728x90)</span>
-      </div>
-    )
-  }
-</div>
+{
+  shouldShow ? (
+    <>
+      <script is:inline async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${CLIENT_ID}`} crossorigin="anonymous"></script>
+      <ins
+        class="adsbygoogle"
+        style={displayStyle}
+        data-ad-client={CLIENT_ID}
+        data-ad-slot={slot}
+        data-ad-format={dataAdFormat}
+        {...(layout && { 'data-ad-layout': layout })}
+        {...(isHorizontal && { 'data-full-width-responsive': 'true' })}
+      />
+      <script is:inline>
+        {
+          (() => {
+            if (typeof window !== 'undefined') {
+              (window.adsbygoogle = window.adsbygoogle || []).push({});
+            }
+          })()
+        }
+      </script>
+    </>
+  ) : (
+    <div class="ad-placeholder">
+      <span>Advertisement Placeholder ({format})</span>
+    </div>
+  )
+}
 
 <style>
-  .ad-container {
-    width: 100%;
-    max-width: 728px;
-    margin: 2rem auto;
-    min-height: 90px;
-  }
-
   .ad-placeholder {
     width: 100%;
-    height: 90px;
+    min-height: 90px;
     background-color: #f0f0f0;
     display: flex;
     align-items: center;
@@ -40,5 +66,7 @@ const isProd = import.meta.env.PROD;
     border: 1px dashed #ccc;
     color: #666;
     font-size: 0.9rem;
+    padding: 1rem;
+    margin: 2rem auto;
   }
 </style>

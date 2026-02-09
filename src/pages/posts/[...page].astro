@@ -5,18 +5,34 @@ import type { CollectionEntry } from 'astro:content';
 import Pagination from '@components/Paginator.astro';
 import PostPreview from '@components/blog/PostPreview.astro';
 import PageLayout from '@layouts/Base.astro';
-import { getAllPosts, getUniqueTags, sortMDByDate } from '@data/post';
+import { getAllPosts, getUniqueTags as getPostUniqueTags, sortMDByDate as sortPostsByDate } from '@data/post';
+import { getAllDelphiPosts, getUniqueTags as getDelphiUniqueTags, sortMDByDate as sortDelphiByDate } from '@data/delphi';
 import 'astro-starlight-remark-asides/styles.css';
 
 export const getStaticPaths = (async ({ paginate }) => {
   const allPosts = await getAllPosts();
-  const allPostsByDate = sortMDByDate(allPosts);
-  const uniqueTags = getUniqueTags(allPosts);
-  return paginate(allPostsByDate, { pageSize: 10, props: { uniqueTags } });
+  const allDelphiPosts = await getAllDelphiPosts();
+  const allPostsByDate = sortPostsByDate(allPosts);
+  const allDelphiPostsByDate = sortDelphiByDate(allDelphiPosts);
+  const allCombinedPosts = [...allPostsByDate, ...allDelphiPostsByDate];
+
+  // Sort combined posts by date
+  const allCombinedByDate = allCombinedPosts.sort((a, b) => {
+    const aDate = new Date(a.data.updatedDate ?? a.data.publishDate).valueOf();
+    const bDate = new Date(b.data.updatedDate ?? b.data.publishDate).valueOf();
+    return bDate - aDate;
+  });
+
+  // Get unique tags from both collections
+  const postTags = getPostUniqueTags(allPosts);
+  const delphiTags = getDelphiUniqueTags(allDelphiPosts);
+  const uniqueTags = [...new Set([...postTags, ...delphiTags])];
+
+  return paginate(allCombinedByDate, { pageSize: 10, props: { uniqueTags } });
 }) satisfies GetStaticPaths;
 
 interface Props {
-  page: Page<CollectionEntry<'post'>>;
+  page: Page<CollectionEntry<'post'> | CollectionEntry<'delphi'>>;
   uniqueTags: string[];
 }
 
@@ -26,37 +42,22 @@ const meta = {
   description: 'Ready my collection of posts and the things that interest me',
   title: 'Posts',
 };
-
-const paginationProps = {
-  ...(page.url.prev && {
-    prevUrl: {
-      text: '← Previous Posts',
-      url: page.url.prev,
-    },
-  }),
-  ...(page.url.next && {
-    nextUrl: {
-      text: 'Next Posts →',
-      url: page.url.next,
-    },
-  }),
-};
 ---
 
 <PageLayout meta={meta}>
-  <h1 class="title mb-6">Posts</h1>
-  <div class="grid gap-y-16 sm:grid-cols-[3fr_1fr] sm:gap-x-8">
-    <section aria-label="Blog post list">
-      <ul class="space-y-8 text-start">
+  <h1 class='title mb-6'>Posts</h1>
+  <div class='grid gap-y-16 sm:grid-cols-[3fr_1fr] sm:gap-x-8'>
+    <section aria-label='Blog post list'>
+      <ul class='space-y-8 text-start'>
         {
           page.data.map((p) => (
-            <li class="flex flex-col flex-wrap gap-2 sm:flex-row [&_q]:basis-full">
-              <PostPreview as="h2" post={p} withDesc />
+            <li class='flex flex-col flex-wrap gap-2 sm:flex-row [&_q]:basis-full'>
+              <PostPreview as='h2' post={p} withDesc />
             </li>
           ))
         }
       </ul>
-      <Pagination {...paginationProps} />
+      <Pagination page={page} />
     </section>
     {
       !!uniqueTags.length && (

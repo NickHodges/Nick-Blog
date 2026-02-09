@@ -1,0 +1,13 @@
+---
+author: Nick Hodges
+publishDate: 2015-04-10
+title: Flotsam and Jetsam #100
+postSlug: flotsam-and-jetsam-100
+featured: false
+tags:
+  - delphi
+  - flotsam and jetsam
+description: "Well, here we are; one hundred Flotsam and Jetsam’s. I started this series just after I left Embarcadero."
+---
+
+- Well, here we are; one hundred Flotsam and Jetsam’s.  I started this series just after I left Embarcadero. Here’s a link to [the very first one on July 17, 2010](http://www.nickhodges.com/post/Flotsam-and-Jetsam-1.aspx).  Short and sweet it was.  Took almost five years to get here to one hundred.  Thanks for hanging with me.  Here’s to another 100, eh?- [Delphi XE8 is out](http://www.embarcadero.com/products/delphi). The main feature appears to be the Apple-mandated 64-bit iOS support.  It has Castalia integration as well as an interesting new tool called “GetIt” that will install a various – and presumably expanding – list of third party component sets and frameworks.  That’s pretty nice.  [The Data Sheet can be found here](http://www.embarcadero.com/products/rad-studio/rad-studio-data-sheet.pdf) and the [Feature Matrix is here](http://www.embarcadero.com/products/delphi/delphi-feature-matrix.pdf).  Give it a look.  “Support and Maintenance” is now called “[Update Subscription](http://www.embarcadero.com/products/delphi#update)”  which has the following interesting text in it:  *“…on-going maintenance on previous versions for up to 2 years from release..” *  That sounds intriguing. There is also a tool to migrate your settings  from previous versions.  I know I’ll be using that. Here’s [the list of new things in XE8 – it’s pretty long](http://docwiki.embarcadero.com/RADStudio/XE8/en/What%27s_New).- [SD Tmes](http://sdtimes.com) has [a review of RAD Studio XE8](http://sdtimes.com/embarcadero-focuses-on-iot-in-latest-release/?utm_content=14069067&utm_medium=social&utm_source=twitter).  Lots of talk about IoT – “The Internet of Things'”.  And [here’s the article from The Register](http://www.theregister.co.uk/2015/04/08/embarcaderos_crossplatform_xe8_rad_studio_targets_ios_8_internet_of_things/).  My favorite quote from that article: “*I ran up the RAD Studio XE8 IDE and one obvious benefit is the speed and responsiveness of the IDE compared to Visual Studio.*”- For some reason, VCL developers always seem to feel slighted by recent releases.  No reason to feel that way, though:  Marco has [a nice list of things for VCL developers in XE8](http://blog.marcocantu.com/blog/2015-april-new-xe8-vcl-developers.html). I especially like the improved TField performance.

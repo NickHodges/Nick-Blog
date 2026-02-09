@@ -1,0 +1,15 @@
+---
+author: Nick Hodges
+publishDate: 2019-09-03
+title: Flotsam and Jetsam #121
+postSlug: flotsam-and-jetsam-121
+featured: false
+tags:
+  - delphi
+  - flotsam and jetsam
+description: "Goodness, I've been neglectful of this blog. I have a problem, and I'm hoping you all can help me."
+---
+
+- Goodness, I've been neglectful of this blog.  - I have a problem, and I'm hoping you all can help me.  Almost five years ago, I left my BlogEngine.net-based blog at  [http://nickhodges.com/](http://nickhodges.com/)  and moved my blog to here.  I have a lot of content there, and a lot of links that still get viewed.  I'd like to do something more useful with [nickhodges.com](http://nickhodges.com/),  But I don't want to lose the content.  Losing the links would be slightly less worrisome if the content were still discoverable.  BlogEngine.net is pretty much abandoned and has no good export capability, other than BlogML which is so old that no one imports it.  I'm not thrilled at having to write an application to read the BlogML output and convert it to some useful format.  Does anyone have any ideas?
+In a classic "[Talk to the duck](https://mindovermachines.com/when-you-get-stuck-talk-to-the-duck/)" moment, after writing the above, I [found this blog post](https://blogs.biztalk360.com/migrating-your-blog-from-any-blogml-based-platform-to-wordpress-2/) that pretty much already wrote the utility for me.  I gave it a shot but didn't have much luck.  It said it imported something, and some of the stuff is there, but it didn't have the desired effect.  Maybe I'm missing something.....
+- Okay, so I just noticed that my book [More Coding in Delphi](https://amzn.to/2ZFT8dZ) was priced at $29.99, higher than[ Coding in Delphi](https://amzn.to/2PvDli8) by $5.00.  I've lowered the former so that both are the same price.  Please feel free to buy it.  - I am, of course, grateful to all of you who have bought my books.  I have, however, noticed an interesting trend.  [Coding in Delphi ](https://amzn.to/2PvDli8)continues to sell better than the other two books, even after all these years.  That means that there are a lot of you out there who are buying [Coding in Delphi](https://amzn.to/2PvDli8), but not buying [More Coding in Delphi ](https://amzn.to/2ZFT8dZ)and [Dependency Injection in Delphi](https://amzn.to/2LisHWx).  You can, of course, buy the two newer books.  I won't stop you.  ;-)- And if you want to buy more than one, there are bundles available on LeanPub --[ one for my first two books](https://leanpub.com/b/codingindelphibundle), and [one for all three](https://leanpub.com/b/nicksdelphibookbundle).  Don't be shy!-  (And yes, the last three bullet points were just an excuse plug my books and to link to them on [Amazon ](https://amzn.to/2Lk9wM5)and [LeanPub](https://leanpub.com/u/nickhodges).  I'm shameless.)

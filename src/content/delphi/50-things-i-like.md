@@ -1,0 +1,13 @@
+---
+author: Nick Hodges
+publishDate: 2016-05-08
+title: 50 Things I Like
+postSlug: 50-things-i-like
+featured: false
+tags:
+  - delphi
+  - general
+description: "Delphi The Delphi Community Clipmate (written in Delphi, by the way) Everything search tool NBA Basketball My Nexus 5x phone Visual Studio Code Notepa..."
+---
+
+- [Delphi](https://www.embarcadero.com/products/delphi)- The Delphi Community- [Clipmate](http://www.clipmate.com/) (written in Delphi, by the way)- [Everything](http://www.voidtools.com4) search tool- [NBA Basketball](http://www.nba.com)- [My Nexus 5x phone](http://amzn.to/1Whhp5Y)- [Visual Studio Code](http://code.visualstudio.com/?wt.mc_id=DX_834369&utm_source=bing&utm_medium=paid&utm_content=1&utm_campaign=Corp-FY16Q3March-Dev-PJVS)- [Notepad++](https://notepad-plus-plus.org/)- [Taylor Swift](http://amzn.to/1Whhmaa)- [Bruce Springsteen](http://amzn.to/1Oj97mm)- [Cream Cheese](http://www.kraftrecipes.com/philadelphia/default.aspx)- Traveling- [Evernote](http://www.evernote.com)- Being married- Being a Dad- [Twitter](http://www.twitter.com)- [Lonesome Dove](http://amzn.to/1WiHKRK)- [Casablanca](http://amzn.to/24E30pG)- Taking a nap on Sunday afternoon- Working at [Gateway Ticketing](http://www.gatewayticketing.com)- [Netflix](http://www.netflix.com)- [The Spring for Delphi Framework](https://bitbucket.org/sglienke/spring4d)- [The Delphi MVC Framework](https://github.com/danieleteti/delphimvcframework)- [Patty Griffin](http://amzn.to/1WhjIWF)- Dogs- [Mat Kearney](http://amzn.to/23zLLQh)- Cool Spring days- Iced Tea- [Raize Components](https://www.embarcadero.com/products/konopka-signature-vcl-controls) (and yes, I liked them before Embarcadero bought them.  ;-) )- [Harry Potter](http://amzn.to/1OjbbdZ)- Loosely coupled code- [The Minnesota Timberwolves](http://www.timberwolves.com)- [The Chrome Browser](https://www.google.com/chrome/browser/desktop/index.html?utm_source=bing&utm_medium=sem&utm_campaign=1001342|ChromeWin10|US|en|Hybrid|Text|BKWS~TopKWDS-BMM&brand=CHBF)- Freedom- [Facebook](https://www.facebook.com/)- Donating to open source projects- [Raspberry Pi](http://amzn.to/1q7Eomc)- Loyalty- [Amazon.com](http://amzn.to/24FNrtX)- Butter- Pickled Herring- Giving presentations at conferences- Writing code- [The Good Wife](http://amzn.to/1TxBgI5)- [Spiderman](http://amzn.to/1rIBHbM)- [My Roku](http://amzn.to/1NnMsdS)- [The Caine Mutiny](http://amzn.to/24FNNAS) (The book, not the movie.  The movie was terrible)- Birds of Prey – all kinds- Black Panthers- Wood burning stoves.

@@ -1,9 +1,25 @@
 ---
 import PageLayout from '@layouts/Base.astro';
-import { getAllPosts, getUniqueTagsWithCount } from '@data/post';
+import { getAllPosts, getUniqueTagsWithCount as getPostTagsWithCount } from '@data/post';
+import { getAllDelphiPosts, getUniqueTagsWithCount as getDelphiTagsWithCount } from '@data/delphi';
 
 const allPosts = await getAllPosts();
-const allTags = getUniqueTagsWithCount(allPosts);
+const allDelphiPosts = await getAllDelphiPosts();
+const allCombinedPosts = [...allPosts, ...allDelphiPosts];
+
+// Combine tags from both collections
+const postTags = getPostTagsWithCount(allPosts);
+const delphiTags = getDelphiTagsWithCount(allDelphiPosts);
+const tagCountMap = new Map<string, number>();
+
+postTags.forEach(([tag, count]) => {
+  tagCountMap.set(tag, (tagCountMap.get(tag) || 0) + count);
+});
+delphiTags.forEach(([tag, count]) => {
+  tagCountMap.set(tag, (tagCountMap.get(tag) || 0) + count);
+});
+
+const allTags = Array.from(tagCountMap.entries()).sort((a, b) => b[1] - a[1]);
 
 const meta = {
   description: "A list of all the topics I've written about in my posts",

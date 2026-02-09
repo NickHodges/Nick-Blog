@@ -1,0 +1,13 @@
+---
+author: Nick Hodges
+publishDate: 2015-03-29
+title: Flotsam and Jetsam #98
+postSlug: flotsam-and-jetsam-98
+featured: false
+tags:
+  - delphi
+  - flotsam and jetsam
+description: "I’ve been whining about my difficulty in writing a book chapter about the Parallel Programming Library ."
+---
+
+- I’ve been whining about my difficulty in writing a book chapter about the [Parallel Programming Library](http://docwiki.embarcadero.com/RADStudio/XE7/en/Using_the_Parallel_Programming_Library).  I’m getting the hang of it, though, and it is as cool as it’s been touted to be.  In fact, I’d venture to say that once you start using it, you’ll never really need to use `TThread` again.  The PPL is a nice abstraction of threading, with the notion of a `TTask/ITask` taking over the role of `TThread`.  You can pretty much parallelize anything you want with ease.  Very much worth the upgrade, if you are still on a pre-XE7 version.  And completely cross-platform – with nary an `{$IFDEF}` to be found.  - As many of you know, I work on my book at my local [Burger King](www.burgerking.com) on Saturday and Sunday mornings.  As a result, I drink a lot of iced tea.  This is fine – I enjoy a good caffeine buzz – but the down side?  All that iced tea makes me cold, despite the fact that I have a heavy fleece jacket on most of the time.   And the iced tea in the container is warm, so you have to use a lot of ice to get it cold, because no one wants warm iced tea.  I wonder if I could give myself hypothermia.  I mean, I drink a ***lot*** of iced tea while I’m writing, and I am definitely lowering my body temperature.- Here’s a wish that I have for Delphi:  That the default behavior for many of the VCL components be changed to ***not*** include the caption in the initial component.  Does ***anyone ***want the `TPanel` caption to be anything other than blank?  Does anyone want “Memo1” in a TMemo? “Edit1” in an edit?  Maybe there was a time for that, but how tough can it be to change that and save us all the aggravation?  VCL team – make this happen!- I get the sense that Delphi folks don’t make use of environmental variables like they should. Am I right?  When I find a new library that I want to use, I put it in a directory called `c:\code`.  For instance, I have `c:\code\duckduckdelphi`.  Then, I create an environmental variable called “DUCK” that equals the source directory for DuckDuckDelphi.  Then I add $(DUCK) to my Delphi path.  That way, it keeps the path short and sweet and less awkward than a hard-coded path.  In team environments, this works great too, because then people don’t all have to have exactly the same directory structures.  Do others do this?  How do you guys handle your Delphi paths?

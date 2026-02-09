@@ -1,0 +1,13 @@
+---
+author: Nick Hodges
+publishDate: 2016-06-13
+title: Flotsam and Jetsam #114
+postSlug: flotsam-and-jetsam-114
+featured: false
+tags:
+  - delphi
+  - flotsam and jetsam
+description: "Signups are open for Delphi Developer Days . Remember, the “Very Early Bird” special price ends on August 12, so start planning now."
+---
+
+- Signups are open for [Delphi Developer Days](http://www.delphideveloperdays.com/).  Remember, the “Very Early Bird” special price ends on August 12, so start planning now.  I love presenting and hanging out with Delphi developers, so I hope you’ll be at one of the events.  Should be a very fun time all around.  And of course, if your company wants to help sponsor the event, then please be sure to contact Cary via the website.- [RAD Server](https://www.embarcadero.com/products/rad-server) is the latest “official” product at Embarcadero.  (It previously was known as the Enterprise Management Server and was a feature of high end Delphi SKU’s).  This is a cool tool.  It’s basically an “AppServer” to Delphi as AppServers are to Java Enterprise Beans (or at least as I understand it).  It in effect makes it pathetically easy to build REST APIs.  Microservices are all the rage, and so this is a well-timed release.  I’m definitely going to investigate it.- **Book Update:**  [You can find out the basics of my new book here](•https://leanpub.com/dependencyinjectionindelphi/). You can also sign up to get email updates, and help me price it by letting me know what you’d be willing to pay.  Currently the book is being proof-read and is under technical review.  I can’t say for sure when it will be available, but it’s definitely in the “The last 10% takes 90% of the time” stage.  I just realized that I hadn’t covered attributes enough, so I’m going to have to add a section on that.  - I simply cannot say enough good things about [CodeInsightPlus](http://www.devjetsoftware.com/products/codeinsightplus/).  Here’s the one thing I will say. If you value your time even slightly, get it and install it now. - [This blog post by Marco](http://blog.marcocantu.com/blog/2016-june-closing-class-helpers-loophole.html?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+marcocantublog+%28marcocantu.blog%29) started an interesting discussion.  For what it’s worth, I stand on the side of proper encapsulation, after having originally been on the other side of the argument.
