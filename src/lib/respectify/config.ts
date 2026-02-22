@@ -32,7 +32,10 @@ export type RespectifyConfig = z.infer<typeof RespectifyConfigSchema>;
 let cachedConfig: RespectifyConfig | null = null;
 
 export function loadRespectifyConfig(): RespectifyConfig {
-	if (cachedConfig) {
+	// In development, always reload config to pick up changes
+	const isDevelopment = import.meta.env.DEV;
+
+	if (cachedConfig && !isDevelopment) {
 		return cachedConfig;
 	}
 
