@@ -1,0 +1,24 @@
+{
+	"$schema": "./respectify.schema.json",
+	"enabled": true,
+	"apiEndpoint": "https://app.respectify.org/web/analyze",
+	"autoPublish": {
+		"enabled": true,
+		"minimumScore": 0.7
+	},
+	"moderation": {
+		"blockDisrespectful": false,
+		"showFeedbackToUser": true,
+		"allowOverride": true
+	},
+	"thresholds": {
+		"autoApprove": 0.7,
+		"warn": 0.5,
+		"block": 0.3
+	},
+	"feedback": {
+		"approved": "Thank you for your respectful comment!",
+		"warning": "Your comment may contain disrespectful language. Please consider revising it.",
+		"blocked": "Your comment does not meet our respectfulness standards. Please revise and try again."
+	}
+}

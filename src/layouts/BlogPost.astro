@@ -5,6 +5,8 @@ import BlogHero from '@components/blog/Hero.astro';
 import TOC from '@components/blog/TOC.astro';
 import ShareButtons from '@components/ShareButtons.astro';
 import NewsletterSignup from '@components/NewsletterSignup.astro';
+import CommentList from '@components/blog/CommentList.astro';
+import CommentForm from '@components/blog/CommentForm.astro';
 
 import BaseLayout from './Base.astro';
 
@@ -37,6 +39,11 @@ const { headings } = await post.render();
       <ShareButtons title={title} url={postUrl} description={description} />
 
       <NewsletterSignup />
+
+      <div class="mt-12 border-t border-gray-200 dark:border-gray-700 pt-8">
+        <CommentList postSlug={slug} />
+        <CommentForm postSlug={slug} />
+      </div>
     </article>
   </div>
 

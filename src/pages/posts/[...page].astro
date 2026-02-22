@@ -9,6 +9,8 @@ import { getAllPosts, getUniqueTags as getPostUniqueTags, sortMDByDate as sortPo
 import { getAllDelphiPosts, getUniqueTags as getDelphiUniqueTags, sortMDByDate as sortDelphiByDate } from '@data/delphi';
 import 'astro-starlight-remark-asides/styles.css';
 
+export const prerender = true;
+
 export const getStaticPaths = (async ({ paginate }) => {
   const allPosts = await getAllPosts();
   const allDelphiPosts = await getAllDelphiPosts();

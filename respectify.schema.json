@@ -1,0 +1,110 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"title": "Respectify Configuration",
+	"description": "Configuration for Respectify comment moderation integration",
+	"type": "object",
+	"properties": {
+		"enabled": {
+			"type": "boolean",
+			"description": "Enable or disable Respectify integration",
+			"default": true
+		},
+		"apiEndpoint": {
+			"type": "string",
+			"description": "Respectify API endpoint URL",
+			"format": "uri"
+		},
+		"autoPublish": {
+			"type": "object",
+			"description": "Auto-publish settings for approved comments",
+			"properties": {
+				"enabled": {
+					"type": "boolean",
+					"description": "Auto-publish comments that meet the minimum score",
+					"default": true
+				},
+				"minimumScore": {
+					"type": "number",
+					"description": "Minimum respectfulness score for auto-publishing (0-1)",
+					"minimum": 0,
+					"maximum": 1,
+					"default": 0.7
+				}
+			},
+			"required": ["enabled", "minimumScore"]
+		},
+		"moderation": {
+			"type": "object",
+			"description": "Moderation behavior settings",
+			"properties": {
+				"blockDisrespectful": {
+					"type": "boolean",
+					"description": "Block comments below the block threshold",
+					"default": false
+				},
+				"showFeedbackToUser": {
+					"type": "boolean",
+					"description": "Show Respectify feedback to users",
+					"default": true
+				},
+				"allowOverride": {
+					"type": "boolean",
+					"description": "Allow users to submit despite warnings",
+					"default": true
+				}
+			},
+			"required": ["blockDisrespectful", "showFeedbackToUser", "allowOverride"]
+		},
+		"thresholds": {
+			"type": "object",
+			"description": "Score thresholds for different actions",
+			"properties": {
+				"autoApprove": {
+					"type": "number",
+					"description": "Auto-approve comments above this score (0-1)",
+					"minimum": 0,
+					"maximum": 1,
+					"default": 0.7
+				},
+				"warn": {
+					"type": "number",
+					"description": "Show warning for comments below this score (0-1)",
+					"minimum": 0,
+					"maximum": 1,
+					"default": 0.5
+				},
+				"block": {
+					"type": "number",
+					"description": "Block comments below this score if blockDisrespectful is true (0-1)",
+					"minimum": 0,
+					"maximum": 1,
+					"default": 0.3
+				}
+			},
+			"required": ["autoApprove", "warn", "block"]
+		},
+		"feedback": {
+			"type": "object",
+			"description": "User-facing feedback messages",
+			"properties": {
+				"approved": {
+					"type": "string",
+					"description": "Message shown when comment is auto-approved",
+					"default": "Thank you for your respectful comment!"
+				},
+				"warning": {
+					"type": "string",
+					"description": "Message shown when comment receives a warning",
+					"default": "Your comment may contain disrespectful language. Please consider revising it."
+				},
+				"blocked": {
+					"type": "string",
+					"description": "Message shown when comment is blocked",
+					"default": "Your comment does not meet our respectfulness standards. Please revise and try again."
+				}
+			},
+			"required": ["approved", "warning", "blocked"]
+		}
+	},
+	"required": ["enabled", "apiEndpoint", "autoPublish", "moderation", "thresholds", "feedback"]
+}

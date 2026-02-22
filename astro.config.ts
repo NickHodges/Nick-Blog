@@ -9,7 +9,8 @@ import { remarkReadingTime } from './src/utils/remark-reading-time';
 import icon from 'astro-icon';
 import expressiveCode from 'astro-expressive-code';
 import { expressiveCodeOptions } from './src/site.config';
-// import vercelAdapter from '@astrojs/vercel';
+import vercelAdapter from '@astrojs/vercel';
+import db from '@astrojs/db';
 
 import astroStarlightRemarkAsides from 'astro-starlight-remark-asides';
 import remarkDirective from 'remark-directive';
@@ -17,14 +18,13 @@ import remarkDirective from 'remark-directive';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://nickhodges.com/',
-  output: 'static',
-  // Comment out adapter for local builds - uncomment for deployment
-  // adapter: vercelAdapter({
-  //   webAnalytics: {
-  //     enabled: true,
-  //   },
-  //   analytics: true,
-  // }),
+  output: 'server',
+  adapter: vercelAdapter({
+    webAnalytics: {
+      enabled: true,
+    },
+    analytics: true,
+  }),
   markdown: {
     remarkPlugins: [remarkUnwrapImages, remarkReadingTime, remarkDirective, astroStarlightRemarkAsides],
     rehypePlugins: [
@@ -43,6 +43,7 @@ export default defineConfig({
     },
   },
   integrations: [
+    db(),
     expressiveCode(expressiveCodeOptions),
     icon(),
     tailwind({

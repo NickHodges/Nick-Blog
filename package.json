@@ -17,6 +17,7 @@
     "spellcheck:md": "cspell \"src/content/post/**/*.md\""
   },
   "dependencies": {
+    "@astrojs/db": "^0.19.0",
     "@astrojs/mdx": "^4.3.0",
     "@astrojs/react": "^4.3.0",
     "@astrojs/rss": "^4.0.11",

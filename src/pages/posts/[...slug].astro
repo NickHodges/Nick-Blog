@@ -6,6 +6,8 @@ import { getAllPosts } from '@data/post';
 import { getAllDelphiPosts } from '@data/delphi';
 import 'astro-starlight-remark-asides/styles.css';
 
+export const prerender = true;
+
 export const getStaticPaths = (async () => {
   const postEntries = await getAllPosts();
   const delphiEntries = await getAllDelphiPosts();
