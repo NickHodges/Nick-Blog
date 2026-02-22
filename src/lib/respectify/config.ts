@@ -5,6 +5,7 @@ import path from 'path';
 const RespectifyConfigSchema = z.object({
 	enabled: z.boolean(),
 	apiEndpoint: z.string().url(),
+	requiresAuth: z.boolean(),
 	autoPublish: z.object({
 		enabled: z.boolean(),
 		minimumScore: z.number().min(0).max(1),

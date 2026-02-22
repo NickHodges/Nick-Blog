@@ -1,7 +1,8 @@
 {
 	"$schema": "./respectify.schema.json",
 	"enabled": true,
-	"apiEndpoint": "https://app.respectify.org/web/analyze",
+	"apiEndpoint": "https://app.respectify.ai/v0.2/commentscore",
+	"requiresAuth": true,
 	"autoPublish": {
 		"enabled": true,
 		"minimumScore": 0.7

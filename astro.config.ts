@@ -1,4 +1,4 @@
-import { defineConfig } from 'astro/config';
+import { defineConfig, envField } from 'astro/config';
 import fs from 'fs';
 import mdx from '@astrojs/mdx';
 import tailwind from '@astrojs/tailwind';
@@ -54,6 +54,12 @@ export default defineConfig({
   ],
   // https://docs.astro.build/en/guides/prefetch/
   prefetch: true,
+  env: {
+    schema: {
+      RESPECTIFY_EMAIL: envField.string({ context: 'server', access: 'secret' }),
+      RESPECTIFY_API_KEY: envField.string({ context: 'server', access: 'secret' }),
+    },
+  },
   vite: {
     resolve: {
       alias: {
