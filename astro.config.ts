@@ -53,24 +53,6 @@ export default defineConfig({
       },
     },
   },
-  security: {
-    csp: {
-      scriptDirective: {
-        resources: [
-          "'self'",
-          'https://www.googletagmanager.com',
-          'https://pagead2.googlesyndication.com',
-          'https://vercel.live',
-        ],
-      },
-      directives: [
-        "default-src 'self'",
-        "img-src 'self' data: https://pagead2.googlesyndication.com https://astro.badg.es",
-        "connect-src 'self' https://www.google-analytics.com https://pagead2.googlesyndication.com",
-        'frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com',
-      ],
-    },
-  },
   integrations: [
     db(),
     icon(),
