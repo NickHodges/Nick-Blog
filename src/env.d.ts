@@ -9,6 +9,9 @@ declare module '@pagefind/default-ui' {
 }
 
 declare namespace App {
+  interface SessionData {
+    user: string; // admin email
+  }
   interface Locals {
     user: string | null;
     isAuthenticated: boolean;

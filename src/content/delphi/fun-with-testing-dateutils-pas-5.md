@@ -27,7 +27,7 @@ So, we have two related issues here:  Time values for negative TDateTime values
 
 But wait, there is more.  As it turns out, all of the time calculations in DateUtils.pas are based on floating point values.  Very, very small floating point values, in fact.  For instance, take a look at the current implementation of IncMillisecond:
 
-```delphi
+```pascal
 function IncMilliSecond(const AValue: TDateTime;
   const ANumberOfMilliSeconds: Int64): TDateTime;
 begin
@@ -42,7 +42,7 @@ The value for MSecsPerDay is pretty large — 86,400,000 – and when you start 
 
 Or even better, go to SysUtils.pas and take a look at TryEncodeTime, which really does some arithmetic fraught with the possibilities for errors and inaccuracies:
 
-```delphi
+```pascal
 function TryEncodeTime(Hour, Min, Sec, MSec: Word; out Time: TDateTime): Boolean;
 begin
   Result := False;
@@ -64,7 +64,7 @@ Okay, so where to turn in all of this?  The first thing I did was to rewrite In
 
 Okay, so I thought – I’m doing all this test driven development; what I need to do right now is to write some test cases that I know should pass before I even start.  First, I thought that if you have a function called IncMillisecond, then it ought to at least have enough accuracy and precision to at the very least create a different date/time combination, right?
 
-```delphi
+```pascal
 TestDate := 0.0;
 TestResult := IncMillisecond(TestDate);
 CheckFalse(SameDateTime(TestDate, TestResult), 'IncMilliseocnd failed to
@@ -77,7 +77,7 @@ And then it hits me – Uh oh.  I’ve started pulling on a thread, and if I ke
 
 Checkout your SameDateTime:
 
-```delphi
+```pascal
 function SameDateTime(const A, B: TDateTime): Boolean;
 begin
   Result := Abs(A - B) < OneMillisecond;
@@ -90,7 +90,7 @@ So, let’s follow this loose thread a bit more, and then we’ll quit for today
 
 TTimeStamp is declared as follows:
 
-```delphi
+```pascal
 { Date and time record }
   TTimeStamp = record
     Time: Integer;      { Number of milliseconds since midnight }
@@ -100,7 +100,7 @@ TTimeStamp is declared as follows:
 
 Now, that is more like it — integers and not these fuzzy floating point numbers! The accompanying DateTimeToTimeStamp function is exactly what we need. Now, we can write a very precise SameDateTime and SameDate functions:
 
-```delphi
+```pascal
 function SameDateTime(const A, B: TDateTime): Boolean;
 var
   TSA, TSB: TTimeStamp;
@@ -120,7 +120,7 @@ Those two new implementations will, in fact, return correct results for two date
 
 Okay, so our original, simple test above passes now. But guess what: this second one still doesn’t:
 
-```delphi
+```pascal
 TestDate := 0.0;
   TestResult := IncMillisecond(TestDate, -1);
   CheckFalse(SameDateTime(TestDate, TestResult), 'IncMilliseocnd failed

@@ -32,7 +32,7 @@ const
 ```
 and declare your loops as
 
-```delphi
+```pascal
 for i := 1 to NumberOfRepetitions do 
 begin
   ProcessStuff;   
@@ -44,7 +44,7 @@ and now when your boss switches things up, you have but one simple change to mak
 
 Now this is a pretty simple, basic thing to do, but I’m constantly surprised at how often I find myself forgetting to do it. (For instance, if you look through the code for TextScrubber, you’ll probably notice that I need to apply the DRY Principle to the TVersionInfo constructor in uTextScrubberTypes.pas.) You might be surprised how many literals you use in your code. I often take advantage of the syntax highlighting feature to scan code for specific colors for strings and numbers and replace them with constant values as much as possible. For instance, some code from TextScrubber used to look like this:
 
-```delphi
+```pascal
 procedure TStraightTextMainForm.InitializeMainFormInformation;
 var 
   IniFile: TIniFile; 
@@ -61,7 +61,7 @@ end;
 
 with a bunch of string literals. Instead, now, I’ve declared two constants in the uTextScrubberConsts.pas unit
 
-```delphi
+```pascal
 const 
   cOptions = 'Options';   
   cClickChoice = 'ClickChoice'; 
@@ -71,7 +71,7 @@ const
 
 and the new code looks like this:
 
-```delphi
+```pascal
 procedure TStraightTextMainForm.InitializeMainFormInformation; 
 var 
   IniFile: TIniFile; 

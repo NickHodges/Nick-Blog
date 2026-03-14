@@ -19,7 +19,7 @@ From there, I worked my way down the list, writing tests for IsLeapYear, IsPM, e
 
 One thing I did was to add IsAM to DateUtils.pas and simply implemented it as:
 
-```delphi
+```pascal
 function IsAM(const AValue: TDateTime): Boolean;
 begin
   Result := not IsPM(AValue);
@@ -32,7 +32,7 @@ Philosophical Note: As I’m doing this, I’m seeing more clearly than ever tha
 
 So, for instance, let’s look at the tests for IsInLeapYear.  Leap years are a bit funky.  Some years that you think are leap years are not – Quick:  Was 1600 a leap year?  What about 1900?  Wikipedia actually has a good page on leap years.  (Did you know that leap years are also called “intercalary years”? I sure didn’t.)  The actual calculation of a leap year is a bit more complicated that “Is it divisible by 4?”. 
 
-```delphi
+```pascal
 function IsLeapYear(Year: Word): Boolean;
 begin
   Result := (Year mod 4 = 0) and ((Year mod 100 <> 0) or (Year mod 400 = 0));
@@ -41,7 +41,7 @@ end;
 ```
 Examine the code, you can see that the answer to the questions above are Yes and No.  (As a side note, our QA Manager is a “Leapling”, born on February 29th.  He’s really only 12 years old.)  So, how do you test something called IsInLeapYear?  The declaration is actually quite simple:
 
-```delphi
+```pascal
 function IsInLeapYear(const AValue: TDateTime): Boolean;
 begin
   Result := IsLeapYear(YearOf(AValue));
@@ -50,7 +50,7 @@ end;
 ```
 But just because it is simple doesn’t mean that you shouldn’t thoroughly test it!  So I wrote a whole bunch of tests. First, I checked that random dates in years I know are leap years were properly identified as being in a leap year:
 
-```delphi
+```pascal
   TestDate   := EncodeDate(1960, 2, 29);
   TestResult := IsInLeapYear(TestDate);
   CheckTrue(TestResult, Format('%s is in a leap year, but IsInLeapYear'
@@ -88,7 +88,7 @@ Another thing to note is that this code uses (and thus tests) EncodeDate. And Is
 
 Anyway, I also wrote some negative test cases, checking to see that it returned False for dates that most definitely were not in leap years.   I also wrote tests for dates in years that many folks might thing are leap years but are in fact not leap years:
 
-```delphi
+```pascal
   // Years that end in 00 are /not/ leap years, unless divisible by 400
   TestDate   := EncodeDate(1700, 2, 28);
   TestResult := IsInLeapYear(TestDate);

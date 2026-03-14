@@ -1,8 +1,8 @@
 import { defineAction, ActionError } from 'astro:actions';
-import { z } from 'astro:schema';
+import { z } from 'astro/zod';
 import { db, Comment, eq } from 'astro:db';
 import { analyzeComment } from '../lib/respectify/service';
-import { verifyCredentials, createSession, destroySession } from '../lib/auth';
+import { verifyCredentials } from '../lib/auth';
 import { logger } from '../lib/logger';
 
 export const server = {
@@ -85,7 +85,8 @@ export const server = {
 					});
 				}
 
-				await createSession(context.cookies, email);
+				context.session?.set('user', email);
+				context.session?.regenerate();
 				logger.info('User logged in successfully');
 
 				return { success: true as const };
@@ -96,7 +97,7 @@ export const server = {
 			accept: 'json',
 			input: z.object({}),
 			handler: async (_input, context) => {
-				destroySession(context.cookies);
+				context.session?.destroy();
 				logger.info('User logged out');
 
 				return { success: true as const };

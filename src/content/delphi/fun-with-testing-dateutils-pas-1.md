@@ -21,7 +21,7 @@ So I started in on DateUtils.pas.  This is a pretty cool unit with a lot of goo
 
 So, one of the first things I realized was that I needed to be able to generate dates.  Now, I realized that you don’t want that many non-deterministic tests (or maybe you don’t want any at all – it depends).  But I need to be sure that many of the DateUtils.pas routines can pass with any date.  So I wrote the following routine to generate a legitimate but random date:
 
-```delphi
+```pascal
 /// 
 ///   This creates a random, valid date from year 1 to aYearRange
 /// 
@@ -57,7 +57,7 @@ Now I’ll bet that you guys can come up with a better algorithm, but this works
 
 Another thing that I knew I’d need was to generate to do date testing is valid “Leap Days’”, that is, a valid February 29 date.  When you unit test, you are constantly looking for corner cases, and Leap Days are a corner case for dates.  Naturally, I’ll utilize CreateRandomDate to help out:
 
-```delphi
+```pascal
 function GetRandomLeapDay: TDate;
 begin
   Result := DateOf(CreateRandomDate(True));

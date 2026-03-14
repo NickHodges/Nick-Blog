@@ -1,14 +1,14 @@
-import { defineConfig, envField } from 'astro/config';
-import fs from 'fs';
+import { defineConfig, envField, fontProviders, sessionDrivers } from 'astro/config';
+import { loadEnv } from 'vite';
 import mdx from '@astrojs/mdx';
 import tailwind from '@astrojs/tailwind';
+
+const { REDIS_URL } = loadEnv(process.env.NODE_ENV ?? 'development', process.cwd(), '');
 import sitemap from '@astrojs/sitemap';
 import remarkUnwrapImages from 'remark-unwrap-images';
 import rehypeExternalLinks from 'rehype-external-links';
 import { remarkReadingTime } from './src/utils/remark-reading-time';
 import icon from 'astro-icon';
-import expressiveCode from 'astro-expressive-code';
-import { expressiveCodeOptions } from './src/site.config';
 import vercelAdapter from '@astrojs/vercel';
 import db from '@astrojs/db';
 
@@ -18,13 +18,25 @@ import remarkDirective from 'remark-directive';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://nickhodges.com/',
-  output: 'static',
+  output: 'server',
   adapter: vercelAdapter({
     webAnalytics: {
       enabled: true,
     },
   }),
+  session: {
+    driver: sessionDrivers.redis({
+      url: REDIS_URL,
+    }),
+    cookie: {
+      name: 'session',
+      sameSite: 'lax',
+      secure: true,
+    },
+    ttl: 604800, // 7 days in seconds
+  },
   markdown: {
+    syntaxHighlight: 'prism',
     remarkPlugins: [remarkUnwrapImages, remarkReadingTime, remarkDirective, astroStarlightRemarkAsides],
     rehypePlugins: [
       [
@@ -41,9 +53,26 @@ export default defineConfig({
       },
     },
   },
+  security: {
+    csp: {
+      scriptDirective: {
+        resources: [
+          "'self'",
+          'https://www.googletagmanager.com',
+          'https://pagead2.googlesyndication.com',
+        ],
+        strictDynamic: true,
+      },
+      directives: [
+        "default-src 'self'",
+        "img-src 'self' data: https://pagead2.googlesyndication.com https://astro.badg.es",
+        "connect-src 'self' https://www.google-analytics.com https://pagead2.googlesyndication.com",
+        'frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com',
+      ],
+    },
+  },
   integrations: [
     db(),
-    expressiveCode(expressiveCodeOptions),
     icon(),
     tailwind({
       applyBaseStyles: false,
@@ -53,13 +82,34 @@ export default defineConfig({
   ],
   // https://docs.astro.build/en/guides/prefetch/
   prefetch: true,
+  fonts: [
+    {
+      provider: fontProviders.local(),
+      name: 'Roboto Mono',
+      cssVariable: '--font-mono',
+      options: {
+        variants: [
+          {
+            src: ['./src/assets/roboto-mono-regular.ttf'],
+            weight: 400,
+            style: 'normal',
+          },
+          {
+            src: ['./src/assets/roboto-mono-700.ttf'],
+            weight: 700,
+            style: 'normal',
+          },
+        ],
+      },
+    },
+  ],
   env: {
     schema: {
       RESPECTIFY_EMAIL: envField.string({ context: 'server', access: 'secret' }),
       RESPECTIFY_API_KEY: envField.string({ context: 'server', access: 'secret' }),
       ADMIN_EMAIL: envField.string({ context: 'server', access: 'secret' }),
       ADMIN_PASSWORD: envField.string({ context: 'server', access: 'secret' }),
-      SESSION_SECRET: envField.string({ context: 'server', access: 'secret' }),
+      REDIS_URL: envField.string({ context: 'server', access: 'secret' }),
       ASTRO_DB_REMOTE_URL: envField.string({ context: 'server', access: 'secret', optional: true }),
       ASTRO_DB_APP_TOKEN: envField.string({ context: 'server', access: 'secret', optional: true }),
     },
@@ -70,25 +120,8 @@ export default defineConfig({
         '@components': '/src/components',
       },
     },
-    plugins: [rawFonts(['.ttf', '.woff'])],
     optimizeDeps: {
       exclude: ['@resvg/resvg-js'],
     },
   },
 });
-function rawFonts(ext: Array<string>) {
-  return {
-    name: 'vite-plugin-raw-fonts',
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore:next-line
-    transform(_, id) {
-      if (ext.some((e) => id.endsWith(e))) {
-        const buffer = fs.readFileSync(id);
-        return {
-          code: `export default ${JSON.stringify(buffer)}`,
-          map: null,
-        };
-      }
-    },
-  };
-}

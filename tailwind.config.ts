@@ -28,7 +28,7 @@ export default {
         quote: 'hsl(var(--theme-quote) / <alpha-value>)',
       },
       fontFamily: {
-        // Add any custom fonts here
+        mono: ['var(--font-mono)', ...fontFamily.mono],
         sans: [...fontFamily.sans],
         serif: [...fontFamily.serif],
       },

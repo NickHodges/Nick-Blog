@@ -7,13 +7,13 @@ import FormattedDate from '../FormattedDate.astro';
 
 interface Props {
   content: CollectionEntry<'post'> | CollectionEntry<'delphi'>;
+  minutesRead?: string;
 }
 
 const {
-  content: { data, render },
+  content: { data },
+  minutesRead,
 } = Astro.props;
-
-const { remarkPluginFrontmatter } = await render();
 
 const dateTimeOptions: Intl.DateTimeFormatOptions = {
   month: 'long',
@@ -34,7 +34,7 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
 <div class="flex flex-wrap items-center gap-x-3 gap-y-2">
   <p class="font-semibold">
     <FormattedDate date={data.publishDate} dateTimeOptions={dateTimeOptions} /> /{' '}
-    {remarkPluginFrontmatter.minutesRead}
+    {minutesRead}
   </p>
   {
     data.updatedDate && (

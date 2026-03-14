@@ -13,7 +13,7 @@ Okay, so when we last left off, IncMillisecond was still failing in certain circ
 
 Here is the IncMilliseconds that you very likely have on your computer:
 
-```delphi
+```pascal
 function IncMilliSecond(const AValue: TDateTime;
   const ANumberOfMilliSeconds: Int64): TDateTime;
 begin
@@ -25,7 +25,7 @@ end;
 ```
 Now that probably works just fine for you — as long as you don’t have a date that has a value less than the epoch. Below the epoch, and particularly in that magic "48 Hours" area right around the epoch itself, things go horribly awry. As we saw last time, this test will fail:
 
-```delphi
+```pascal
 TestDate := 0.0;
   TestResult := IncMillisecond(TestDate, -1);
   Expected := EncodeDateTime(1899, 12, 29, 23, 59, 59, 999);
@@ -36,7 +36,7 @@ It fails because of a number of reasons actually. The first is precision. The cu
 
 Plus, if you do things around the value of zero, it gets really weird.  For instance, check out the output of this console application:
 
-```delphi
+```pascal
 program IncMillisecondTest;
 
 {$APPTYPE CONSOLE}
@@ -66,7 +66,7 @@ So finally, it is time to rework IncMillisecond, because this pesky little routi
 
 Okay, so I started out writing this really cool implementation that checked for before and after the epoch, and divided large increments into years and months and days to make sure that their was no loss of precision.  I spent a lot of time on it, and had  whole bunch of tests written and passing with it.   But then it suddenly occurs to me that the trusty TTimeStamp data type and its accompanying conversion routines can once again come to the rescue:
 
-```delphi
+```pascal
 function IncMilliSecond(const AValue: TDateTime;
   const ANumberOfMilliSeconds: Int64 = 1): TDateTime;
 var
@@ -84,7 +84,7 @@ And here is the cool thing:  I was able to change from my sweet but overly comp
 
 Anywhow….  Again, the TTimeStamp type is precise, and easy. No need to do direct arithmetic on the TDateTime itself. Instead, we can deal with integers and get the exact answer every time no matter how many milliseconds you pass in. You can pass in 5000 years worth of milliseconds, and all will be well. For instance, this test passes just fine.
 
-```delphi
+```pascal
 TestDate := EncodeDate(2010, 4, 8);
 MSecsToAdd := Int64(5000) * DaysPerYear[False] * HoursPerDay * MinsPerHour *
     SecsPerMin *  MSecsPerSec; // 1.5768E14 or 157680000000000
@@ -97,7 +97,7 @@ CheckTrue(SameDate(Expected, TestResult), 'IncMillisecond failed to
 ```
 And for you curious folks, here the implementation for the helper function LeapDaysBetweenDates:
 
-```delphi
+```pascal
 function TDateUtilsTests.LeapDaysBetweenDates(aStartDate,
        aEndDate: TDateTime): Word;
 var
@@ -121,7 +121,7 @@ end;
 ```
 From there, the rest of the IncXXXXX routines are simple –- they merely multiply by the next “level up” of time intervals, and call the previous one.  I’ve marked them all inline so that it all happens in one need function call.  Thus, we have:
 
-```delphi
+```pascal
 function IncHour(const AValue: TDateTime;
   const ANumberOfHours: Int64 = 1): TDateTime;
 begin
@@ -145,7 +145,7 @@ One thing to note: DateUtils.pas will only handle years from 1 to 9999. TDateTim
 
 Now, once you’ve done the above, it is tempting to say “Hey, for IncDay, I’ll just add the days to the value passed in.  I mean, that’s all you are really doing.  Well guess what!  You can’t do that!  If you have this for your IncDay:
 
-```delphi
+```pascal
 function IncDay(const AValue: TDateTime;
   const ANumberOfDays: Integer = 1): TDateTime;
 begin
@@ -155,7 +155,7 @@ end;
 
 Then this test will not pass because of the strange “48 hour” deal we talked about last post:
 
-```delphi
+```pascal
 TestDate := EncodeDateTime(1899, 12, 30, 1, 43, 28, 400);
   TestResult := IncDay(TestDate, -1);
   Expected := EncodeDateTime(1899, 12, 29, 1, 43, 28, 400);
@@ -165,7 +165,7 @@ TestDate := EncodeDateTime(1899, 12, 30, 1, 43, 28, 400);
 
 Instead, you have to send it all the way back to milliseconds via IncHour, IncMinute, and IncSecond:
 
-```delphi
+```pascal
 function IncDay(const AValue: TDateTime;
   const ANumberOfDays: Integer = 1): TDateTime;
 begin

@@ -1,5 +1,4 @@
 import { defineMiddleware } from 'astro:middleware';
-import { getSessionUser } from '../lib/auth';
 import { loginLimiter, commentLimiter } from '../lib/rate-limit';
 import type { IRateLimiter } from '../lib/rate-limit';
 
@@ -43,8 +42,8 @@ export const onRequest = defineMiddleware(async (context, next) => {
     return next();
   }
 
-  const user = await getSessionUser(context.cookies);
-  context.locals.user = user;
-  context.locals.isAuthenticated = user !== null;
+  const user = await context.session?.get('user');
+  context.locals.user = user ?? null;
+  context.locals.isAuthenticated = user != null;
   return next();
 });

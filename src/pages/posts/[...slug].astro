@@ -1,6 +1,10 @@
 ---
 import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
 
+import { render } from 'astro:content';
+
+export const prerender = true;
+
 import PostLayout from '@layouts/BlogPost.astro';
 import { getAllPosts } from '@data/post';
 import { getAllDelphiPosts } from '@data/delphi';
@@ -12,7 +16,7 @@ export const getStaticPaths = (async () => {
   const allEntries = [...postEntries, ...delphiEntries];
 
   return allEntries.map((entry) => ({
-    params: { slug: entry.slug },
+    params: { slug: entry.id },
     props: { entry },
   }));
 }) satisfies GetStaticPaths;
@@ -20,7 +24,7 @@ export const getStaticPaths = (async () => {
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 ---
 
 <PostLayout post={entry}>

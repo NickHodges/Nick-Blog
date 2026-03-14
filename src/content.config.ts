@@ -1,4 +1,6 @@
-import { z, defineCollection } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { z } from 'astro/zod';
+import { glob } from 'astro/loaders';
 
 function removeDupsAndLowerCase(array: string[]) {
   if (!array.length) return array;
@@ -8,7 +10,7 @@ function removeDupsAndLowerCase(array: string[]) {
 }
 
 const post = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/content/post' }),
   schema: ({ image }) =>
     z.object({
       title: z.string().max(60),
@@ -36,7 +38,7 @@ const post = defineCollection({
 });
 
 const info = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/content/info' }),
   schema: () =>
     z.object({
       title: z.string().max(60).optional(),
@@ -47,7 +49,7 @@ const info = defineCollection({
 });
 
 const delphi = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/content/delphi' }),
   schema: ({ image }) =>
     z.object({
       title: z.string().max(120),

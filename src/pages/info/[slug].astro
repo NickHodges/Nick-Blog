@@ -1,6 +1,10 @@
 ---
 import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
 
+import { render } from 'astro:content';
+
+export const prerender = true;
+
 import InfoLayout from '@layouts/InfoPost.astro';
 import { getAllInfoPosts } from '@data/info';
 import 'astro-starlight-remark-asides/styles.css';
@@ -8,7 +12,7 @@ import 'astro-starlight-remark-asides/styles.css';
 export const getStaticPaths = (async () => {
   const infoEntries = await getAllInfoPosts();
   return infoEntries.map((entry) => ({
-    params: { slug: entry.slug },
+    params: { slug: entry.id },
     props: { entry },
   }));
 }) satisfies GetStaticPaths;
@@ -21,7 +25,7 @@ if (!entry) {
   return Astro.redirect('/404');
 }
 
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 ---
 
 <InfoLayout info={entry}>

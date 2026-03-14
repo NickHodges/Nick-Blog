@@ -1,3 +1,7 @@
+export const prerender = true;
+
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import type { APIContext, InferGetStaticPropsType } from 'astro';
 import satori, { type SatoriOptions } from 'satori';
 import { html } from 'satori-html';
@@ -6,11 +10,10 @@ import { siteConfig } from '@site-config';
 import { getFormattedDate } from '@utils';
 import { getAllPosts } from '@data/post';
 
-// After
 import type { ReactNode } from 'react';
 
-import RobotoMono from '@assets/roboto-mono-regular.ttf';
-import RobotoMonoBold from '@assets/roboto-mono-700.ttf';
+const RobotoMono = readFileSync(join(process.cwd(), 'src/assets/roboto-mono-regular.ttf'));
+const RobotoMonoBold = readFileSync(join(process.cwd(), 'src/assets/roboto-mono-700.ttf'));
 
 // Use a simple placeholder image instead of reading from file system
 // This avoids file path issues during build
@@ -19,17 +22,16 @@ const nickImageBase64 = `data:image/svg+xml;base64,${Buffer.from('<svg width="60
 const ogOptions: SatoriOptions = {
   width: 1200,
   height: 630,
-  // debug: true,
   fonts: [
     {
       name: 'Roboto Mono',
-      data: Buffer.from(RobotoMono),
+      data: RobotoMono,
       weight: 400,
       style: 'normal',
     },
     {
       name: 'Roboto Mono',
-      data: Buffer.from(RobotoMonoBold),
+      data: RobotoMonoBold,
       weight: 700,
       style: 'normal',
     },
@@ -79,7 +81,7 @@ export async function getStaticPaths() {
   return posts
     .filter(({ data }) => !data.ogImage)
     .map((post) => ({
-      params: { slug: post.slug },
+      params: { slug: post.id },
       props: {
         title: post.data.title,
         pubDate: post.data.updatedDate ?? post.data.publishDate,

@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { render } from 'astro:content';
 import TOC from '@components/blog/TOC.astro';
 import BaseLayout from './Base.astro';
 
@@ -10,11 +11,11 @@ interface Props {
 const { info } = Astro.props;
 const {
   data: { ogImage, title },
-  slug,
+  id,
 } = info;
-const socialImage = ogImage ?? `/og-image/${slug}.png`;
+const socialImage = ogImage ?? `/og-image/${id}.png`;
 
-const { headings } = await info.render();
+const { headings } = await render(info);
 ---
 
 <BaseLayout meta={{ ogImage: socialImage, title }}>

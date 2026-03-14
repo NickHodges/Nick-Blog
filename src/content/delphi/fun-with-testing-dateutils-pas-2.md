@@ -19,7 +19,7 @@ Okay, back to the show…..
 
 So to get going with unit testing DateUtils.pas, I naturally simply “plugged in” to our existing RTL unit test framework.  We have an existing RTL set of unit tests for running DUnit tests on the RTL.  I simply added the unit UnitTest.DateUtils.pas to the project, created the new class:
 
-```delphi
+```pascal
 TDateUtilsTests = class(TTestCase) 
 end;
 
@@ -28,7 +28,7 @@ and I was in business.  From there, it’s merely a matter of declaring publish
 
 So, I started right at the top with DateOf and TimeOf. So, what to test? Well, the most obvious thing: Does DateOf actually return the date portion of a given TDateTime?  Well, lets create a TDateTime with a random time, then, lets create a TDate with the same date but no time at all, and see if DateOf can do it’s magic?
 
-```delphi
+```pascal
 procedure TDateUtilsTests.Test_DateOf; 
 var
   TestDate: TDateTime;
@@ -48,7 +48,7 @@ So this is a pretty straightforward test – you create two dates, and see if th
 
 What if you, say, increment the time part by one millisecond.  Come on, that can’t hurt anything right?  Better make sure:
 
-```delphi
+```pascal
   
 // This test will fail if it gets run at 23:59.999 
 // at night. I'm willing to gamble that this 
@@ -63,7 +63,7 @@ CheckTrue(SameDate(Result, Expected),
 ```
 Okay, those are some “positive test cases”.  (I have a bunch more different ones along these lines….)  What about testing the negative case?  That is, test where we know that the two dates should be different after the call, and we test to make sure that they are, indeed different.
 
-```delphi
+```pascal
   
   TestDate := Now; 
   Expected := DateOf(IncDay(TestDate)); 

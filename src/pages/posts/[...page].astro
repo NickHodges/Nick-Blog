@@ -1,6 +1,8 @@
 ---
 import type { GetStaticPaths } from 'astro';
 
+export const prerender = true;
+
 import Pagination from '@components/Paginator.astro';
 import PostPreview from '@components/blog/PostPreview.astro';
 import PageLayout from '@layouts/Base.astro';

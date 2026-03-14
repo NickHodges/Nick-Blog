@@ -21,7 +21,7 @@ So there I was rolling along, writing tests for WeeksInAYear (bet you didn’t k
 
 For instance, here are the tests for Yesterday.  Not too hard to test, as there is really only one thing you can do:
 
-```delphi
+```pascal
 procedure TDateUtilsTests.Test_Yesterday;
 var
   TestResult: TDateTime;
@@ -46,7 +46,7 @@ Things were going along swimmingly, and then all of a sudden, out of left field,
 
 Here’s how it happened: I was going along, writing tests, and I wrote this one:
 
-```delphi
+```pascal
 procedure TDateUtilsTests.Test_EndOfTheDay;
 var
   TestDate  : TDateTime;
@@ -93,7 +93,7 @@ The first check is fine – the call to EndOfTheDay doesn’t actually change th
 
 EndOfTheDay is a pretty simple function;  it returns the very last millisecond of the date for the date/time combination passed to it – that is, 11:59.999pm for the day in question. It is implemented like so:
 
-```delphi
+```pascal
 // From DateUtils.pas
 function EndOfTheDay(const AValue: TDateTime): TDateTime;
 begin

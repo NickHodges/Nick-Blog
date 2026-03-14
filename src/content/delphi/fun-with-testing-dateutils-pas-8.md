@@ -15,7 +15,7 @@ Okay, first up:  [I’ve put the tests and updates for DateUtils.pas on CodeCen
 
 So far, I’ve been writing tests in a pretty organized way.  But I write each individual test, one at a time.  I often end up writing a lot of “piece-meal” tests by hand.  I end up with a lot of code that looks like this:
 
-```delphi
+```pascal
 procedure TDateUtilsTests.Test_IncMinuteBeforeEpochAdding;
 var
   TestDate, Expected, TestResult: TDateTime;
@@ -48,7 +48,7 @@ For instance, when he first did this, I noticed that he didn’t always add data
 
 Here’s how this looks:
 
-```delphi
+```pascal
 procedure TDateUtilsTests.Test_DayOfTheMonth;
 const
   CMax = 16;
@@ -103,7 +103,7 @@ Note that the first thing this code does is declare a really big array full of d
 
 Now for me to add a bunch of tests that use data before the epoch is a piece of cake. I merely change the value for CMax and then make the array look like this:
 
-```delphi
+```pascal
 const
   CDates: TDates = (
     (Year: 2004; Month: 01; Day: 01; ExpectedDay: 01),  // 1
@@ -124,7 +124,7 @@ const
     (Year: 2005; Month: 02; Day: 25; ExpectedDay: 25),  // 15
     (Year: 2005; Month: 04; Day: 10; ExpectedDay: 10),
 ```
-```delphi
+```pascal
     // Before the Epoch
     (Year: 1004; Month: 01; Day: 01; ExpectedDay: 01),  // 17
     (Year: 1004; Month: 01; Day: 05; ExpectedDay: 05),
@@ -151,7 +151,7 @@ And if a test fails, you are given the test number, and you can see the test dat
 
 And here’s a further aside for those of you who don’t like me using random dates:  this test for EncodeDateDay and DecodeDateDay tests every single day in every single year.   
 
-```delphi
+```pascal
 procedure TDateUtilsTests.Test_EncodeDateDay_DecodeDateDay;
 var
   TempYear, MinYear, MaxYear: Word;

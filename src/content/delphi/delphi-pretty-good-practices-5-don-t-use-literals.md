@@ -15,19 +15,19 @@ As a practical matter, the DRY principle in its most basic form tells us that we
 
 For example:  Say you have a system that has an arbitrary number of required repetitions, say 17.  You might end up writing a whole bunch of code like this:
 
-```delphi
+```pascal
 for i := 1 to 17 do 
 ```
-```delphi
+```pascal
 begin 
 ```
-```delphi
+```pascal
   ProcessStuff; 
 ```
-```delphi
+```pascal
   DoSomeMoreStuff; 
 ```
-```delphi
+```pascal
 end;
 ```
 
@@ -35,12 +35,12 @@ Now imagine that you have that kind of code all over the place, and then your bo
 
 Of course, the thing to do is to declare a constant:
 
-```delphi
+```pascal
 const NumberOfRepetitions = 17;
 ```
 and declare your loops as
 
-```delphi
+```pascal
 for i := 1 to NumberOfRepetitions do
 
 begin
@@ -60,7 +60,7 @@ procedure TStraightTextMainForm.InitializeMainFormInformation; var IniFile: TIni
 
 with a bunch of string literals.  Instead, now, I’ve declared two constants in the uTextScrubberConsts.pas unit
 
-```delphi
+```pascal
 const
 
   cOptions = 'Options';
