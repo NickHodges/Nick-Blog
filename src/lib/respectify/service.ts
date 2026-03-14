@@ -55,7 +55,7 @@ async function getOrInitializeArticleId(postSlug: string): Promise<string> {
 
 	// Initialize topic from the post URL
 	const client = getRespectifyClient();
-	const postUrl = `https://nickhodges.com/posts/${postSlug}/`;
+	const postUrl = `${import.meta.env.SITE}posts/${postSlug}/`;
 
 	try {
 		logger.debug('Initializing Respectify topic', { postSlug, postUrl });

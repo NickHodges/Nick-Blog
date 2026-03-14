@@ -18,7 +18,7 @@ import remarkDirective from 'remark-directive';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://nickhodges.com/',
-  output: 'server',
+  output: 'static',
   adapter: vercelAdapter({
     webAnalytics: {
       enabled: true,

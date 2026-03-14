@@ -1,6 +1,6 @@
 ---
 import AdSense from '@components/AdSense.astro';
-import { menuLinks, siteConfig } from '@site-config';
+import { menuLinks, legalLinks, siteConfig } from '@site-config';
 
 const year = new Date().getFullYear();
 ---
@@ -17,6 +17,15 @@ const year = new Date().getFullYear();
     {
       menuLinks.map((link) => (
         <a class="px-4 py-2 sm:py-0 sm:hover:text-textColor sm:hover:underline" href={link.path}>
+          {link.title}
+        </a>
+      ))
+    }
+  </nav>
+  <nav aria-label="Legal" class="mt-2 flex justify-center gap-x-2 text-xs sm:gap-x-0 sm:divide-x sm:divide-gray-500">
+    {
+      legalLinks.map((link) => (
+        <a class="px-4 py-1 sm:py-0 sm:hover:text-textColor sm:hover:underline" href={link.path}>
           {link.title}
         </a>
       ))

@@ -18,9 +18,6 @@ interface Props {
 
 const { postSlug } = Astro.props;
 
-// Read auth state from middleware-populated locals
-const isAdmin = Astro.locals.isAuthenticated;
-
 // Query comments directly from the database
 let comments: CommentData[] = [];
 try {
@@ -60,34 +57,32 @@ function formatDate(date: Date): string {
 					<div class="comment-header flex items-baseline justify-between mb-2">
 						<div class="flex items-center gap-2">
 							<span class="font-semibold text-lg">{comment.author}</span>
-							{isAdmin && (
-								<span class="delete-controls inline-flex items-center gap-1" data-delete-for={comment.id}>
+							<span class="delete-controls hidden items-center gap-1" data-delete-for={comment.id}>
+								<button
+									class="delete-comment-btn text-xs px-2 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition-colors"
+									data-comment-id={comment.id}
+									type="button"
+								>
+									Delete
+								</button>
+								<span class="delete-confirm hidden items-center gap-1">
+									<span class="text-xs text-gray-600 dark:text-gray-400">Delete this comment?</span>
 									<button
-										class="delete-comment-btn text-xs px-2 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition-colors"
+										class="confirm-delete-btn text-xs px-2 py-1 bg-red-700 text-white rounded hover:bg-red-800 transition-colors"
 										data-comment-id={comment.id}
 										type="button"
 									>
-										Delete
+										Yes, delete
 									</button>
-									<span class="delete-confirm hidden items-center gap-1">
-										<span class="text-xs text-gray-600 dark:text-gray-400">Delete this comment?</span>
-										<button
-											class="confirm-delete-btn text-xs px-2 py-1 bg-red-700 text-white rounded hover:bg-red-800 transition-colors"
-											data-comment-id={comment.id}
-											type="button"
-										>
-											Yes, delete
-										</button>
-										<button
-											class="cancel-delete-btn text-xs px-2 py-1 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 transition-colors dark:bg-gray-600 dark:text-gray-200"
-											type="button"
-										>
-											Cancel
-										</button>
-									</span>
-									<span class="delete-error hidden text-xs text-red-600 dark:text-red-400"></span>
+									<button
+										class="cancel-delete-btn text-xs px-2 py-1 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 transition-colors dark:bg-gray-600 dark:text-gray-200"
+										type="button"
+									>
+										Cancel
+									</button>
 								</span>
-							)}
+								<span class="delete-error hidden text-xs text-red-600 dark:text-red-400"></span>
+							</span>
 						</div>
 						<span class="text-sm text-gray-500 dark:text-gray-400">
 							{formatDate(comment.createdAt)}
@@ -102,81 +97,85 @@ function formatDate(date: Date): string {
 	)}
 </div>
 
-{isAdmin && (
-	<script>
-		import { actions } from 'astro:actions';
+<script>
+	import { actions } from 'astro:actions';
+	import { checkAuth } from '../../lib/client/auth-check';
 
-		document.addEventListener('DOMContentLoaded', () => {
-			const controlGroups = document.querySelectorAll('.delete-controls');
+	checkAuth().then((isAdmin) => {
+		if (!isAdmin) return;
 
-			controlGroups.forEach((group) => {
-				const deleteBtn = group.querySelector('.delete-comment-btn') as HTMLButtonElement;
-				const confirmSpan = group.querySelector('.delete-confirm') as HTMLSpanElement;
-				const confirmBtn = group.querySelector('.confirm-delete-btn') as HTMLButtonElement;
-				const cancelBtn = group.querySelector('.cancel-delete-btn') as HTMLButtonElement;
-				const errorSpan = group.querySelector('.delete-error') as HTMLSpanElement;
+		const controlGroups = document.querySelectorAll('.delete-controls');
 
-				if (!deleteBtn || !confirmSpan || !confirmBtn || !cancelBtn || !errorSpan) return;
+		controlGroups.forEach((group) => {
+			group.classList.remove('hidden');
+			group.classList.add('inline-flex');
 
-				// Step 1: show confirmation
-				deleteBtn.addEventListener('click', () => {
-					deleteBtn.classList.add('hidden');
-					confirmSpan.classList.remove('hidden');
-					confirmSpan.classList.add('inline-flex');
-					errorSpan.classList.add('hidden');
-				});
+			const deleteBtn = group.querySelector('.delete-comment-btn') as HTMLButtonElement;
+			const confirmSpan = group.querySelector('.delete-confirm') as HTMLSpanElement;
+			const confirmBtn = group.querySelector('.confirm-delete-btn') as HTMLButtonElement;
+			const cancelBtn = group.querySelector('.cancel-delete-btn') as HTMLButtonElement;
+			const errorSpan = group.querySelector('.delete-error') as HTMLSpanElement;
 
-				// Cancel: revert to delete button
-				cancelBtn.addEventListener('click', () => {
+			if (!deleteBtn || !confirmSpan || !confirmBtn || !cancelBtn || !errorSpan) return;
+
+			// Step 1: show confirmation
+			deleteBtn.addEventListener('click', () => {
+				deleteBtn.classList.add('hidden');
+				confirmSpan.classList.remove('hidden');
+				confirmSpan.classList.add('inline-flex');
+				errorSpan.classList.add('hidden');
+			});
+
+			// Cancel: revert to delete button
+			cancelBtn.addEventListener('click', () => {
+				confirmSpan.classList.add('hidden');
+				confirmSpan.classList.remove('inline-flex');
+				deleteBtn.classList.remove('hidden');
+			});
+
+			// Step 2: actually delete
+			confirmBtn.addEventListener('click', async () => {
+				const commentId = parseInt(confirmBtn.dataset.commentId || '0', 10);
+				if (!commentId) return;
+
+				confirmBtn.disabled = true;
+				confirmBtn.textContent = 'Deleting...';
+
+				const { error } = await actions.comments.delete({ commentId });
+
+				if (error) {
+					errorSpan.textContent = 'Failed to delete comment';
+					errorSpan.classList.remove('hidden');
 					confirmSpan.classList.add('hidden');
 					confirmSpan.classList.remove('inline-flex');
 					deleteBtn.classList.remove('hidden');
-				});
+					confirmBtn.disabled = false;
+					confirmBtn.textContent = 'Yes, delete';
+					return;
+				}
 
-				// Step 2: actually delete
-				confirmBtn.addEventListener('click', async () => {
-					const commentId = parseInt(confirmBtn.dataset.commentId || '0', 10);
-					if (!commentId) return;
+				// Remove the comment from the DOM
+				const commentEl = document.querySelector(`[data-comment-id="${commentId}"]`);
+				if (commentEl) {
+					commentEl.remove();
 
-					confirmBtn.disabled = true;
-					confirmBtn.textContent = 'Deleting...';
-
-					const { error } = await actions.comments.delete({ commentId });
-
-					if (error) {
-						errorSpan.textContent = 'Failed to delete comment';
-						errorSpan.classList.remove('hidden');
-						confirmSpan.classList.add('hidden');
-						confirmSpan.classList.remove('inline-flex');
-						deleteBtn.classList.remove('hidden');
-						confirmBtn.disabled = false;
-						confirmBtn.textContent = 'Yes, delete';
-						return;
+					// Update comment count
+					const countEl = document.querySelector('.comments-section h3');
+					if (countEl) {
+						const currentCount = parseInt(countEl.textContent?.match(/\d+/)?.[0] || '0', 10);
+						countEl.textContent = `Comments (${currentCount - 1})`;
 					}
 
-					// Remove the comment from the DOM
-					const commentEl = document.querySelector(`[data-comment-id="${commentId}"]`);
-					if (commentEl) {
-						commentEl.remove();
-
-						// Update comment count
-						const countEl = document.querySelector('.comments-section h3');
-						if (countEl) {
-							const currentCount = parseInt(countEl.textContent?.match(/\d+/)?.[0] || '0', 10);
-							countEl.textContent = `Comments (${currentCount - 1})`;
-						}
-
-						// Show "no comments" message if this was the last one
-						const commentsContainer = document.querySelector('.space-y-6');
-						if (commentsContainer && commentsContainer.children.length === 0) {
-							const noCommentsMsg = document.createElement('p');
-							noCommentsMsg.className = 'text-gray-600 dark:text-gray-400 italic';
-							noCommentsMsg.textContent = 'No comments yet. Be the first to comment!';
-							commentsContainer.replaceWith(noCommentsMsg);
-						}
+					// Show "no comments" message if this was the last one
+					const commentsContainer = document.querySelector('.space-y-6');
+					if (commentsContainer && commentsContainer.children.length === 0) {
+						const noCommentsMsg = document.createElement('p');
+						noCommentsMsg.className = 'text-gray-600 dark:text-gray-400 italic';
+						noCommentsMsg.textContent = 'No comments yet. Be the first to comment!';
+						commentsContainer.replaceWith(noCommentsMsg);
 					}
-				});
+				}
 			});
 		});
-	</script>
-)}
+	});
+</script>

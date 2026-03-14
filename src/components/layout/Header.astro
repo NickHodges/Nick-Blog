@@ -9,8 +9,7 @@ import nickImg from '@assets/nick.png';
 
 import { Image } from 'astro:assets';
 
-const url = new URL(Astro.request.url);
-const isLoggedIn = Astro.locals.isAuthenticated;
+const url = Astro.url;
 ---
 
 <header class="group relative mb-16 flex items-center sm:ps-[4.5rem]" id="main-header">
@@ -20,10 +19,8 @@ const isLoggedIn = Astro.locals.isAuthenticated;
         src={nickImg}
         alt="Logo"
         loading="eager"
-        class:list={[
-          "me-3 h-10 w-10 sm:absolute sm:start-[-4.5rem] sm:me-0 sm:h-20 sm:w-20 rounded-full",
-          isLoggedIn && "ring-4 ring-red-500 ring-offset-2"
-        ]}
+        id="admin-avatar"
+        class="me-3 h-10 w-10 sm:absolute sm:start-[-4.5rem] sm:me-0 sm:h-20 sm:w-20 rounded-full"
       />
 
       <title>Logo</title>
@@ -60,6 +57,7 @@ const isLoggedIn = Astro.locals.isAuthenticated;
 
   <script>
     import { toggleClass } from '@utils';
+    import { logger } from '../../lib/logger';
 
     class MobileNavBtn extends HTMLElement {
       private headerEl!: HTMLElement;
@@ -81,14 +79,14 @@ const isLoggedIn = Astro.locals.isAuthenticated;
 
         const headerEl = document.getElementById('main-header');
         if (!headerEl) {
-          console.error('Header element not found');
+          logger.error('Header element not found');
           return;
         }
         this.headerEl = headerEl;
 
         const mobileButtonEl = this.querySelector('button');
         if (!mobileButtonEl) {
-          console.error('Mobile button not found');
+          logger.error('Mobile button not found');
           return;
         }
         this.mobileButtonEl = mobileButtonEl as HTMLButtonElement;
@@ -100,5 +98,17 @@ const isLoggedIn = Astro.locals.isAuthenticated;
     }
 
     customElements.define('mobile-button', MobileNavBtn);
+  </script>
+
+  <script>
+    import { checkAuth } from '../../lib/client/auth-check';
+
+    checkAuth().then((isAdmin) => {
+      if (!isAdmin) return;
+      const avatar = document.getElementById('admin-avatar');
+      if (avatar) {
+        avatar.classList.add('ring-4', 'ring-red-500', 'ring-offset-2');
+      }
+    });
   </script>
 </header>

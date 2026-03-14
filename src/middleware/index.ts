@@ -37,6 +37,12 @@ export const onRequest = defineMiddleware(async (context, next) => {
     }
   }
 
+  if (context.isPrerendered) {
+    context.locals.user = null;
+    context.locals.isAuthenticated = false;
+    return next();
+  }
+
   const user = await getSessionUser(context.cookies);
   context.locals.user = user;
   context.locals.isAuthenticated = user !== null;

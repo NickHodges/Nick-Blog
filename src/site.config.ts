@@ -48,6 +48,22 @@ export const menuLinks: Array<{ title: string; path: string }> = [
   },
 ];
 
+// Legal page links shown in the footer.
+export const legalLinks: Array<{ title: string; path: string }> = [
+  {
+    title: 'Privacy Policy',
+    path: '/info/privacy-policy/',
+  },
+  {
+    title: 'Terms of Service',
+    path: '/info/terms-of-service/',
+  },
+  {
+    title: 'Disclaimer',
+    path: '/info/disclaimer/',
+  },
+];
+
 // https://expressive-code.com/reference/configuration/
 export const expressiveCodeOptions: AstroExpressiveCodeOptions = {
   // One dark, one light theme => https://expressive-code.com/guides/themes/#available-themes

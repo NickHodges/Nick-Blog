@@ -56,6 +56,8 @@ const emailUrl = `mailto:?subject=${encodedTitle}&body=${encodedDescription}%0A%
 </div>
 
 <script>
+  import { logger } from '../lib/logger';
+
   // Web Share API support with proper cleanup
   class ShareButtonManager {
     private shareButton: HTMLButtonElement | null;
@@ -72,7 +74,7 @@ const emailUrl = `mailto:?subject=${encodedTitle}&body=${encodedDescription}%0A%
 
     init() {
       if (!this.shareButton) {
-        console.error('Share button not found');
+        logger.error('Share button not found');
         return;
       }
 
@@ -95,7 +97,7 @@ const emailUrl = `mailto:?subject=${encodedTitle}&body=${encodedDescription}%0A%
             if (err instanceof Error && err.name === 'AbortError') {
               return; // User cancelled, no need to show error
             }
-            console.error('Share failed:', err);
+            logger.error('Share failed:', err);
             // Show user-friendly error message
             alert('Unable to share. Please try using one of the social media buttons below.');
           }
@@ -120,7 +122,7 @@ const emailUrl = `mailto:?subject=${encodedTitle}&body=${encodedDescription}%0A%
               }
             }
           } catch (err) {
-            console.error('Share error:', err);
+            logger.error('Share error:', err);
             // Don't prevent default - let the link work normally as fallback
           }
         };
