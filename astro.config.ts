@@ -60,8 +60,8 @@ export default defineConfig({
           "'self'",
           'https://www.googletagmanager.com',
           'https://pagead2.googlesyndication.com',
+          'https://vercel.live',
         ],
-        strictDynamic: true,
       },
       directives: [
         "default-src 'self'",
