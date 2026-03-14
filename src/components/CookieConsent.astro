@@ -55,11 +55,15 @@
 		function hideBanner() {
 			var banner = document.getElementById('cookie-banner');
 			if (banner) banner.classList.add('hidden');
+			document.body.style.paddingBottom = '';
 		}
 
 		function showBanner() {
 			var banner = document.getElementById('cookie-banner');
-			if (banner) banner.classList.remove('hidden');
+			if (banner) {
+				banner.classList.remove('hidden');
+				document.body.style.paddingBottom = banner.offsetHeight + 'px';
+			}
 		}
 
 		var consent = localStorage.getItem(CONSENT_KEY);

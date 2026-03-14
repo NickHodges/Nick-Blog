@@ -58,6 +58,19 @@ const emailUrl = `mailto:?subject=${encodedTitle}&body=${encodedDescription}%0A%
 <script>
   import { logger } from '../lib/logger';
 
+  function showShareToast(message: string) {
+    const existing = document.getElementById('share-toast');
+    if (existing) existing.remove();
+
+    const toast = document.createElement('div');
+    toast.id = 'share-toast';
+    toast.textContent = message;
+    toast.className =
+      'fixed bottom-4 left-1/2 -translate-x-1/2 z-50 rounded-md bg-gray-800 px-4 py-2 text-sm text-white shadow-lg dark:bg-gray-200 dark:text-gray-900';
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 4000);
+  }
+
   // Web Share API support with proper cleanup
   class ShareButtonManager {
     private shareButton: HTMLButtonElement | null;
@@ -99,7 +112,7 @@ const emailUrl = `mailto:?subject=${encodedTitle}&body=${encodedDescription}%0A%
             }
             logger.error('Share failed:', err);
             // Show user-friendly error message
-            alert('Unable to share. Please try using one of the social media buttons below.');
+            showShareToast('Unable to share. Please try using one of the social media buttons below.');
           }
         };
         this.shareButton.addEventListener('click', this.shareClickHandler);
@@ -117,7 +130,7 @@ const emailUrl = `mailto:?subject=${encodedTitle}&body=${encodedDescription}%0A%
               const popup = window.open(link.href, 'share-popup', 'width=600,height=480');
               if (!popup) {
                 // Popup blocked - show message and open in new tab
-                alert('Popup blocked. Opening in new tab instead.');
+                showShareToast('Popup blocked. Opening in new tab instead.');
                 window.open(link.href, '_blank');
               }
             }
