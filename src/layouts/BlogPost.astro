@@ -11,7 +11,7 @@ import CommentForm from '@components/blog/CommentForm.astro';
 import BaseLayout from './Base.astro';
 
 interface Props {
-  post: CollectionEntry<'post'>;
+  post: CollectionEntry<'post'> | CollectionEntry<'delphi'>;
 }
 
 const { post } = Astro.props;

@@ -31,10 +31,9 @@ The pre-commit hook runs `lint-staged` which:
 - Authentication is done in `middleware/index.ts`
 
 ### Backend Integration
-- Headless client — no local database
 - Communicates with backend via Astro Actions
-- Backend API URL configured via `BACKEND_API_URL` environment variable
-- Does NOT use Astro:DB, Drizzle, or Turso
+- Uses Astro:DB (libsql) for comment storage
+- Database schema defined in `db/config.ts`
 
 ### Commenting System
 - Integrated commenting on blog posts

@@ -23,7 +23,6 @@ export default defineConfig({
     webAnalytics: {
       enabled: true,
     },
-    analytics: true,
   }),
   markdown: {
     remarkPlugins: [remarkUnwrapImages, remarkReadingTime, remarkDirective, astroStarlightRemarkAsides],

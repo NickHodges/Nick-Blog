@@ -5,7 +5,6 @@ import { getAllDelphiPosts, getUniqueTagsWithCount as getDelphiTagsWithCount } f
 
 const allPosts = await getAllPosts();
 const allDelphiPosts = await getAllDelphiPosts();
-const allCombinedPosts = [...allPosts, ...allDelphiPosts];
 
 // Combine tags from both collections
 const postTags = getPostTagsWithCount(allPosts);

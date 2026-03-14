@@ -86,6 +86,13 @@ const { postSlug } = Astro.props;
 <script>
 	import { actions } from 'astro:actions';
 
+	function createTextDiv(text: string, className: string): HTMLDivElement {
+		const div = document.createElement('div');
+		div.className = className;
+		div.textContent = text;
+		return div;
+	}
+
 	const form = document.getElementById('comment-form') as HTMLFormElement | null;
 	const messageEl = document.getElementById('form-message');
 	const submitButton = document.getElementById('submit-button') as HTMLButtonElement | null;
@@ -123,16 +130,14 @@ const { postSlug } = Astro.props;
 
 				if (data.approved) {
 					// Comment approved and published
-					let messageHTML = `
-						<div class="font-semibold text-lg mb-2">✓ ${data.message}</div>
-						<div class="text-sm">${data.feedback}</div>
-					`;
+					messageEl.innerHTML = '';
+					messageEl.appendChild(createTextDiv(`✓ ${data.message}`, 'font-semibold text-lg mb-2'));
+					messageEl.appendChild(createTextDiv(data.feedback, 'text-sm'));
 
 					if (data.score !== undefined) {
-						messageHTML += `<div class="text-xs mt-2 opacity-75">Respectfulness score: ${(data.score * 100).toFixed(0)}%</div>`;
+						messageEl.appendChild(createTextDiv(`Respectfulness score: ${(data.score * 100).toFixed(0)}%`, 'text-xs mt-2 opacity-75'));
 					}
 
-					messageEl.innerHTML = messageHTML;
 					messageEl.className = 'mt-4 p-4 rounded-md bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 border-2 border-green-300 dark:border-green-700';
 					form.reset();
 
@@ -142,27 +147,26 @@ const { postSlug } = Astro.props;
 					}, 2000);
 				} else {
 					// Comment not approved - show feedback and allow revision
-					let messageHTML = `
-						<div class="font-semibold text-lg mb-2">⚠ Comment needs improvement</div>
-						<div class="mb-3">${data.feedback || 'Your comment did not meet our respectfulness standards.'}</div>
-					`;
+					messageEl.innerHTML = '';
+					messageEl.appendChild(createTextDiv('⚠ Comment needs improvement', 'font-semibold text-lg mb-2'));
+					messageEl.appendChild(createTextDiv(
+						data.feedback || 'Your comment did not meet our respectfulness standards.',
+						'mb-3',
+					));
 
 					if (data.suggestion) {
-						messageHTML += `
-							<div class="mt-3 p-3 bg-blue-50 dark:bg-blue-900 rounded border border-blue-200 dark:border-blue-700">
-								<div class="font-semibold text-sm mb-1">Suggestion:</div>
-								<div class="text-sm">${data.suggestion}</div>
-							</div>
-						`;
+						const suggestionBox = document.createElement('div');
+						suggestionBox.className = 'mt-3 p-3 bg-blue-50 dark:bg-blue-900 rounded border border-blue-200 dark:border-blue-700';
+						suggestionBox.appendChild(createTextDiv('Suggestion:', 'font-semibold text-sm mb-1'));
+						suggestionBox.appendChild(createTextDiv(data.suggestion, 'text-sm'));
+						messageEl.appendChild(suggestionBox);
 					}
 
 					if (data.score !== undefined) {
-						messageHTML += `<div class="text-xs mt-3 opacity-75">Respectfulness score: ${(data.score * 100).toFixed(0)}%</div>`;
+						messageEl.appendChild(createTextDiv(`Respectfulness score: ${(data.score * 100).toFixed(0)}%`, 'text-xs mt-3 opacity-75'));
 					}
 
-					messageHTML += `<div class="mt-3 text-sm font-medium">Please revise your comment and try again.</div>`;
-
-					messageEl.innerHTML = messageHTML;
+					messageEl.appendChild(createTextDiv('Please revise your comment and try again.', 'mt-3 text-sm font-medium'));
 					messageEl.className = 'mt-4 p-4 rounded-md bg-yellow-100 text-yellow-900 dark:bg-yellow-900 dark:text-yellow-200 border-2 border-yellow-300 dark:border-yellow-700';
 				}
 

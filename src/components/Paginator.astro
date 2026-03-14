@@ -1,8 +1,9 @@
 ---
 import type { Page } from 'astro';
+import type { CollectionEntry } from 'astro:content';
 
 interface Props {
-  page: Page<any>;
+  page: Page<CollectionEntry<'post'> | CollectionEntry<'delphi'>>;
 }
 
 const { page } = Astro.props;
