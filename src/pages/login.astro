@@ -1,0 +1,221 @@
+---
+// If already logged in, redirect to home
+if (Astro.locals.isAuthenticated) {
+	return Astro.redirect('/');
+}
+
+const title = 'Admin Login';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>{title}</title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			body {
+				font-family: system-ui, -apple-system, sans-serif;
+				background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+				min-height: 100vh;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				padding: 1rem;
+			}
+
+			.login-container {
+				background: white;
+				border-radius: 1rem;
+				box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+				padding: 3rem 2rem;
+				width: 100%;
+				max-width: 400px;
+			}
+
+			h1 {
+				font-size: 2rem;
+				font-weight: 700;
+				color: #1a202c;
+				margin-bottom: 0.5rem;
+				text-align: center;
+			}
+
+			.subtitle {
+				color: #718096;
+				text-align: center;
+				margin-bottom: 2rem;
+				font-size: 0.875rem;
+			}
+
+			form {
+				display: flex;
+				flex-direction: column;
+				gap: 1.5rem;
+			}
+
+			.form-group {
+				display: flex;
+				flex-direction: column;
+				gap: 0.5rem;
+			}
+
+			label {
+				font-weight: 500;
+				color: #2d3748;
+				font-size: 0.875rem;
+			}
+
+			input {
+				padding: 0.75rem 1rem;
+				border: 2px solid #e2e8f0;
+				border-radius: 0.5rem;
+				font-size: 1rem;
+				transition: border-color 0.2s;
+			}
+
+			input:focus {
+				outline: none;
+				border-color: #667eea;
+			}
+
+			button {
+				padding: 0.875rem 1rem;
+				background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+				color: white;
+				border: none;
+				border-radius: 0.5rem;
+				font-size: 1rem;
+				font-weight: 600;
+				cursor: pointer;
+				transition: transform 0.2s, box-shadow 0.2s;
+			}
+
+			button:hover {
+				transform: translateY(-1px);
+				box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+			}
+
+			button:active {
+				transform: translateY(0);
+			}
+
+			button:disabled {
+				opacity: 0.6;
+				cursor: not-allowed;
+				transform: none;
+			}
+
+			.message {
+				padding: 0.75rem 1rem;
+				border-radius: 0.5rem;
+				font-size: 0.875rem;
+				display: none;
+			}
+
+			.message.show {
+				display: block;
+			}
+
+			.message.error {
+				background: #fed7d7;
+				color: #c53030;
+				border: 1px solid #fc8181;
+			}
+
+			.message.success {
+				background: #c6f6d5;
+				color: #276749;
+				border: 1px solid #9ae6b4;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="login-container">
+			<h1>🔐 Admin Login</h1>
+			<p class="subtitle">Sign in to access admin features</p>
+
+			<div id="message" class="message"></div>
+
+			<form id="login-form">
+				<div class="form-group">
+					<label for="email">Email</label>
+					<input
+						type="email"
+						id="email"
+						name="email"
+						required
+						autocomplete="email"
+						placeholder="nickhodges@gmail.com"
+					/>
+				</div>
+
+				<div class="form-group">
+					<label for="password">Password</label>
+					<input
+						type="password"
+						id="password"
+						name="password"
+						required
+						autocomplete="current-password"
+						placeholder="Enter your password"
+					/>
+				</div>
+
+				<button type="submit" id="submit-btn">Sign In</button>
+			</form>
+		</div>
+
+		<script>
+			import { actions } from 'astro:actions';
+
+			const form = document.getElementById('login-form') as HTMLFormElement | null;
+			const messageEl = document.getElementById('message');
+			const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement | null;
+
+			function showMessage(text: string, type: string) {
+				if (!messageEl) return;
+				messageEl.textContent = text;
+				messageEl.className = `message show ${type}`;
+			}
+
+			function hideMessage() {
+				if (!messageEl) return;
+				messageEl.className = 'message';
+			}
+
+			if (form && submitBtn) {
+				form.addEventListener('submit', async (e) => {
+					e.preventDefault();
+					hideMessage();
+
+					const formData = new FormData(form);
+					const email = formData.get('email') as string;
+					const password = formData.get('password') as string;
+
+					submitBtn.disabled = true;
+					submitBtn.textContent = 'Signing in...';
+
+					const { error } = await actions.auth.login({ email, password });
+
+					if (error) {
+						showMessage(error.message || 'Login failed', 'error');
+						submitBtn.disabled = false;
+						submitBtn.textContent = 'Sign In';
+					} else {
+						showMessage('Login successful! Redirecting...', 'success');
+						setTimeout(() => {
+							window.location.href = '/';
+						}, 1000);
+					}
+				});
+			}
+		</script>
+	</body>
+</html>

@@ -5,6 +5,8 @@ import InfoLayout from '@layouts/InfoPost.astro';
 import { getAllInfoPosts } from '@data/info';
 import 'astro-starlight-remark-asides/styles.css';
 
+export const prerender = true;
+
 export const getStaticPaths = (async () => {
   const infoEntries = await getAllInfoPosts();
   return infoEntries.map((entry) => ({
@@ -16,6 +18,11 @@ export const getStaticPaths = (async () => {
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const { entry } = Astro.props;
+
+if (!entry) {
+  return Astro.redirect('/404');
+}
+
 const { Content } = await entry.render();
 ---
 

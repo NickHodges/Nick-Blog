@@ -1,12 +1,15 @@
 ---
-interface Comment {
+import { db, Comment as CommentTable, eq, and, asc } from 'astro:db';
+
+interface CommentData {
 	id: number;
 	postSlug: string;
 	author: string;
 	content: string;
 	createdAt: Date;
 	approved: boolean;
-	parentId?: number;
+	parentId?: number | null;
+	email?: string | null;
 }
 
 interface Props {
@@ -15,14 +18,18 @@ interface Props {
 
 const { postSlug } = Astro.props;
 
-// Fetch comments from the API
-let comments: Comment[] = [];
+// Read auth state from middleware-populated locals
+const isAdmin = Astro.locals.isAuthenticated;
+
+// Query comments directly from the database
+let comments: CommentData[] = [];
 try {
-	const response = await fetch(`${Astro.url.origin}/api/comments/${postSlug}`);
-	if (response.ok) {
-		comments = await response.json();
-	}
-} catch (error) {
+	comments = await db
+		.select()
+		.from(CommentTable)
+		.where(and(eq(CommentTable.postSlug, postSlug), eq(CommentTable.approved, true)))
+		.orderBy(asc(CommentTable.createdAt));
+} catch {
 	// Handle error silently, comments will just be empty
 }
 
@@ -49,9 +56,39 @@ function formatDate(date: Date): string {
 	) : (
 		<div class="space-y-6">
 			{comments.map((comment) => (
-				<div class="comment p-4 border border-gray-200 rounded-lg bg-white dark:bg-gray-800 dark:border-gray-700">
+				<div class="comment p-4 border border-gray-200 rounded-lg bg-white dark:bg-gray-800 dark:border-gray-700" data-comment-id={comment.id}>
 					<div class="comment-header flex items-baseline justify-between mb-2">
-						<span class="font-semibold text-lg">{comment.author}</span>
+						<div class="flex items-center gap-2">
+							<span class="font-semibold text-lg">{comment.author}</span>
+							{isAdmin && (
+								<span class="delete-controls inline-flex items-center gap-1" data-delete-for={comment.id}>
+									<button
+										class="delete-comment-btn text-xs px-2 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition-colors"
+										data-comment-id={comment.id}
+										type="button"
+									>
+										Delete
+									</button>
+									<span class="delete-confirm hidden items-center gap-1">
+										<span class="text-xs text-gray-600 dark:text-gray-400">Delete this comment?</span>
+										<button
+											class="confirm-delete-btn text-xs px-2 py-1 bg-red-700 text-white rounded hover:bg-red-800 transition-colors"
+											data-comment-id={comment.id}
+											type="button"
+										>
+											Yes, delete
+										</button>
+										<button
+											class="cancel-delete-btn text-xs px-2 py-1 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 transition-colors dark:bg-gray-600 dark:text-gray-200"
+											type="button"
+										>
+											Cancel
+										</button>
+									</span>
+									<span class="delete-error hidden text-xs text-red-600 dark:text-red-400"></span>
+								</span>
+							)}
+						</div>
 						<span class="text-sm text-gray-500 dark:text-gray-400">
 							{formatDate(comment.createdAt)}
 						</span>
@@ -64,3 +101,82 @@ function formatDate(date: Date): string {
 		</div>
 	)}
 </div>
+
+{isAdmin && (
+	<script>
+		import { actions } from 'astro:actions';
+
+		document.addEventListener('DOMContentLoaded', () => {
+			const controlGroups = document.querySelectorAll('.delete-controls');
+
+			controlGroups.forEach((group) => {
+				const deleteBtn = group.querySelector('.delete-comment-btn') as HTMLButtonElement;
+				const confirmSpan = group.querySelector('.delete-confirm') as HTMLSpanElement;
+				const confirmBtn = group.querySelector('.confirm-delete-btn') as HTMLButtonElement;
+				const cancelBtn = group.querySelector('.cancel-delete-btn') as HTMLButtonElement;
+				const errorSpan = group.querySelector('.delete-error') as HTMLSpanElement;
+
+				if (!deleteBtn || !confirmSpan || !confirmBtn || !cancelBtn || !errorSpan) return;
+
+				// Step 1: show confirmation
+				deleteBtn.addEventListener('click', () => {
+					deleteBtn.classList.add('hidden');
+					confirmSpan.classList.remove('hidden');
+					confirmSpan.classList.add('inline-flex');
+					errorSpan.classList.add('hidden');
+				});
+
+				// Cancel: revert to delete button
+				cancelBtn.addEventListener('click', () => {
+					confirmSpan.classList.add('hidden');
+					confirmSpan.classList.remove('inline-flex');
+					deleteBtn.classList.remove('hidden');
+				});
+
+				// Step 2: actually delete
+				confirmBtn.addEventListener('click', async () => {
+					const commentId = parseInt(confirmBtn.dataset.commentId || '0', 10);
+					if (!commentId) return;
+
+					confirmBtn.disabled = true;
+					confirmBtn.textContent = 'Deleting...';
+
+					const { error } = await actions.comments.delete({ commentId });
+
+					if (error) {
+						errorSpan.textContent = 'Failed to delete comment';
+						errorSpan.classList.remove('hidden');
+						confirmSpan.classList.add('hidden');
+						confirmSpan.classList.remove('inline-flex');
+						deleteBtn.classList.remove('hidden');
+						confirmBtn.disabled = false;
+						confirmBtn.textContent = 'Yes, delete';
+						return;
+					}
+
+					// Remove the comment from the DOM
+					const commentEl = document.querySelector(`[data-comment-id="${commentId}"]`);
+					if (commentEl) {
+						commentEl.remove();
+
+						// Update comment count
+						const countEl = document.querySelector('.comments-section h3');
+						if (countEl) {
+							const currentCount = parseInt(countEl.textContent?.match(/\d+/)?.[0] || '0', 10);
+							countEl.textContent = `Comments (${currentCount - 1})`;
+						}
+
+						// Show "no comments" message if this was the last one
+						const commentsContainer = document.querySelector('.space-y-6');
+						if (commentsContainer && commentsContainer.children.length === 0) {
+							const noCommentsMsg = document.createElement('p');
+							noCommentsMsg.className = 'text-gray-600 dark:text-gray-400 italic';
+							noCommentsMsg.textContent = 'No comments yet. Be the first to comment!';
+							commentsContainer.replaceWith(noCommentsMsg);
+						}
+					}
+				});
+			});
+		});
+	</script>
+)}

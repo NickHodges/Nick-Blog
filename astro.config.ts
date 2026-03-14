@@ -58,6 +58,11 @@ export default defineConfig({
     schema: {
       RESPECTIFY_EMAIL: envField.string({ context: 'server', access: 'secret' }),
       RESPECTIFY_API_KEY: envField.string({ context: 'server', access: 'secret' }),
+      ADMIN_EMAIL: envField.string({ context: 'server', access: 'secret' }),
+      ADMIN_PASSWORD: envField.string({ context: 'server', access: 'secret' }),
+      SESSION_SECRET: envField.string({ context: 'server', access: 'secret' }),
+      ASTRO_DB_REMOTE_URL: envField.string({ context: 'server', access: 'secret', optional: true }),
+      ASTRO_DB_APP_TOKEN: envField.string({ context: 'server', access: 'secret', optional: true }),
     },
   },
   vite: {

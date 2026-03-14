@@ -8,9 +8,9 @@
 		"minimumScore": 0.7
 	},
 	"moderation": {
-		"blockDisrespectful": false,
+		"blockDisrespectful": true,
 		"showFeedbackToUser": true,
-		"allowOverride": true
+		"allowOverride": false
 	},
 	"thresholds": {
 		"autoApprove": 0.7,

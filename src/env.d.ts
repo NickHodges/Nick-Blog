@@ -8,6 +8,13 @@ declare module '@pagefind/default-ui' {
   }
 }
 
+declare namespace App {
+  interface Locals {
+    user: string | null;
+    isAuthenticated: boolean;
+  }
+}
+
 interface ImportMetaEnv {
   readonly VITE_API_URL: string;
 }

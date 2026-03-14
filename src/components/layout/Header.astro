@@ -10,12 +10,21 @@ import nickImg from '@assets/nick.png';
 import { Image } from 'astro:assets';
 
 const url = new URL(Astro.request.url);
+const isLoggedIn = Astro.locals.isAuthenticated;
 ---
 
 <header class="group relative mb-16 flex items-center sm:ps-[4.5rem]" id="main-header">
   <div class="flex sm:flex-col">
     <a aria-current={url.pathname === '/' ? 'page' : false} class="inline-flex items-center hover:filter-none sm:relative sm:inline-block" href="/">
-      <Image src={nickImg} alt="Logo" loading="eager" class="me-3 h-10 w-10 sm:absolute sm:start-[-4.5rem] sm:me-0 sm:h-20 sm:w-20" />
+      <Image
+        src={nickImg}
+        alt="Logo"
+        loading="eager"
+        class:list={[
+          "me-3 h-10 w-10 sm:absolute sm:start-[-4.5rem] sm:me-0 sm:h-20 sm:w-20 rounded-full",
+          isLoggedIn && "ring-4 ring-red-500 ring-offset-2"
+        ]}
+      />
 
       <title>Logo</title>
     </a>
