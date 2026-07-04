@@ -11,6 +11,7 @@ import { remarkReadingTime } from './src/utils/remark-reading-time';
 import icon from 'astro-icon';
 import vercelAdapter from '@astrojs/vercel';
 import db from '@astrojs/db';
+import respectify from '@respectify/astro';
 
 import astroStarlightRemarkAsides from 'astro-starlight-remark-asides';
 import remarkDirective from 'remark-directive';
@@ -55,6 +56,10 @@ export default defineConfig({
   },
   integrations: [
     db(),
+    respectify({
+      commentsApiPath: '/api/comments',
+      getPostUrl: (slug, site) => `${site.replace(/\/$/, '')}/posts/${slug}/`,
+    }),
     icon(),
     tailwind({
       applyBaseStyles: false,

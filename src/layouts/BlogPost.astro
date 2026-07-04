@@ -6,9 +6,7 @@ import BlogHero from '@components/blog/Hero.astro';
 import TOC from '@components/blog/TOC.astro';
 import ShareButtons from '@components/ShareButtons.astro';
 import NewsletterSignup from '@components/NewsletterSignup.astro';
-import CommentList from '@components/blog/CommentList.astro';
-import CommentForm from '@components/blog/CommentForm.astro';
-import PoweredByRespectify from '@components/blog/PoweredByRespectify.astro';
+import CommentSection from '@respectify/astro/components/CommentSection.astro';
 
 import BaseLayout from './Base.astro';
 
@@ -43,12 +41,12 @@ const { headings, remarkPluginFrontmatter } = await render(post);
       <NewsletterSignup />
 
       <div class="mt-12 border-t border-gray-200 dark:border-gray-700 pt-8 not-prose">
-        <PoweredByRespectify />
-        <CommentList postSlug={id} />
-        <CommentForm postSlug={id} />
-        <div class="mt-4 flex justify-end">
-          <PoweredByRespectify variant="badge" />
-        </div>
+        <CommentSection
+          postSlug={id}
+          apiPath="/api/comments"
+          enableDelete
+          style="--rf-accent: hsl(var(--theme-accent)); --rf-accent-hover: hsl(var(--theme-accent-2));"
+        />
       </div>
     </article>
   </div>
@@ -65,7 +63,6 @@ const { headings, remarkPluginFrontmatter } = await render(post);
 
   function callback(entries: IntersectionObserverEntry[]) {
     entries.forEach((entry) => {
-      // only show the scroll to top button when the heading is out of view
       scrollBtn.dataset.show = (!entry.isIntersecting).toString();
     });
   }
