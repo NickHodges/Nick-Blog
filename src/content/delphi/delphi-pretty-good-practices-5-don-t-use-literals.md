@@ -6,7 +6,7 @@ postSlug: delphi-pretty-good-practices-5-don-t-use-literals
 featured: false
 tags:
   - delphi
-description: "If there is a bedrock, bottom line, everyone-should-follow-it-all-the-time rule in programming it is “The DRY Principle” – Don’t Repeat Yourself."
+description: 'If there is a bedrock, bottom line, everyone-should-follow-it-all-the-time rule in programming it is “The DRY Principle” – Don’t Repeat Yourself.'
 ---
 
 If there is a bedrock, bottom line, everyone-should-follow-it-all-the-time rule in programming it is “The DRY Principle” – Don’t Repeat Yourself.  This simple rule states that you should write code once and only once, and that you shouldn’t allow the same code to be used all over the place.  Or, as the Wikipedia article deftly states: "Every piece of knowledge must have a single, unambiguous, authoritative representation within a system."  Put more simply, it means that you shouldn’t have the same thing repeated all over your code, but that you should create a single identifier and use that in the many places where it might be needed.
@@ -18,15 +18,19 @@ For example:  Say you have a system that has an arbitrary number of required re
 ```pascal
 for i := 1 to 17 do 
 ```
+
 ```pascal
 begin 
 ```
+
 ```pascal
   ProcessStuff; 
 ```
+
 ```pascal
   DoSomeMoreStuff; 
 ```
+
 ```pascal
 end;
 ```
@@ -38,6 +42,7 @@ Of course, the thing to do is to declare a constant:
 ```pascal
 const NumberOfRepetitions = 17;
 ```
+
 and declare your loops as
 
 ```pascal
@@ -71,22 +76,24 @@ const
 
   cVersionLangCodePage = '040904E4';
 ```
+
 and the new code looks like this:
 
 ```
-procedure TStraightTextMainForm.InitializeMainFormInformation; 
-var 
-  IniFile: TIniFile; 
-begin 
-  IniFile := TIniFile.Create(IniFileName); 
-  try 
-    TextScrubberOptions.ClickChoice := TClickChoice( IniFile.ReadInteger(cOptions, cClickChoice, 0)); 
-    TextScrubberOptions.ShouldTrim := IniFile.ReadBool(cOptions, cShouldTrimText, False); 
-  finally 
-    IniFile.Free; 
-  end; 
+procedure TStraightTextMainForm.InitializeMainFormInformation;
+var
+  IniFile: TIniFile;
+begin
+  IniFile := TIniFile.Create(IniFileName);
+  try
+    TextScrubberOptions.ClickChoice := TClickChoice( IniFile.ReadInteger(cOptions, cClickChoice, 0));
+    TextScrubberOptions.ShouldTrim := IniFile.ReadBool(cOptions, cShouldTrimText, False);
+  finally
+    IniFile.Free;
+  end;
 end;
 ```
+
 Those constants are also used when I write out information to the INI file, so that I can change the value in one place if I need to, and so that I can know that there won’t be any typographical errors in my strings that will cause a bug.  The same string value is always going to be used for the INI file entry.
 
 Now let’s take a look specifically at strings.  Strings are a bit special because they are very often used to communicate information, and as such, they frequently need to be translated into other languages through the process of “localization”.  Windows provides an easy way to do this via string resources, and Delphi provides an easy way to create string resources via the resourcestring identifier.  These strings are then created as resources, making them easy to translate.  And “easy to translate” can often be, well, translated into “cheaper to translate” and that is a good thing.

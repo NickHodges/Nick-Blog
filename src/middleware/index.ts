@@ -22,7 +22,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
   if (limiter && context.request.method === 'POST') {
     const ip = getClientIp(context.request, context.clientAddress);
     const key = `${ip}:${pathname}`;
-    const result = limiter.check(key);
+    const result = await limiter.check(key);
 
     if (!result.allowed) {
       const retryAfterSeconds = Math.ceil(result.retryAfterMs / 1000);

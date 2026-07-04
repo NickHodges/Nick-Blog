@@ -6,16 +6,16 @@ postSlug: book-price-drop-again
 featured: false
 tags:
   - delphi
-description: "Hey, my book prices are dropping again: Coding in Delphi : The new price is $14.99 ."
+description: 'Hey, my book prices are dropping again: Coding in Delphi : The new price is $14.99 .'
 ---
 
 Hey, my book prices are dropping again:
 
- 	- [*Coding in Delphi*](http://amzn.to/2vQr4Hx):  The new price is **$14.99**.
- 	- [*More Coding in Delphi*](http://amzn.to/2wag7Do) is now** $14.99**
- 	- [*Dependency Injection in Delphi*](http://amzn.to/2fRlzEI) is now **$9.99**
- 	- [*The Coding in Delphi Bundle*](https://leanpub.com/b/codingindelphibundle) on LeanPub is now **$29.99**
- 	- [*The Nick’s Delphi Book Bundle*](https://leanpub.com/b/nicksdelphibookbundle) on LeanPub is now **$34.99**
+- [_Coding in Delphi_](http://amzn.to/2vQr4Hx):  The new price is **$14.99**.
+- [_More Coding in Delphi_](http://amzn.to/2wag7Do) is now** $14.99**
+- [_Dependency Injection in Delphi_](http://amzn.to/2fRlzEI) is now **$9.99**
+- [_The Coding in Delphi Bundle_](https://leanpub.com/b/codingindelphibundle) on LeanPub is now **$29.99**
+- [_The Nick’s Delphi Book Bundle_](https://leanpub.com/b/nicksdelphibookbundle) on LeanPub is now **$34.99**
 
 Links to both LeanPub, where you can by electronic copies, and Amazon, where you can buy hardcopies, are [here at http://codingindelphi.com/](http://codingindelphi.com/)
 

@@ -17,11 +17,15 @@ interface Props {
 const {
   meta: { articleDate, description = siteConfig.description, ogImage, title },
 } = Astro.props;
+
+const isProd = import.meta.env.PROD;
+const ADSENSE_CLIENT_ID = 'ca-pub-9957327027530940';
 ---
 
 <html lang={siteConfig.lang}>
   <head>
     <BaseHead articleDate={articleDate} description={description} ogImage={ogImage} title={title} />
+    {isProd && <script is:inline async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT_ID}`} crossorigin="anonymous" />}
   </head>
 
   <body>
@@ -33,8 +37,8 @@ const {
       <main id="main" class="pb-12">
         <slot />
         <AdSense slot="6923999981" format="horizontal" />
-        <Footer />
       </main>
+      <Footer />
     </div>
     <CookieConsent />
   </body>

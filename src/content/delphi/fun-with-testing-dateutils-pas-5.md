@@ -9,7 +9,7 @@ tags:
 description: 'Note: This is a "reprint" of content from my blog on Embarcadero.com when I was working there.'
 ---
 
-***Note: **This is a "reprint" of content from my blog on Embarcadero.com when I was working there.  They've since shut down my blog and the content is gone.  I'm republishing it here.  See the [main article](http://www.codingindelphi.com/blog/page/My-Embarcadero-Blog-Content) for more information.*
+**\*Note: **This is a "reprint" of content from my blog on Embarcadero.com when I was working there.  They've since shut down my blog and the content is gone.  I'm republishing it here.  See the [main article](http://www.codingindelphi.com/blog/page/My-Embarcadero-Blog-Content) for more information.\*
 
 Okay, so when I left you hanging in the last post, I promised I’d explain what was up with IncMillisecond.  But before I do that, I have to explain a bunch of stuff about TDateTime. And as it turns out, we’ll have to take a detour, and we won’t exactly get to IncMillisecond this time around. 
 

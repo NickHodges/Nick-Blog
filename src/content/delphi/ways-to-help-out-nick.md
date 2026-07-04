@@ -6,7 +6,7 @@ postSlug: ways-to-help-out-nick
 featured: false
 tags:
   - delphi
-description: "I do this website mostly for fun and to contribute back to the Delphi community that has give so much to me."
+description: 'I do this website mostly for fun and to contribute back to the Delphi community that has give so much to me.'
 ---
 
 I do this website mostly for fun and to contribute back to the Delphi community that has give so much to me.

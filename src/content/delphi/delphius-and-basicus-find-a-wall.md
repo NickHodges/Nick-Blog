@@ -7,16 +7,16 @@ featured: false
 tags:
   - delphi
   - delphius and basicus
-description: "Delphius and Basicus were walking down a path. Delphius was a wise software developer with many years of experience."
+description: 'Delphius and Basicus were walking down a path. Delphius was a wise software developer with many years of experience.'
 ---
 
 Delphius and Basicus were walking down a path.  Delphius was a wise software developer with many years of experience.  Basicus, Delphius’ student, had some experience as well, but lacked wisdom and often made foolish errors.
 
-As the two were walking, they came upon a wall blocking the path.  The wall was made of stone and was not high – it could be easily climbed over -- and not wide, the brush on either side could be easily walked through. 
+As the two were walking, they came upon a wall blocking the path.  The wall was made of stone and was not high – it could be easily climbed over -- and not wide, the brush on either side could be easily walked through.
 
 “What a stupid place for a wall!” exclaimed Basicus.
 
-Delphius considered the wall.  
+Delphius considered the wall. 
 
 “Clearly someone put this wall here on purpose,” he said.
 

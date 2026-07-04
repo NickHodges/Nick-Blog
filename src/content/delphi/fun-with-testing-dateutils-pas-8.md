@@ -9,7 +9,7 @@ tags:
 description: 'Note: This is a "reprint" of content from my blog on Embarcadero.com when I was working there.'
 ---
 
-***Note: **This is a "reprint" of content from my blog on Embarcadero.com when I was working there.  They've since shut down my blog and the content is gone.  I'm republishing it here.  See the [main article](http://www.codingindelphi.com/blog/page/My-Embarcadero-Blog-Content) for more information.*
+**\*Note: **This is a "reprint" of content from my blog on Embarcadero.com when I was working there.  They've since shut down my blog and the content is gone.  I'm republishing it here.  See the [main article](http://www.codingindelphi.com/blog/page/My-Embarcadero-Blog-Content) for more information.\*
 
 Okay, first up:  [I’ve put the tests and updates for DateUtils.pas on CodeCentra](http://cc.embarcadero.com/item/27675)l. 
 
@@ -38,6 +38,7 @@ begin
      a days worth of minutes to %s ', [DateTimeToStr(TestDate)]));
 end;
 ```
+
 Now those tests are fine, but they aren’t very easy to write. Adding another one either takes a lot of typing, or runs the risk of cut-n-paste errors that slow things down.  Wouldn’t it be cool if there were a more systematic way of running tests that made it easier to add a specific test?
 
 Well, one of our R&D guys did that for the DateUtils.pas unit.  Denis Totoliciu works on the RTL as part of our Romanian team.   Now Denis is a pretty smart guy and a big proponent of test driven development.  He has been busy writing tests for DateUtils.pas as well, and he’s a lot more efficiency minded than I am.  As a result, he’s also a lot more productive and prolific. This is why I am the manager and he is the developer.   
@@ -124,6 +125,7 @@ const
     (Year: 2005; Month: 02; Day: 25; ExpectedDay: 25),  // 15
     (Year: 2005; Month: 04; Day: 10; ExpectedDay: 10),
 ```
+
 ```pascal
     // Before the Epoch
     (Year: 1004; Month: 01; Day: 01; ExpectedDay: 01),  // 17
@@ -145,6 +147,7 @@ const
     (Year: 1005; Month: 04; Day: 10; ExpectedDay: 10)
   );
 ```
+
 And now I have a complete set of tests for dates before the epoch.  Piece of cake.  If I find specific dates that I want to test, then I can easily add those as well.  The actual code that runs the tests doesn’t care how many elements there are in the array; it will happily process all the data passed to it.  Now, you don’t get to write as many fun error messages as you do when you do it the more straightforward way, but that is a small price to pay for the efficiency gained.
 
 And if a test fails, you are given the test number, and you can see the test data and expected result right away right in the code.
@@ -181,6 +184,7 @@ begin
   end;
 end;
 ```
+
 It takes a little longer to process, but it covers every single possible test case, I believe.
 
 So that should cover it.  I think I’ll wrap the series up here.  I’m almost done writing tests for DateUtils.pas.  When I am done, I think I will move on to StrUtils.pas.

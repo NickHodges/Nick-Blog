@@ -6,7 +6,7 @@ postSlug: delphi-pretty-good-practices-5-don-t-use-literals-2
 featured: false
 tags:
   - delphi
-description: "If there is a bedrock, bottom line, everyone-should-follow-it-all-the-time rule in programming it is “The DRY Principle” – Don’t Repeat Yourself."
+description: 'If there is a bedrock, bottom line, everyone-should-follow-it-all-the-time rule in programming it is “The DRY Principle” – Don’t Repeat Yourself.'
 ---
 
 If there is a bedrock, bottom line, everyone-should-follow-it-all-the-time rule in programming it is “The DRY Principle” – Don’t Repeat Yourself. This simple rule states that you should write code once and only once, and that you shouldn’t allow the same code to be used all over the place. Or, as the Wikipedia article deftly states: "Every piece of knowledge must have a single, unambiguous, authoritative representation within a system." Put more simply, it means that you shouldn’t have the same thing repeated all over your code, but that you should create a single identifier and use that in the many places where it might be needed.
@@ -16,26 +16,28 @@ As a practical matter, the DRY principle in its most basic form tells us that we
 For example: Say you have a system that has an arbitrary number of required repetitions, say 17. You might end up writing a whole bunch of code like this:
 
 ```
-for i := 1 to 17 do 
-begin 
-  ProcessStuff; 
-  DoSomeMoreStuff; 
+for i := 1 to 17 do
+begin
+  ProcessStuff;
+  DoSomeMoreStuff;
 end;
 ```
+
 Now imagine that you have that kind of code all over the place, and then your boss comes around and says "Hey, we need to repeat all that stuff 18 times now, not just seventeen.” Well, if you haven’t followed the DRY Principle, you could very well end up with a lot of code to change. And don’t use search and replace, because what if you change the 17 that is part of a variable name or something? Things could get ugly fast.
 
 Of course, the thing to do is to declare a constant:
 
 ```
-const 
+const
   NumberOfRepetitions = 17;
 ```
+
 and declare your loops as
 
 ```pascal
 for i := 1 to NumberOfRepetitions do 
 begin
-  ProcessStuff;   
+  ProcessStuff; 
   DoSomeMoreStuff;
 end;
 ```
@@ -46,43 +48,43 @@ Now this is a pretty simple, basic thing to do, but I’m constantly surprised a
 
 ```pascal
 procedure TStraightTextMainForm.InitializeMainFormInformation;
-var 
-  IniFile: TIniFile; 
-begin 
-  IniFile := TIniFile.Create(IniFileName); 
-  try 
+var
+  IniFile: TIniFile;
+begin
+  IniFile := TIniFile.Create(IniFileName);
+  try
     TextScrubberOptions.ClickChoice := TClickChoice( IniFile.ReadInteger('Options', cClickChoice, 0));
-    TextScrubberOptions.ShouldTrim := IniFile.ReadBool(cOptions, 'ShouldTrimText', False); 
-  finally 
-    IniFile.Free; 
-  end; 
+    TextScrubberOptions.ShouldTrim := IniFile.ReadBool(cOptions, 'ShouldTrimText', False);
+  finally
+    IniFile.Free;
+  end;
 end;
 ```
 
 with a bunch of string literals. Instead, now, I’ve declared two constants in the uTextScrubberConsts.pas unit
 
 ```pascal
-const 
-  cOptions = 'Options';   
-  cClickChoice = 'ClickChoice'; 
-  cShouldTrimText = 'ShouldTrimText'; 
+const
+  cOptions = 'Options';
+  cClickChoice = 'ClickChoice';
+  cShouldTrimText = 'ShouldTrimText';
   cVersionLangCodePage = '040904E4';
 ```
 
 and the new code looks like this:
 
 ```pascal
-procedure TStraightTextMainForm.InitializeMainFormInformation; 
-var 
-  IniFile: TIniFile; 
-begin 
-  IniFile := TIniFile.Create(IniFileName); 
-  try 
-    TextScrubberOptions.ClickChoice := TClickChoice( IniFile.ReadInteger(cOptions, cClickChoice, 0)); 
-    TextScrubberOptions.ShouldTrim := IniFile.ReadBool(cOptions, cShouldTrimText, False); 
-  finally 
-    IniFile.Free; 
-  end; 
+procedure TStraightTextMainForm.InitializeMainFormInformation;
+var
+  IniFile: TIniFile;
+begin
+  IniFile := TIniFile.Create(IniFileName);
+  try
+    TextScrubberOptions.ClickChoice := TClickChoice( IniFile.ReadInteger(cOptions, cClickChoice, 0));
+    TextScrubberOptions.ShouldTrim := IniFile.ReadBool(cOptions, cShouldTrimText, False);
+  finally
+    IniFile.Free;
+  end;
 end;
 ```
 

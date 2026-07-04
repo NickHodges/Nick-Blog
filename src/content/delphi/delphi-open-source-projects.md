@@ -6,14 +6,14 @@ postSlug: delphi-open-source-projects
 featured: false
 tags:
   - delphi
-description: "This page is a listing of a number of high quality Delphi Open Source Projects."
+description: 'This page is a listing of a number of high quality Delphi Open Source Projects.'
 ---
 
 This page is a listing of a number of high quality Delphi Open Source Projects.
 
 The projects listed on this page are:
 
-- Vetted and looked at by me and deemed "worthy" of being here.  I'm happy to take recommendations for listing.  I'll try not to be too snooty about it, but I don't want to list every single project out there -- there has to be ***some*** minimum standard, right?
+- Vetted and looked at by me and deemed "worthy" of being here.  I'm happy to take recommendations for listing.  I'll try not to be too snooty about it, but I don't want to list every single project out there -- there has to be **_some_** minimum standard, right?
 - Available for download via either Subversion (svn) or Mercurial (hg) or another popular open source SCM tool.
 
 If you know if a good, well-maintained, and useful library that deserves to be here, let me know.

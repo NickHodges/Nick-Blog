@@ -25,11 +25,13 @@ turso db create nick-blog-comments
 ## Step 4: Get Database Credentials
 
 Get your database URL:
+
 ```bash
 turso db show nick-blog-comments --url
 ```
 
 Create an auth token:
+
 ```bash
 turso db tokens create nick-blog-comments
 ```
@@ -58,5 +60,6 @@ The local database will continue to work automatically. The remote database is o
 ## Vercel Deployment
 
 When deploying to Vercel, add these environment variables in your Vercel project settings:
+
 - `ASTRO_DB_REMOTE_URL`
 - `ASTRO_DB_APP_TOKEN`

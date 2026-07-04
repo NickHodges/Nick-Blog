@@ -49,29 +49,23 @@ function getPageUrl(pageNum: number) {
 
 {
   page.lastPage > 1 && (
-    <nav class='mt-8 flex items-center justify-center gap-2' aria-label='Pagination'>
+    <nav class="mt-8 flex items-center justify-center gap-2" aria-label="Pagination">
       {page.url.prev && (
-        <a class='rounded px-3 py-2 sm:hover:text-accent' data-astro-prefetch href={page.url.prev} aria-label='Previous page'>
+        <a class="rounded px-3 py-2 sm:hover:text-accent" data-astro-prefetch href={page.url.prev} aria-label="Previous page">
           ← Previous
         </a>
       )}
       {pageNumbers.map((num) =>
         num === '...' ? (
-          <span class='px-2'>…</span>
+          <span class="px-2">…</span>
         ) : (
-          <a
-            class={`rounded px-3 py-2 ${num === page.currentPage ? 'bg-accent text-bgColor font-bold' : 'sm:hover:text-accent'}`}
-            data-astro-prefetch
-            href={getPageUrl(num as number)}
-            aria-label={`Page ${num}`}
-            aria-current={num === page.currentPage ? 'page' : undefined}
-          >
+          <a class={`rounded px-3 py-2 ${num === page.currentPage ? 'bg-accent text-bgColor font-bold' : 'sm:hover:text-accent'}`} data-astro-prefetch href={getPageUrl(num as number)} aria-label={`Page ${num}`} aria-current={num === page.currentPage ? 'page' : undefined}>
             {num}
           </a>
-        )
+        ),
       )}
       {page.url.next && (
-        <a class='rounded px-3 py-2 sm:hover:text-accent' data-astro-prefetch href={page.url.next} aria-label='Next page'>
+        <a class="rounded px-3 py-2 sm:hover:text-accent" data-astro-prefetch href={page.url.next} aria-label="Next page">
           Next →
         </a>
       )}

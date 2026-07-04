@@ -10,8 +10,6 @@ import { siteConfig } from '@site-config';
 import { getFormattedDate } from '@utils';
 import { getAllPosts } from '@data/post';
 
-import type { ReactNode } from 'react';
-
 const RobotoMono = readFileSync(join(process.cwd(), 'src/assets/roboto-mono-regular.ttf'));
 const RobotoMonoBold = readFileSync(join(process.cwd(), 'src/assets/roboto-mono-700.ttf'));
 
@@ -66,7 +64,7 @@ export async function GET(context: APIContext) {
     month: 'long',
   });
   //const svg = await satori(markup(title, postDate), ogOptions);
-  const svg = await satori(markup(title, postDate) as unknown as ReactNode, ogOptions);
+  const svg = await satori(markup(title, postDate) as Parameters<typeof satori>[0], ogOptions);
   const png = new Resvg(svg).render().asPng();
   return new Response(Buffer.from(png), {
     headers: {

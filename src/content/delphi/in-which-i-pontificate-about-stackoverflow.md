@@ -7,7 +7,7 @@ featured: false
 tags:
   - delphi
   - software development
-description: "Joel Spolsky is kind of a hero to me."
+description: 'Joel Spolsky is kind of a hero to me.'
 ---
 
 Joel Spolsky is kind of a hero to me. He was one of the first developer bloggers -- one of the first guys to write about things that we developers were thinking about and talking about. He wrote classics like "[The Joel Test](https://www.joelonsoftware.com/2000/08/09/the-joel-test-12-steps-to-better-code/)" and stuck up for developer environments with "[Bionic Office](https://www.joelonsoftware.com/2003/09/24/bionic-office/)".  It was revelatory.  It was mind expanding at a time when these things had never been openly considered.

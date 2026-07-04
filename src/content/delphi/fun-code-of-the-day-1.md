@@ -7,7 +7,7 @@ featured: false
 tags:
   - delphi
   - fun code of the day
-description: "unit uEnumConverter; interface type TEnum = record public class function AsString<T>(aEnum: T): string; static; class function AsInteger<T>(aEnum: T):..."
+description: 'unit uEnumConverter; interface type TEnum = record public class function AsString<T>(aEnum: T): string; static; class function AsInteger<T>(aEnum: T):...'
 ---
 
 ```

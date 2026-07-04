@@ -7,7 +7,7 @@ featured: false
 tags:
   - delphi
   - general
-description: "A commenter on my last post asked about why I bought 100 ISBNs. That does seem like a lot, no. Well, the ISBN game is a bit of a racket."
+description: 'A commenter on my last post asked about why I bought 100 ISBNs. That does seem like a lot, no. Well, the ISBN game is a bit of a racket.'
 ---
 
 A commenter on my last post asked about why I bought 100 ISBNs.  That does seem like a lot, no?

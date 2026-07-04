@@ -7,14 +7,14 @@ featured: false
 tags:
   - delphi
   - general
-description: "My deal with Embarcadero has expired, so More Coding in Delphi is now available for sale in electronic form ."
+description: 'My deal with Embarcadero has expired, so More Coding in Delphi is now available for sale in electronic form .'
 ---
 
-My deal with Embarcadero has expired, so [More Coding in Delphi is now available for sale in electronic form](https://leanpub.com/morecodingindelphi).  
+My deal with Embarcadero has expired, so [More Coding in Delphi is now available for sale in electronic form](https://leanpub.com/morecodingindelphi). 
 
 That makes a total of four ways to buy my two books:
 
-- You can buy *More Coding in Delphi* in [paperback](https://www.createspace.com/5598794) or [electronic form](https://leanpub.com/morecodingindelphi)- You can still get *Coding in Delphi* in [paperback](https://www.createspace.com/4584226) or [electronic form](https://leanpub.com/codingindelphi).
-Both books are also [available on Amazon](http://amzn.to/1jHCgOI).  
+- You can buy _More Coding in Delphi_ in [paperback](https://www.createspace.com/5598794) or [electronic form](https://leanpub.com/morecodingindelphi)- You can still get _Coding in Delphi_ in [paperback](https://www.createspace.com/4584226) or [electronic form](https://leanpub.com/codingindelphi).
+  Both books are also [available on Amazon](http://amzn.to/1jHCgOI). 
 
 Both books have been more successful than I could have hoped for, and I’m very grateful to all of you that have purchased.  I hope you are pleased with it.

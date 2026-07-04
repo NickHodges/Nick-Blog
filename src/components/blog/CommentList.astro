@@ -1,181 +1,142 @@
 ---
-import { db, Comment as CommentTable, eq, and, asc } from 'astro:db';
-
-interface CommentData {
-	id: number;
-	postSlug: string;
-	author: string;
-	content: string;
-	createdAt: Date;
-	approved: boolean;
-	parentId?: number | null;
-	email?: string | null;
-}
-
 interface Props {
-	postSlug: string;
+  postSlug: string;
 }
 
 const { postSlug } = Astro.props;
-
-// Query comments directly from the database
-let comments: CommentData[] = [];
-try {
-	comments = await db
-		.select()
-		.from(CommentTable)
-		.where(and(eq(CommentTable.postSlug, postSlug), eq(CommentTable.approved, true)))
-		.orderBy(asc(CommentTable.createdAt));
-} catch {
-	// Handle error silently, comments will just be empty
-}
-
-function formatDate(date: Date): string {
-	return new Date(date).toLocaleDateString('en-US', {
-		year: 'numeric',
-		month: 'long',
-		day: 'numeric',
-		hour: '2-digit',
-		minute: '2-digit',
-	});
-}
 ---
 
-<div class="comments-section mt-8">
-	<h3 class="text-2xl font-bold mb-6">
-		Comments ({comments.length})
-	</h3>
+<div class="comments-section mt-8" data-post-slug={postSlug}>
+  <h3 class="text-2xl font-bold mb-6">
+    Comments (<span class="comment-count">…</span>)
+  </h3>
 
-	{comments.length === 0 ? (
-		<p class="text-gray-600 dark:text-gray-400 italic">
-			No comments yet. Be the first to comment!
-		</p>
-	) : (
-		<div class="space-y-6">
-			{comments.map((comment) => (
-				<div class="comment p-4 border border-gray-200 rounded-lg bg-white dark:bg-gray-800 dark:border-gray-700" data-comment-id={comment.id}>
-					<div class="comment-header flex items-baseline justify-between mb-2">
-						<div class="flex items-center gap-2">
-							<span class="font-semibold text-lg">{comment.author}</span>
-							<span class="delete-controls hidden items-center gap-1" data-delete-for={comment.id}>
-								<button
-									class="delete-comment-btn text-xs px-2 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition-colors"
-									data-comment-id={comment.id}
-									type="button"
-								>
-									Delete
-								</button>
-								<span class="delete-confirm hidden items-center gap-1">
-									<span class="text-xs text-gray-600 dark:text-gray-400">Delete this comment?</span>
-									<button
-										class="confirm-delete-btn text-xs px-2 py-1 bg-red-700 text-white rounded hover:bg-red-800 transition-colors"
-										data-comment-id={comment.id}
-										type="button"
-									>
-										Yes, delete
-									</button>
-									<button
-										class="cancel-delete-btn text-xs px-2 py-1 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 transition-colors dark:bg-gray-600 dark:text-gray-200"
-										type="button"
-									>
-										Cancel
-									</button>
-								</span>
-								<span class="delete-error hidden text-xs text-red-600 dark:text-red-400"></span>
-							</span>
-						</div>
-						<span class="text-sm text-gray-500 dark:text-gray-400">
-							{formatDate(comment.createdAt)}
-						</span>
-					</div>
-					<div class="comment-content text-gray-800 dark:text-gray-200 whitespace-pre-wrap">
-						{comment.content}
-					</div>
-				</div>
-			))}
-		</div>
-	)}
+  <div class="comments-loading text-gray-600 dark:text-gray-400 italic">Loading comments…</div>
+
+  <div class="comments-list hidden space-y-6"></div>
+
+  <p class="comments-empty hidden text-gray-600 dark:text-gray-400 italic">No comments yet. Be the first to comment!</p>
 </div>
 
 <script>
-	import { actions } from 'astro:actions';
-	import { checkAuth } from '../../lib/client/auth-check';
+  import { actions } from 'astro:actions';
+  import { checkAuth } from '../../lib/client/auth-check';
+  import { fetchComments, renderCommentHtml } from '../../lib/client/comments';
 
-	checkAuth().then((isAdmin) => {
-		if (!isAdmin) return;
+  function setupDeleteControls(isAdmin: boolean): void {
+    if (!isAdmin) return;
 
-		const controlGroups = document.querySelectorAll('.delete-controls');
+    const controlGroups = document.querySelectorAll('.delete-controls');
 
-		controlGroups.forEach((group) => {
-			group.classList.remove('hidden');
-			group.classList.add('inline-flex');
+    controlGroups.forEach((group) => {
+      if (group.getAttribute('data-delete-bound') === 'true') return;
+      group.setAttribute('data-delete-bound', 'true');
 
-			const deleteBtn = group.querySelector('.delete-comment-btn') as HTMLButtonElement;
-			const confirmSpan = group.querySelector('.delete-confirm') as HTMLSpanElement;
-			const confirmBtn = group.querySelector('.confirm-delete-btn') as HTMLButtonElement;
-			const cancelBtn = group.querySelector('.cancel-delete-btn') as HTMLButtonElement;
-			const errorSpan = group.querySelector('.delete-error') as HTMLSpanElement;
+      group.classList.remove('hidden');
+      group.classList.add('inline-flex');
 
-			if (!deleteBtn || !confirmSpan || !confirmBtn || !cancelBtn || !errorSpan) return;
+      const deleteBtn = group.querySelector('.delete-comment-btn') as HTMLButtonElement;
+      const confirmSpan = group.querySelector('.delete-confirm') as HTMLSpanElement;
+      const confirmBtn = group.querySelector('.confirm-delete-btn') as HTMLButtonElement;
+      const cancelBtn = group.querySelector('.cancel-delete-btn') as HTMLButtonElement;
+      const errorSpan = group.querySelector('.delete-error') as HTMLSpanElement;
 
-			// Step 1: show confirmation
-			deleteBtn.addEventListener('click', () => {
-				deleteBtn.classList.add('hidden');
-				confirmSpan.classList.remove('hidden');
-				confirmSpan.classList.add('inline-flex');
-				errorSpan.classList.add('hidden');
-			});
+      if (!deleteBtn || !confirmSpan || !confirmBtn || !cancelBtn || !errorSpan) return;
 
-			// Cancel: revert to delete button
-			cancelBtn.addEventListener('click', () => {
-				confirmSpan.classList.add('hidden');
-				confirmSpan.classList.remove('inline-flex');
-				deleteBtn.classList.remove('hidden');
-			});
+      deleteBtn.addEventListener('click', () => {
+        deleteBtn.classList.add('hidden');
+        confirmSpan.classList.remove('hidden');
+        confirmSpan.classList.add('inline-flex');
+        errorSpan.classList.add('hidden');
+      });
 
-			// Step 2: actually delete
-			confirmBtn.addEventListener('click', async () => {
-				const commentId = parseInt(confirmBtn.dataset.commentId || '0', 10);
-				if (!commentId) return;
+      cancelBtn.addEventListener('click', () => {
+        confirmSpan.classList.add('hidden');
+        confirmSpan.classList.remove('inline-flex');
+        deleteBtn.classList.remove('hidden');
+      });
 
-				confirmBtn.disabled = true;
-				confirmBtn.textContent = 'Deleting...';
+      confirmBtn.addEventListener('click', async () => {
+        const commentId = parseInt(confirmBtn.dataset.commentId || '0', 10);
+        if (!commentId) return;
 
-				const { error } = await actions.comments.delete({ commentId });
+        confirmBtn.disabled = true;
+        confirmBtn.textContent = 'Deleting...';
 
-				if (error) {
-					errorSpan.textContent = 'Failed to delete comment';
-					errorSpan.classList.remove('hidden');
-					confirmSpan.classList.add('hidden');
-					confirmSpan.classList.remove('inline-flex');
-					deleteBtn.classList.remove('hidden');
-					confirmBtn.disabled = false;
-					confirmBtn.textContent = 'Yes, delete';
-					return;
-				}
+        const { error } = await actions.comments.delete({ commentId });
 
-				// Remove the comment from the DOM
-				const commentEl = document.querySelector(`[data-comment-id="${commentId}"]`);
-				if (commentEl) {
-					commentEl.remove();
+        if (error) {
+          errorSpan.textContent = 'Failed to delete comment';
+          errorSpan.classList.remove('hidden');
+          confirmSpan.classList.add('hidden');
+          confirmSpan.classList.remove('inline-flex');
+          deleteBtn.classList.remove('hidden');
+          confirmBtn.disabled = false;
+          confirmBtn.textContent = 'Yes, delete';
+          return;
+        }
 
-					// Update comment count
-					const countEl = document.querySelector('.comments-section h3');
-					if (countEl) {
-						const currentCount = parseInt(countEl.textContent?.match(/\d+/)?.[0] || '0', 10);
-						countEl.textContent = `Comments (${currentCount - 1})`;
-					}
+        const commentEl = document.querySelector(`[data-comment-id="${commentId}"]`);
+        commentEl?.remove();
 
-					// Show "no comments" message if this was the last one
-					const commentsContainer = document.querySelector('.space-y-6');
-					if (commentsContainer && commentsContainer.children.length === 0) {
-						const noCommentsMsg = document.createElement('p');
-						noCommentsMsg.className = 'text-gray-600 dark:text-gray-400 italic';
-						noCommentsMsg.textContent = 'No comments yet. Be the first to comment!';
-						commentsContainer.replaceWith(noCommentsMsg);
-					}
-				}
-			});
-		});
-	});
+        const section = document.querySelector('.comments-section');
+        const countEl = section?.querySelector('.comment-count');
+        if (countEl) {
+          const currentCount = parseInt(countEl.textContent || '0', 10);
+          countEl.textContent = String(Math.max(currentCount - 1, 0));
+        }
+
+        const listEl = section?.querySelector('.comments-list');
+        const emptyEl = section?.querySelector('.comments-empty');
+        if (listEl && listEl.children.length === 0) {
+          listEl.classList.add('hidden');
+          emptyEl?.classList.remove('hidden');
+        }
+      });
+    });
+  }
+
+  async function loadComments(section: HTMLElement): Promise<void> {
+    const postSlug = section.dataset.postSlug || '';
+    const loadingEl = section.querySelector('.comments-loading') as HTMLElement;
+    const listEl = section.querySelector('.comments-list') as HTMLElement;
+    const emptyEl = section.querySelector('.comments-empty') as HTMLElement;
+    const countEl = section.querySelector('.comment-count') as HTMLElement;
+
+    try {
+      const comments = await fetchComments(postSlug);
+
+      loadingEl.classList.add('hidden');
+      countEl.textContent = String(comments.length);
+
+      if (comments.length === 0) {
+        emptyEl.classList.remove('hidden');
+        return;
+      }
+
+      listEl.innerHTML = comments.map((comment) => renderCommentHtml(comment)).join('');
+      listEl.classList.remove('hidden');
+
+      const isAdmin = await checkAuth();
+      setupDeleteControls(isAdmin);
+    } catch {
+      loadingEl.textContent = 'Unable to load comments.';
+    }
+  }
+
+  const section = document.querySelector('.comments-section') as HTMLElement | null;
+  if (section) {
+    void loadComments(section);
+
+    window.addEventListener('comment-published', (event) => {
+      const detail = (event as CustomEvent<{ postSlug: string }>).detail;
+      if (detail?.postSlug === section.dataset.postSlug) {
+        const emptyEl = section.querySelector('.comments-empty');
+        const listEl = section.querySelector('.comments-list');
+        emptyEl?.classList.add('hidden');
+        listEl?.classList.remove('hidden');
+        void loadComments(section);
+      }
+    });
+  }
 </script>

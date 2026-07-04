@@ -6,7 +6,7 @@ postSlug: tvirtualinterface-series
 featured: false
 tags:
   - delphi
-description: "I wrote a series of articles on using TVirtualInterface."
+description: 'I wrote a series of articles on using TVirtualInterface.'
 ---
 
 I wrote a series of articles on using TVirtualInterface.  Here are links to all the articles in order:

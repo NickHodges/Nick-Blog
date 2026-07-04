@@ -6,7 +6,7 @@ postSlug: fun-with-testing-dateutils-pas-6
 featured: false
 tags:
   - delphi
-description: "Okay, so when we last left off, IncMillisecond was still failing in certain circumstances. Let’s take a look at that."
+description: 'Okay, so when we last left off, IncMillisecond was still failing in certain circumstances. Let’s take a look at that.'
 ---
 
 Okay, so when we last left off, IncMillisecond was still failing in certain circumstances.  Let’s take a look at that.  Note, too, that I have this crazy notion that if you have a function called IncMillisecond, then it should be able to, you know, increment a millisecond.  
@@ -23,6 +23,7 @@ begin
     Result := ((AValue * MSecsPerDay) - ANumberOfMilliSeconds) / MSecsPerDay;
 end;
 ```
+
 Now that probably works just fine for you — as long as you don’t have a date that has a value less than the epoch. Below the epoch, and particularly in that magic "48 Hours" area right around the epoch itself, things go horribly awry. As we saw last time, this test will fail:
 
 ```pascal
@@ -32,7 +33,8 @@ TestDate := 0.0;
   CheckTrue(SameDateTime(Expected, TestResult), 'IncMillisecond failed
     to subtract 1ms across the epoch');
 ```
-It fails because of a number of reasons actually. The first is precision. The current implementation of IncMillisecond does division using a very small number in the denominator.  In the case of this test the numerator is a really big number multiplied by a really small number.  All of this cries out “precision error!”. (You should thank me – I almost used the  tag there.  Phew!)  And that is basically what happens.  IncMillisecond isn’t precise enough to “see” the difference.
+
+It fails because of a number of reasons actually. The first is precision. The current implementation of IncMillisecond does division using a very small number in the denominator.  In the case of this test the numerator is a really big number multiplied by a really small number.  All of this cries out “precision error!”. (You should thank me – I almost used the tag there.  Phew!)  And that is basically what happens.  IncMillisecond isn’t precise enough to “see” the difference.
 
 Plus, if you do things around the value of zero, it gets really weird.  For instance, check out the output of this console application:
 
@@ -60,6 +62,7 @@ begin
   ReadLn;
 end.
 ```
+
 I think it is safe to say that something is amiss.
 
 So finally, it is time to rework IncMillisecond, because this pesky little routine is actually at the heart of a bunch of issues with DateUtils.pas. As it will turn out, if you call any of the IncXXXX routines, it all ends up as a call to IncMilliseconds, so this needs to be right.
@@ -80,6 +83,7 @@ begin
   Result := TimeStampToDateTime(TS);
 end;
 ```
+
 And here is the cool thing:  I was able to change from my sweet but overly complicated version to the new version above without worrying too much about it, because when I made the switch – all of the tests that I had written for my original version still passed.  This was so cool – I could make the change with confidence because of the large set of tests that I had that exercised all aspects on IncMillisecond.
 
 Anywhow….  Again, the TTimeStamp type is precise, and easy. No need to do direct arithmetic on the TDateTime itself. Instead, we can deal with integers and get the exact answer every time no matter how many milliseconds you pass in. You can pass in 5000 years worth of milliseconds, and all will be well. For instance, this test passes just fine.
@@ -95,6 +99,7 @@ Expected := IncDay(Expected, -ExtraLeapDays);
 CheckTrue(SameDate(Expected, TestResult), 'IncMillisecond failed to
    add 5000 years worth of milliseconds.');
 ```
+
 And for you curious folks, here the implementation for the helper function LeapDaysBetweenDates:
 
 ```pascal
@@ -119,6 +124,7 @@ begin
     Dec(Result);
 end;
 ```
+
 From there, the rest of the IncXXXXX routines are simple –- they merely multiply by the next “level up” of time intervals, and call the previous one.  I’ve marked them all inline so that it all happens in one need function call.  Thus, we have:
 
 ```pascal

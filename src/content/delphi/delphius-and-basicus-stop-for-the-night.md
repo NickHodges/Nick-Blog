@@ -7,7 +7,7 @@ featured: false
 tags:
   - delphi
   - delphius and basicus
-description: "Delphius and Basicus were on a long journey, requiring several days travel. They stopped for the night at a campsite beside the trail."
+description: 'Delphius and Basicus were on a long journey, requiring several days travel. They stopped for the night at a campsite beside the trail.'
 ---
 
 Delphius and Basicus were on a long journey, requiring several days travel.
@@ -16,7 +16,7 @@ They stopped for the night at a campsite beside the trail.  It had obviously be
 
 Delphius and Basicus made camp and slept comfortably, for their journey was long and they were tired.
 
-In the morning, Delphius began cleaning up the remains left by previous users of the site.  
+In the morning, Delphius began cleaning up the remains left by previous users of the site. 
 
 “Why are you cleaning up another’s mess, Delphius.  They should have done it.  Why are you doing it?” said Basicus.
 

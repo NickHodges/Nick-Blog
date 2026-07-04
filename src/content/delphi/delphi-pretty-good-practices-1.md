@@ -6,11 +6,11 @@ postSlug: delphi-pretty-good-practices-1
 featured: false
 tags:
   - delphi
-description: "This article was originally published on Mon, 04/19/2010 - 16:38 on my Embarcadero blog."
+description: 'This article was originally published on Mon, 04/19/2010 - 16:38 on my Embarcadero blog.'
 ---
 
-*This article was originally published on Mon, 04/19/2010 - 16:38 on my Embarcadero blog.*
-**
+_This article was originally published on Mon, 04/19/2010 - 16:38 on my Embarcadero blog._
+\*\*
 A while back someone (I can’t remember who, sadly, sorry to the person who made the suggestion…) suggested that someone do a series of articles about “the best practices on how to develop a Delphi application”.  That’s a good idea.  There are a lot of ways to do things, and clearly there are some good way and some bad ways, some okay ways and some really cool ways to develop with Delphi.
 This series of articles will cover my personal ideas behind a good way to organize and build a Delphi application.  I’ll build a small application that does a few things.  I’ll organize the application in such a way that it illustrates some techniques that I believe are a good way to organize things.  I will explain my reasoning and in doing so I hope that you guys learn something.  This won’t be an exhaustive list or collection of ideas.
 
@@ -24,8 +24,8 @@ To start, I’ll talk about a few general ideas that drive how I do things. Thes
 
 - Any code of consequence at all should be managed under source control, even if I am the only one using and writing the code.  I use Subversion for this. I actually run the Subversion server on my local machine, but you don’t need to do that.  You can manage a Subversion repository merely as a set of local files, if you want.  But even if you develop all alone, I think using source control is a great idea.
 - I want everything I write to be easily expandable and scalable.  I try to organize and write code that can easily be extended and enhanced.  I try to write classes that have a sensible hierarchy and that can be easily inherited from.
-- I want my code to be testable.  I want to write it in such a way that it is conducive to writing unit tests.  I want it to be easy to isolate and easy to find problems if they crop up. 
+- I want my code to be testable.  I want to write it in such a way that it is conducive to writing unit tests.  I want it to be easy to isolate and easy to find problems if they crop up.
 - To as large a degree as possible, I separate the logic of an application from the user interface.  I don’t go full bore into an MVC application usually – that almost requires a special framework, but I do try very hard to separate out functionality into separate, testable classes.
-- I want my code to be well modularized.  That is, I want each class and each unit to have a single purpose, and be linked to other units and classes as loosely as possible. 
+- I want my code to be well modularized.  That is, I want each class and each unit to have a single purpose, and be linked to other units and classes as loosely as possible.
 
 What would you add to this list?  What are some of the general rules you try to follow when developing an application?

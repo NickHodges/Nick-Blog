@@ -62,4 +62,3 @@ export const legalLinks: Array<{ title: string; path: string }> = [
     path: '/info/disclaimer/',
   },
 ];
-

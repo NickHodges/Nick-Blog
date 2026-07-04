@@ -8,6 +8,7 @@ import ShareButtons from '@components/ShareButtons.astro';
 import NewsletterSignup from '@components/NewsletterSignup.astro';
 import CommentList from '@components/blog/CommentList.astro';
 import CommentForm from '@components/blog/CommentForm.astro';
+import PoweredByRespectify from '@components/blog/PoweredByRespectify.astro';
 
 import BaseLayout from './Base.astro';
 
@@ -33,7 +34,7 @@ const { headings, remarkPluginFrontmatter } = await render(post);
     <article class="prose prose-cactus flex-grow break-words" data-pagefind-body>
       <div id="blog-hero"><BlogHero content={post} minutesRead={remarkPluginFrontmatter.minutesRead} /></div>
 
-      <div class="prose prose-cactus mt-12 max-w-3xl">
+      <div class="mt-12 max-w-3xl">
         <slot />
       </div>
 
@@ -41,9 +42,13 @@ const { headings, remarkPluginFrontmatter } = await render(post);
 
       <NewsletterSignup />
 
-      <div class="mt-12 border-t border-gray-200 dark:border-gray-700 pt-8">
+      <div class="mt-12 border-t border-gray-200 dark:border-gray-700 pt-8 not-prose">
+        <PoweredByRespectify />
         <CommentList postSlug={id} />
         <CommentForm postSlug={id} />
+        <div class="mt-4 flex justify-end">
+          <PoweredByRespectify variant="badge" />
+        </div>
       </div>
     </article>
   </div>

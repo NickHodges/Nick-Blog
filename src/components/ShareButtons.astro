@@ -65,8 +65,7 @@ const emailUrl = `mailto:?subject=${encodedTitle}&body=${encodedDescription}%0A%
     const toast = document.createElement('div');
     toast.id = 'share-toast';
     toast.textContent = message;
-    toast.className =
-      'fixed bottom-4 left-1/2 -translate-x-1/2 z-50 rounded-md bg-gray-800 px-4 py-2 text-sm text-white shadow-lg dark:bg-gray-200 dark:text-gray-900';
+    toast.className = 'fixed bottom-4 left-1/2 -translate-x-1/2 z-50 rounded-md bg-gray-800 px-4 py-2 text-sm text-white shadow-lg dark:bg-gray-200 dark:text-gray-900';
     document.body.appendChild(toast);
     setTimeout(() => toast.remove(), 4000);
   }

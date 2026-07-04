@@ -7,12 +7,13 @@ featured: false
 tags:
   - delphi
   - fun code of the day
-description: "Okay, no cheating now. That is, no running the code until you’ve guessed. What is the output of this code."
+description: 'Okay, no cheating now. That is, no running the code until you’ve guessed. What is the output of this code.'
 ---
 
 Okay, no cheating now. That is, no running the code until you’ve guessed.
 
 What is the output of this code?
+
 ```
 program Project90;
 
@@ -44,6 +45,7 @@ begin
 end.
 
 ```
+
 How sure are you?
 
 Now run it and find out. Were you right?

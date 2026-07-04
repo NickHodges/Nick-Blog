@@ -6,12 +6,12 @@ postSlug: obey-postels-law-in-your-code
 featured: false
 tags:
   - delphi
-description: "Jon Postel was a guy that wrote an early specification for the Transmission Control Protocol (TCP), one of the core protocols of the Internet protocol..."
+description: 'Jon Postel was a guy that wrote an early specification for the Transmission Control Protocol (TCP), one of the core protocols of the Internet protocol...'
 ---
 
 [Jon Postel](http://en.wikipedia.org/wiki/Jon_Postel) was a guy that wrote an early specification for the Transmission Control Protocol (TCP), one of the core protocols of the Internet protocol suite.  You use it every day to surf the web, send emails, etc.  One of the guiding principles that he used when writing it was this:
 Be conservative in what you do, be liberal in what you accept from others.
-This idea is also call the [Robustness Principle](http://en.wikipedia.org/wiki/Robustness_principle), and is sometimes rephrased as "*Be conservative in what you send, be liberal in what you accept.*"  When applied to TCP, it means that the sender of data should be strict in what is sent, ensuring that it is accurate and precise.  It also means that the receiver of data should be forgiving and understanding of data to as large a degree as possible.  If you send data, be as clear as possible in what you send.  If you can accept the data sent, then you should.
+This idea is also call the [Robustness Principle](http://en.wikipedia.org/wiki/Robustness_principle), and is sometimes rephrased as "_Be conservative in what you send, be liberal in what you accept._"  When applied to TCP, it means that the sender of data should be strict in what is sent, ensuring that it is accurate and precise.  It also means that the receiver of data should be forgiving and understanding of data to as large a degree as possible.  If you send data, be as clear as possible in what you send.  If you can accept the data sent, then you should.
 
 Any application programming interface (API) should follow this principle.  Thus, the same principle should apply to your code.  The public interface of your class should be viewed as an API, and it should be conservative in what it sends, and forgiving in what it receives.  When calling another API, your code should send out data in a completely conformant way, following the rules laid down by the receiving API.  But it should be willing to receive input in a non-conformant way as long as the input can be understood.
 

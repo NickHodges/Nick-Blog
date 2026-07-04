@@ -19,36 +19,26 @@ jobs:
         uses: actions/checkout@v4
 
       - name: install node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
-
-      - name: install pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 8
-          run_install: false
-
-      - name: Get pnpm store directory
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
-      - name: Setup pnpm cache
-        uses: actions/cache@v3
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
+          node-version: 22
+          cache: npm
 
       - name: Install dependencies
-        run: pnpm install
+        run: npm ci
 
-        # use astro check for issues
+      - name: Run tests
+        run: npm test
+
       - name: Run check
-        run: pnpm astro check
+        run: npm run check
 
-        # ensure build works
       - name: Run build
-        run: pnpm build
+        run: npm run build:ci
+        env:
+          ADMIN_EMAIL: ci@example.com
+          ADMIN_PASSWORD: ci-test-password
+          REDIS_URL: redis://localhost:6379
+          RESPECTIFY_EMAIL: ci@example.com
+          RESPECTIFY_API_KEY: ci-test-key
+          ASTRO_DATABASE_FILE: ./.astro/content.db

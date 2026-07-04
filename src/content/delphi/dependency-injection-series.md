@@ -6,10 +6,10 @@ postSlug: dependency-injection-series
 featured: false
 tags:
   - delphi
-description: "Update in July, 2012 : This series of articles was written using an early version of the framework."
+description: 'Update in July, 2012 : This series of articles was written using an early version of the framework.'
 ---
 
-***Update in July, 2012***:  This series of articles was written using an early version of the framework.  Therefore, much of the code I posted might not compile or make sense.  But the lessons here are all still the same.
+**_Update in July, 2012_**:  This series of articles was written using an early version of the framework.  Therefore, much of the code I posted might not compile or make sense.  But the lessons here are all still the same.
 
 I have written a series of articles on Dependency Injection with the [Delphi Spring Framework](http://code.google.com/p/delphi-spring-framework/).  I've centralized them here:
 

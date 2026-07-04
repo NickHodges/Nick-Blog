@@ -3,46 +3,69 @@
 ## Build Commands
 
 - `npm run dev` - Start development server (localhost:4321)
-- `npm run build` - Run type check and build production site
+- `npm run build` - Run production build with remote Astro DB (`astro build --remote`)
+- `npm run build:ci` - Local/CI build without remote DB
 - `npm run preview` - Preview production build locally
-- `npm run start` - Run production build with Node.js
+- `npm run check` - Type check with `astro check`
+- `npm test` - Run unit tests
 
 ## Pre-commit Checks
 
-**IMPORTANT:** Always run lint checks before finishing work on any changes to ensure the commit hooks will pass.
+Run lint before committing:
 
-The pre-commit hook runs `lint-staged` which:
-1. Runs eslint with `--fix` on staged `.js`, `.ts`, and `.astro` files
-2. Runs prettier on staged `.json`, `.md`, and `.css` files
+```bash
+npm run lint
+```
 
 ## Project-Specific Details
 
 ### Content Collections
-- Blog posts use Astro content collections
-- Markdown/MDX files in `src/content/blog/`
-- Content schema defined with Zod
 
-### Starwind UI Components
-- Uses Starwind as the base UI component library
-- Same patterns as other projects: inherit, extend, don't replace
+Blog content uses Astro content collections defined in `src/content.config.ts`:
+
+- `post` — main blog posts in `src/content/post/`
+- `delphi` — archived Embarcadero/Delphi posts in `src/content/delphi/`
+- `info` — static info/legal pages in `src/content/info/`
+
+Both `post` and `delphi` render at `/posts/[slug]`.
+
+### UI
+
+- Tailwind CSS with custom `prose-cactus` typography
+- Astro components with minimal client-side JavaScript (custom elements)
+- No React runtime on pages
 
 ### Authentication
-- Authentication is via Supabase, by email address
-- Authentication is done in `middleware/index.ts`
+
+- Single admin account via `ADMIN_EMAIL` / `ADMIN_PASSWORD` env vars
+- Astro 6 Sessions API with Redis (`REDIS_URL`)
+- Login at `/login`; session cookie name is `session`
+- Middleware in `src/middleware/index.ts` hydrates `context.locals.isAuthenticated`
 
 ### Backend Integration
-- Communicates with backend via Astro Actions
-- Uses Astro:DB (libsql) for comment storage
-- Database schema defined in `db/config.ts`
+
+- Astro Actions in `src/actions/` for comments and auth
+- Astro:DB (Turso/libsql) for comment storage — schema in `db/config.ts`
+- Respectify for comment moderation (`src/lib/respectify/`)
+- Comments fetched at runtime via `/api/comments` on prerendered post pages
 
 ### Commenting System
-- Integrated commenting on blog posts
-- Respectify integration for comment moderation
 
-### Component Structure
-- Client-side JavaScript with `define:vars`, kept minimal for UI only
-- No UI framework like React; use Astro components and SSR
-- Dialogs shown via JS
+- Comments submitted via `comments.submit` action (Respectify moderation)
+- Comment list loaded client-side from `/api/comments?slug=...`
+- Admin delete via `comments.delete` action
+
+### Search
+
+- Pagefind indexes prerendered HTML at build time
+- Postbuild script: `pagefind --site dist/client/` (copied to Vercel static output)
+- Search UI in `src/components/Search.astro` (production builds only)
+
+### Deployment
+
+- Vercel with `@astrojs/vercel` adapter
+- `output: 'server'` with most pages prerendered
+- Requires `REDIS_URL`, Respectify credentials, and Turso credentials for production
 
 ## File Organization
 
@@ -51,7 +74,7 @@ The pre-commit hook runs `lint-staged` which:
 - Layouts in `src/layouts/`
 - Utility functions in `src/lib/`
 - Actions in `src/actions/`
-- Blog content in `src/content/blog/`
+- Blog content in `src/content/post/` and `src/content/delphi/`
 
 ## Documentation
 

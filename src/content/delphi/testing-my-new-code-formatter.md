@@ -6,10 +6,11 @@ postSlug: testing-my-new-code-formatter
 featured: false
 tags:
   - delphi
-description: "I am using the Crayon Code Highlighter."
+description: 'I am using the Crayon Code Highlighter.'
 ---
 
 I am using the Crayon Code Highlighter.  Let's see how it works:
+
 ```
 procedure ConfigureOptions;
 var
@@ -38,4 +39,5 @@ begin
   Option.HasValue := True;
 end;
 ```
+
 Looks pretty good I think.

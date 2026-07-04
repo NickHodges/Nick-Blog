@@ -9,7 +9,7 @@ tags:
 description: 'Note: This is a "reprint" of content from my blog on Embarcadero.com when I was working there.'
 ---
 
-***Note: **This is a "reprint" of content from my blog on Embarcadero.com when I was working there.  They've since shut down my blog and the content is gone.  I'm republishing it here.  See the [main article](http://www.codingindelphi.com/blog/page/My-Embarcadero-Blog-Content) for more information.*
+**\*Note: **This is a "reprint" of content from my blog on Embarcadero.com when I was working there.  They've since shut down my blog and the content is gone.  I'm republishing it here.  See the [main article](http://www.codingindelphi.com/blog/page/My-Embarcadero-Blog-Content) for more information.\*
 
 Okay, so after that last post, and after all the fixes that I did, things have settled down a little bit.  I thought I’d take advantage of this interlude to tell you some interesting things about TDateTime in Delphi, because along the way here, I have discovered a thing or two along that way that was surprising.
 

@@ -9,7 +9,7 @@ tags:
 description: 'Note: This is a "reprint" of content from my blog on Embarcadero.com when I was working there.'
 ---
 
-***Note: **This is a "reprint" of content from my blog on Embarcadero.com when I was working there.  They've since shut down my blog and the content is gone.  I'm republishing it here.  See the [main article](http://www.codingindelphi.com/blog/page/My-Embarcadero-Blog-Content) for more information.*
+**\*Note: **This is a "reprint" of content from my blog on Embarcadero.com when I was working there.  They've since shut down my blog and the content is gone.  I'm republishing it here.  See the [main article](http://www.codingindelphi.com/blog/page/My-Embarcadero-Blog-Content) for more information.\*
 
 Okay, so I’m a Development Manager. My job is to see to the health, welfare, productivity, effectiveness, and proper tasking of a big chunk of the RAD Studio development team. I share these duties with the excellent and capable Mike Devery.  I mainly manage the guys that work on the IDE, the RTL, and the frameworks.  I do things like make sure they are working on the right thing via our SCRUM interations, that they have good machines, nice chairs, vacations when they want them, the right keyboard, etc.  I manage the development process in that we on the “War Team” spend a lot of time triaging bugs, managing and defining requirements, tracking progress, finding better ways to write better code – you know, development manager stuff.
 
@@ -22,10 +22,10 @@ So I started in on DateUtils.pas.  This is a pretty cool unit with a lot of goo
 So, one of the first things I realized was that I needed to be able to generate dates.  Now, I realized that you don’t want that many non-deterministic tests (or maybe you don’t want any at all – it depends).  But I need to be sure that many of the DateUtils.pas routines can pass with any date.  So I wrote the following routine to generate a legitimate but random date:
 
 ```pascal
-/// 
+///
 ///   This creates a random, valid date from year 1 to aYearRange
-/// 
-function CreateRandomDate(aMakeItLeapYear: Boolean = False; 
+///
+function CreateRandomDate(aMakeItLeapYear: Boolean = False;
         aYearRange: Word = 2500): TDateTime;
 var
   AYear, AMonth, ADay, AHour, AMinute, ASecond, AMilliSecond: Word;
@@ -48,7 +48,7 @@ begin
   AMinute := Random(MinsPerHour) - 1;
   ASecond := Random(SecsPerMin) - 1;
   AMilliSecond := Random(MSecsPerSec);
-  Result := EncodeDateTime(AYear, AMonth, ADay, AHour, 
+  Result := EncodeDateTime(AYear, AMonth, ADay, AHour,
                  AMinute, ASecond, AMilliSecond);
 end;
 ```

@@ -6,7 +6,7 @@ postSlug: delphi-pretty-good-practices-3-file-setup
 featured: false
 tags:
   - delphi
-description: "Okay, hopefully by now you’ve read the introduction of this series, and you’ve downloaded (or better yet, pulled from source control) the latest versi..."
+description: 'Okay, hopefully by now you’ve read the introduction of this series, and you’ve downloaded (or better yet, pulled from source control) the latest versi...'
 ---
 
 Okay, hopefully by now you’ve read the introduction of this series, and you’ve downloaded (or better yet, pulled from source control) the latest version of TextScrubber and given it a once over.  In this installment, I’m going to discuss the file structure of the project and why I did things the way I did.
@@ -21,7 +21,7 @@ FileName
 Discussion
 
 frmAboutBox.pas
-Every Application should have an About Box.  The About Box should display the Application Icon, give Version information, copyright notices, and contain a short description of what the application is or does. 
+Every Application should have an About Box.  The About Box should display the Application Icon, give Version information, copyright notices, and contain a short description of what the application is or does.
 
 frmStraightText.pas
 This is the “main form” for the application, but since TextScrubber doesn’t have a main for, but it simply a container for some non-visual controls.
@@ -44,11 +44,13 @@ This file contains all the types declarations for the project, including classes
 uTextScrubberUtils.pas
 This file contains those little, standalone, “helper” routines that you use to build the product.  Routings that go into this unit are often considered as candidates to end up in NixUtils.pas, but most often, they are very specific to a purpose of the project.
 
-## 
+##
+
 A Note About Naming Conventions
 For this project, I’ve used a pretty simple naming convention. For filenames, I put ‘frm’ at the front of forms, ‘u’ at the beginning of standalone units. DataModules would get ‘dm’. Constants start with ‘c’, and resourcestrings start with ‘str’.  Parameters are prefixed with ‘a’, and all local variables (well, almost all) are prefaced with ‘Temp’.  Those latter two help keep things straight inside class methods.  I try to make my identifiers descriptive, and I never worry about their length.  A well named identifier makes code clearer, and Code Completion can do all the work if you are worried about typing.  (But in my view, you should never worry about typing if typing less means writing unclear code…..)
 
 I use those as a general set of rules, but I’m not dogmatic about it.  I try to be consistent for my and your benefit.  The exact rules of naming aren’t nearly as important as having a naming convention.  My recommendation is to find a system that you like and stick with it.  Naming conventions are a great source of religious debates. I generally leave that to others, and simply recommend that you find something that works for you and stick with it. 
 
 ## More Detail to Come
+
 I’ll be talking a bit more specifically about each of the files in future installments.  This entry should just give you a brief rundown on the basics.
