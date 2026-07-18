@@ -1,7 +1,6 @@
 {
 	"$schema": "./respectify.schema.json",
 	"enabled": true,
-	"apiEndpoint": "https://app.respectify.ai/v0.2/commentscore",
 	"requiresAuth": true,
 	"autoPublish": {
 		"enabled": true,
@@ -21,5 +20,9 @@
 		"approved": "Thank you for your respectful comment!",
 		"warning": "Your comment may contain disrespectful language. Please consider revising it.",
 		"blocked": "Your comment does not meet our respectfulness standards. Please revise and try again."
+	},
+	"client": {
+		"baseUrl": "https://app.respectify.ai",
+		"version": "0.2"
 	}
 }

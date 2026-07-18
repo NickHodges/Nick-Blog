@@ -45,15 +45,17 @@ Both `post` and `delphi` render at `/posts/[slug]`.
 ### Backend Integration
 
 - Astro Actions in `src/actions/` for comments and auth
-- Astro:DB (Turso/libsql) for comment storage — schema in `db/config.ts`
-- Respectify for comment moderation (`src/lib/respectify/`)
+- Astro:DB (Turso/libsql) for comment storage — Comment table defined in `db/config.ts` (matches `@respectify/astro` schema)
+- Comment moderation via `@respectify/astro` npm integration
 - Comments fetched at runtime via `/api/comments` on prerendered post pages
 
 ### Commenting System
 
-- Comments submitted via `comments.submit` action (Respectify moderation)
+- `@respectify/astro` integration in `astro.config.ts` (custom `commentsApiPath: '/api/comments'`)
+- Comments submitted via `comments.submit` action (`respectifyCommentActions`)
 - Comment list loaded client-side from `/api/comments?slug=...`
 - Admin delete via `comments.delete` action
+- UI: `<CommentSection />` from `@respectify/astro/components/CommentSection.astro`
 
 ### Search
 
