@@ -27,7 +27,7 @@ export default defineConfig({
   }),
   session: {
     driver: sessionDrivers.redis({
-      url: REDIS_URL,
+      url: REDIS_URL ?? process.env.REDIS_URL ?? '',
     }),
     cookie: {
       name: 'session',
