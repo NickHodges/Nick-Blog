@@ -24,6 +24,8 @@ export default defineConfig({
     webAnalytics: {
       enabled: true,
     },
+    // Runtime fs.readFile of Respectify config needs this in the serverless bundle
+    includeFiles: ['./respectify.config.json'],
   }),
   session: {
     driver: sessionDrivers.redis({
