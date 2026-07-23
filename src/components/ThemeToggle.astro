@@ -1,6 +1,6 @@
 <theme-toggle class="ms-2 sm:ms-4">
   <div class="relative">
-    <button class="relative h-9 w-9 rounded-md p-2 ring-zinc-400 transition-all hover:ring-2" type="button" id="theme-button" aria-label="Toggle theme" aria-haspopup="true">
+    <button class="relative h-9 w-9 rounded-md p-2 ring-zinc-400 transition-all hover:ring-2" type="button" id="theme-button" aria-label="Toggle theme" aria-haspopup="menu" aria-expanded="false">
       <svg aria-hidden="true" class="absolute start-1/2 top-1/2 h-7 w-7 -translate-x-1/2 -translate-y-1/2 scale-100 opacity-100 transition-all dark:scale-0 dark:opacity-0" fill="none" focusable="false" id="sun-svg" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path d="M12 18C15.3137 18 18 15.3137 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
         <path d="M22 12L23 12" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -59,8 +59,7 @@
 </theme-toggle>
 
 <script>
-  // Note that if you fire the theme-change event outside of this component, it will not be reflected in the button's aria-checked attribute
-  import { rootInDarkMode } from '@utils';
+  // Note that if you fire the theme-change event outside of this component, it will not be reflected in the button's aria-expanded attribute
 
   class ThemeToggle extends HTMLElement {
     #controller: AbortController | undefined;
@@ -81,9 +80,9 @@
       this.#systemText = this.querySelector('#system-sync-text')!;
       this.#systemIndicator = this.querySelector('#system-sync-indicator')!;
       
-      // Set aria role value
-      this.#button.setAttribute('role', 'switch');
-      this.#button.setAttribute('aria-checked', String(rootInDarkMode()));
+      // Menu button semantics
+      this.#button.setAttribute('aria-haspopup', 'menu');
+      this.#button.setAttribute('aria-expanded', 'false');
       
       // Abort signal
       const { signal } = (this.#controller = new AbortController());
@@ -102,12 +101,22 @@
         }
         
         this.#dropdown.classList.toggle('hidden');
+        this.#button.setAttribute('aria-expanded', String(this.#dropdown.classList.contains('hidden') === false));
       }, { signal });
       
       // Handle option clicks
       this.#lightOption.addEventListener('click', () => this.setTheme('light', false), { signal });
       this.#darkOption.addEventListener('click', () => this.setTheme('dark', false), { signal });
       this.#systemOption.addEventListener('click', this.toggleSystemSync.bind(this), { signal });
+
+      // Escape closes the menu
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !this.#dropdown.classList.contains('hidden')) {
+          this.#dropdown.classList.add('hidden');
+          this.#button.setAttribute('aria-expanded', 'false');
+          this.#button.focus();
+        }
+      }, { signal });
       
       // Close dropdown when clicking outside
       document.addEventListener('click', this.handleOutsideClick.bind(this), { signal });
@@ -116,6 +125,7 @@
     handleOutsideClick(e: Event) {
       if (!this.contains(e.target as Node) && !this.#dropdown.classList.contains('hidden')) {
         this.#dropdown.classList.add('hidden');
+        this.#button.setAttribute('aria-expanded', 'false');
       }
     }
     
@@ -142,8 +152,8 @@
       if (window.themeUtils) {
         window.themeUtils.toggleSyncWithOS();
         this.updateSyncStatus();
-        this.#button.setAttribute('aria-checked', String(rootInDarkMode()));
         this.#dropdown.classList.add('hidden');
+        this.#button.setAttribute('aria-expanded', 'false');
       }
     }
     
@@ -158,9 +168,8 @@
       // Dispatch event -> ThemeProvider.astro
       document.dispatchEvent(themeChangeEvent);
       
-      // Set the aria-checked attribute
-      this.#button.setAttribute('aria-checked', String(rootInDarkMode()));
       this.#dropdown.classList.add('hidden');
+      this.#button.setAttribute('aria-expanded', 'false');
       this.updateSyncStatus();
     }
 

@@ -25,9 +25,9 @@ if (!entry) {
   return Astro.redirect('/404');
 }
 
-const { Content } = await render(entry);
+const { Content, headings } = await render(entry);
 ---
 
-<InfoLayout info={entry}>
-  <article class="prose prose-cactus"><Content /></article>
+<InfoLayout info={entry} headings={headings}>
+  <Content />
 </InfoLayout>

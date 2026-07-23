@@ -29,6 +29,9 @@ const url = Astro.url;
         </a>
       ))
     }
+    <button id="admin-logout" type="button" class="hidden px-4 py-4 text-red-600 sm:py-0 sm:hover:underline" aria-label="Log out">
+      Log out
+    </button>
   </nav>
 
   <Search />
@@ -53,22 +56,22 @@ const url = Astro.url;
 
     class MobileNavBtn extends HTMLElement {
       private headerEl!: HTMLElement;
-
-      private menuOpen!: boolean;
-
+      private menuOpen = false;
       private mobileButtonEl!: HTMLButtonElement;
+      private onKeydown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape' && this.menuOpen) {
+          this.toggleMobileMenu();
+          this.mobileButtonEl.focus();
+        }
+      };
 
       toggleMobileMenu = () => {
         toggleClass(this.headerEl, 'menu-open');
-
         this.menuOpen = !this.menuOpen;
-
         this.mobileButtonEl.setAttribute('aria-expanded', this.menuOpen.toString());
       };
 
-      constructor() {
-        super();
-
+      connectedCallback() {
         const headerEl = document.getElementById('main-header');
         if (!headerEl) {
           logger.error('Header element not found');
@@ -81,25 +84,41 @@ const url = Astro.url;
           logger.error('Mobile button not found');
           return;
         }
-        this.mobileButtonEl = mobileButtonEl as HTMLButtonElement;
-
+        this.mobileButtonEl = mobileButtonEl;
         this.menuOpen = false;
-
         this.mobileButtonEl.addEventListener('click', this.toggleMobileMenu);
+        document.addEventListener('keydown', this.onKeydown);
+      }
+
+      disconnectedCallback() {
+        this.mobileButtonEl?.removeEventListener('click', this.toggleMobileMenu);
+        document.removeEventListener('keydown', this.onKeydown);
       }
     }
 
-    customElements.define('mobile-button', MobileNavBtn);
+    if (!customElements.get('mobile-button')) {
+      customElements.define('mobile-button', MobileNavBtn);
+    }
   </script>
 
   <script>
-    import { checkAuth } from '../../lib/client/auth-check';
+    import { actions } from 'astro:actions';
+    import { checkAuth, clearAuthCache } from '../../lib/client/auth-check';
 
     checkAuth().then((isAdmin) => {
       if (!isAdmin) return;
       const avatar = document.getElementById('admin-avatar');
       if (avatar) {
         avatar.classList.add('ring-4', 'ring-red-500', 'ring-offset-2');
+      }
+      const logoutBtn = document.getElementById('admin-logout');
+      if (logoutBtn) {
+        logoutBtn.classList.remove('hidden');
+        logoutBtn.addEventListener('click', async () => {
+          await actions.auth.logout({});
+          clearAuthCache();
+          window.location.href = '/';
+        });
       }
     });
   </script>

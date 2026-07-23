@@ -20,7 +20,6 @@ const socialImageURL = new URL(ogImage ? ogImage : '/social-card.png', Astro.url
 
 <meta charset="utf-8" />
 <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
-<meta content="IE=edge" http-equiv="X-UA-Compatible" />
 <title>{siteTitle}</title>
 
 {/* Icons / Favicon */}
@@ -41,16 +40,12 @@ const socialImageURL = new URL(ogImage ? ogImage : '/social-card.png', Astro.url
 <meta name="msapplication-TileColor" content="#ffffff" />
 <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
 <meta name="theme-color" content="#ffffff" />
-<link href="/manifest.webmanifest" rel="manifest" />
 <link href={canonicalURL} rel="canonical" />
 
 {/* Primary Meta Tags */}
 <meta content={siteTitle} name="title" />
 <meta content={description} name="description" />
 <meta content={siteConfig.author} name="author" />
-
-{/* Theme Colour */}
-<meta content="" name="theme-color" />
 
 {/* Open Graph / Facebook */}
 <meta content={articleDate ? 'article' : 'website'} property="og:type" />

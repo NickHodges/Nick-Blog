@@ -1,23 +1,14 @@
-import { SESSION_COOKIE_NAME } from '../session-cookie';
-
 interface AuthStatusResponse {
   isAuthenticated: boolean;
 }
 
 let authPromise: Promise<boolean> | null = null;
 
-function hasSessionCookie(): boolean {
-  return document.cookie.split(';').some((part) => {
-    const [name] = part.trim().split('=');
-    return name === SESSION_COOKIE_NAME;
-  });
-}
-
+/**
+ * Check admin auth via the server. Session cookies are httpOnly, so we cannot
+ * gate on document.cookie — always ask /api/auth-status (result is cached).
+ */
 export function checkAuth(): Promise<boolean> {
-  if (!hasSessionCookie()) {
-    return Promise.resolve(false);
-  }
-
   if (!authPromise) {
     authPromise = fetch('/api/auth-status')
       .then((r) => (r.ok ? (r.json() as Promise<AuthStatusResponse>) : { isAuthenticated: false }))
@@ -26,4 +17,9 @@ export function checkAuth(): Promise<boolean> {
   }
 
   return authPromise;
+}
+
+/** Clear the cached auth result (e.g. after logout). */
+export function clearAuthCache(): void {
+  authPromise = null;
 }

@@ -9,6 +9,17 @@ function removeDupsAndLowerCase(array: string[]) {
   return Array.from(distinctItems);
 }
 
+const dateFromStringOrDate = z
+  .string()
+  .or(z.date())
+  .transform((val) => new Date(val));
+
+const optionalDateFromStringOrDate = z
+  .string()
+  .or(z.date())
+  .optional()
+  .transform((str) => (str ? new Date(str) : undefined));
+
 const post = defineCollection({
   loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/content/post' }),
   schema: ({ image }) =>
@@ -16,15 +27,8 @@ const post = defineCollection({
       title: z.string().max(60),
       author: z.string().optional(),
       description: z.string().min(20).max(160),
-      publishDate: z
-        .string()
-        .or(z.date())
-        .transform((val) => new Date(val)),
-      updatedDate: z
-        .string()
-        .or(z.date())
-        .optional()
-        .transform((str) => (str ? new Date(str) : undefined)),
+      publishDate: dateFromStringOrDate,
+      updatedDate: optionalDateFromStringOrDate,
       coverImage: z
         .object({
           src: image(),
@@ -34,6 +38,8 @@ const post = defineCollection({
       draft: z.boolean().default(false),
       tags: z.array(z.string()).default([]).transform(removeDupsAndLowerCase),
       ogImage: z.string().optional(),
+      /** Legacy frontmatter; routing uses the content file id. */
+      postSlug: z.string().optional(),
     }),
 });
 
@@ -55,26 +61,20 @@ const delphi = defineCollection({
       title: z.string().max(120),
       author: z.string().optional().default('Nick Hodges'),
       description: z.string().min(20).max(300),
-      publishDate: z
-        .string()
-        .or(z.date())
-        .transform((val) => new Date(val)),
-      updatedDate: z
-        .string()
-        .or(z.date())
-        .optional()
-        .transform((str) => (str ? new Date(str) : undefined)),
-      postSlug: z.string().optional(),
-      featured: z.boolean().default(false),
-      draft: z.boolean().default(false),
-      tags: z.array(z.string()).default([]).transform(removeDupsAndLowerCase),
-      ogImage: z.string().optional(),
+      publishDate: dateFromStringOrDate,
+      updatedDate: optionalDateFromStringOrDate,
       coverImage: z
         .object({
           src: image(),
           alt: z.string(),
         })
         .optional(),
+      draft: z.boolean().default(false),
+      tags: z.array(z.string()).default([]).transform(removeDupsAndLowerCase),
+      ogImage: z.string().optional(),
+      /** Legacy frontmatter; routing uses the content file id. */
+      postSlug: z.string().optional(),
+      featured: z.boolean().default(false),
     }),
 });
 

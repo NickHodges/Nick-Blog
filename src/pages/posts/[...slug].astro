@@ -24,9 +24,9 @@ export const getStaticPaths = (async () => {
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const { entry } = Astro.props;
-const { Content } = await render(entry);
+const { Content, headings, remarkPluginFrontmatter } = await render(entry);
 ---
 
-<PostLayout post={entry}>
+<PostLayout post={entry} headings={headings} minutesRead={remarkPluginFrontmatter.minutesRead}>
   <Content />
 </PostLayout>

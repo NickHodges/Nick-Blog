@@ -16,15 +16,23 @@ export const server = {
 			}),
 			handler: async ({ email, password }, context) => {
 				if (!verifyCredentials(email, password)) {
-					logger.warn('Failed login attempt');
+					logger.error('Failed login attempt', context.clientAddress ?? 'unknown');
 					throw new ActionError({
 						code: 'UNAUTHORIZED',
 						message: 'Invalid email or password',
 					});
 				}
 
-				context.session?.set('user', email);
-				context.session?.regenerate();
+				if (!context.session) {
+					logger.error('Login succeeded but session is unavailable');
+					throw new ActionError({
+						code: 'INTERNAL_SERVER_ERROR',
+						message: 'Session unavailable',
+					});
+				}
+
+				context.session.set('user', email);
+				await context.session.regenerate();
 				logger.info('User logged in successfully');
 
 				return { success: true as const };
@@ -35,7 +43,9 @@ export const server = {
 			accept: 'json',
 			input: z.object({}),
 			handler: async (_input, context) => {
-				context.session?.destroy();
+				if (context.session) {
+					context.session.destroy();
+				}
 				logger.info('User logged out');
 
 				return { success: true as const };
