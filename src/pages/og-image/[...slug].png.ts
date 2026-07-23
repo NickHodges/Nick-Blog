@@ -9,6 +9,7 @@ import { Resvg } from '@resvg/resvg-js';
 import { siteConfig } from '@site-config';
 import { getFormattedDate } from '@utils';
 import { getAllPosts } from '@data/post';
+import { getAllDelphiPosts } from '@data/delphi';
 
 const RobotoMono = readFileSync(join(process.cwd(), 'src/assets/roboto-mono-regular.ttf'));
 const RobotoMonoBold = readFileSync(join(process.cwd(), 'src/assets/roboto-mono-700.ttf'));
@@ -76,7 +77,9 @@ export async function GET(context: APIContext) {
 
 export async function getStaticPaths() {
   const posts = await getAllPosts();
-  return posts
+  const delphiPosts = await getAllDelphiPosts();
+  const allPosts = [...posts, ...delphiPosts];
+  return allPosts
     .filter(({ data }) => !data.ogImage)
     .map((post) => ({
       params: { slug: post.id },

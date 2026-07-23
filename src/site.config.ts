@@ -22,8 +22,8 @@ export const siteConfig: SiteConfig = {
   },
   // Google AdSense Configuration
   adsense: {
-    clientId: 'ca-pub-9957327027530940', // Replace with your AdSense publisher ID
-    adSlot: '6617379235', // Replace with your ad slot ID
+    clientId: 'ca-pub-9957327027530940',
+    adSlot: '6617379235',
   },
 };
 

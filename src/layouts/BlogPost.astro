@@ -1,20 +1,23 @@
 ---
-import type { CollectionEntry } from 'astro:content';
-import { render } from 'astro:content';
+import type { CollectionEntry, RenderResult } from 'astro:content';
 
 import BlogHero from '@components/blog/Hero.astro';
 import TOC from '@components/blog/TOC.astro';
 import ShareButtons from '@components/ShareButtons.astro';
 import NewsletterSignup from '@components/NewsletterSignup.astro';
+import BackToTop from '@components/BackToTop.astro';
 import CommentSection from '@respectify/astro/components/CommentSection.astro';
+import { COMMENTS_API_PATH } from '../lib/comments-config';
 
 import BaseLayout from './Base.astro';
 
 interface Props {
   post: CollectionEntry<'post'> | CollectionEntry<'delphi'>;
+  headings: RenderResult['headings'];
+  minutesRead?: string;
 }
 
-const { post } = Astro.props;
+const { post, headings, minutesRead } = Astro.props;
 const {
   data: { description, ogImage, publishDate, title, updatedDate },
   id,
@@ -22,55 +25,36 @@ const {
 const socialImage = ogImage ?? `/og-image/${id}.png`;
 const articleDate = updatedDate?.toISOString() ?? publishDate.toISOString();
 const postUrl = `posts/${id}`;
-
-const { headings, remarkPluginFrontmatter } = await render(post);
 ---
 
 <BaseLayout meta={{ articleDate, description, ogImage: socialImage, title }}>
   <div class="gap-x-10 lg:flex lg:items-start">
     {!!headings.length && <TOC headings={headings} />}
     <article class="prose prose-cactus flex-grow break-words" data-pagefind-body>
-      <div id="blog-hero"><BlogHero content={post} minutesRead={remarkPluginFrontmatter.minutesRead} /></div>
+      <div id="blog-hero">
+        {minutesRead !== undefined ? <BlogHero content={post} minutesRead={minutesRead} /> : <BlogHero content={post} />}
+      </div>
 
       <div class="mt-12 max-w-3xl">
         <slot />
       </div>
 
-      <ShareButtons title={title} url={postUrl} description={description} />
+      <div data-pagefind-ignore>
+        <ShareButtons title={title} url={postUrl} description={description} />
 
-      <NewsletterSignup />
+        <NewsletterSignup />
 
-      <div class="mt-12 border-t border-gray-200 dark:border-gray-700 pt-8 not-prose">
-        <CommentSection
-          postSlug={id}
-          apiPath="/api/comments"
-          enableDelete
-          style="--rf-accent: hsl(var(--theme-accent)); --rf-accent-hover: hsl(var(--theme-accent-2));"
-        />
+        <div class="mt-12 border-t border-gray-200 dark:border-gray-700 pt-8 not-prose">
+          <CommentSection
+            postSlug={id}
+            apiPath={COMMENTS_API_PATH}
+            enableDelete
+            style="--rf-accent: hsl(var(--theme-accent)); --rf-accent-hover: hsl(var(--theme-accent-2));"
+          />
+        </div>
       </div>
     </article>
   </div>
 
-  <button aria-label="Back to Top" class="z-90 fixed bottom-8 end-4 flex h-10 w-10 translate-y-28 items-center justify-center rounded-full border-2 border-transparent bg-zinc-200 text-3xl opacity-0 transition-all duration-300 hover:border-zinc-400 data-[show=true]:translate-y-0 data-[show=true]:opacity-100 dark:bg-zinc-700 sm:end-8 sm:h-12 sm:w-12" data-show="false" id="to-top-btn">
-    <svg aria-hidden="true" class="h-6 w-6" fill="none" focusable="false" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path d="M4.5 15.75l7.5-7.5 7.5 7.5" stroke-linecap="round" stroke-linejoin="round"></path>
-    </svg>
-  </button>
+  <BackToTop observeId="blog-hero" />
 </BaseLayout>
-<script>
-  const scrollBtn = document.getElementById('to-top-btn') as HTMLButtonElement;
-  const targetHeader = document.getElementById('blog-hero') as HTMLDivElement;
-
-  function callback(entries: IntersectionObserverEntry[]) {
-    entries.forEach((entry) => {
-      scrollBtn.dataset.show = (!entry.isIntersecting).toString();
-    });
-  }
-
-  scrollBtn.addEventListener('click', () => {
-    document.documentElement.scrollTo({ behavior: 'smooth', top: 0 });
-  });
-
-  const observer = new IntersectionObserver(callback);
-  observer.observe(targetHeader);
-</script>

@@ -7,12 +7,9 @@ const rateLimitedRoutes: Record<string, IRateLimiter> = {
   '/_actions/comments.submit': commentLimiter,
 };
 
-function getClientIp(request: Request, clientAddress: string | undefined): string {
-  const forwarded = request.headers.get('x-forwarded-for');
-  if (forwarded) {
-    return forwarded.split(',')[0]!.trim();
-  }
-  return clientAddress ?? 'unknown';
+/** Prefer platform-provided clientAddress; X-Forwarded-For is spoofable. */
+function getClientIp(clientAddress: string | undefined): string {
+  return clientAddress?.trim() || 'unknown';
 }
 
 export const onRequest = defineMiddleware(async (context, next) => {
@@ -20,7 +17,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
   const limiter = rateLimitedRoutes[pathname];
 
   if (limiter && context.request.method === 'POST') {
-    const ip = getClientIp(context.request, context.clientAddress);
+    const ip = getClientIp(context.clientAddress);
     const key = `${ip}:${pathname}`;
     const result = await limiter.check(key);
 

@@ -103,13 +103,14 @@ import '@pagefind/default-ui/css/ui.css';
     }
 
     connectedCallback() {
-      // Listen for keyboard shortcut
       window.addEventListener('keydown', this.onWindowKeydown);
 
-      // only add pagefind in production
       if (import.meta.env.DEV) return;
+      if (this.querySelector('.pagefind-ui')) return;
+
       const onIdle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1));
       onIdle(async () => {
+        if (this.querySelector('.pagefind-ui')) return;
         const { PagefindUI } = await import('@pagefind/default-ui');
         new PagefindUI({
           baseUrl: import.meta.env.BASE_URL,
@@ -123,6 +124,10 @@ import '@pagefind/default-ui/css/ui.css';
 
     disconnectedCallback() {
       window.removeEventListener('keydown', this.onWindowKeydown);
+      window.removeEventListener('click', this.onWindowClick);
+      if (this.dialog?.open) {
+        this.dialog.close();
+      }
     }
   }
 

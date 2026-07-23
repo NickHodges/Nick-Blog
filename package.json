@@ -8,7 +8,8 @@
     "build": "astro build --remote",
     "build:ci": "ASTRO_DATABASE_FILE=./.astro/content.db astro build",
     "build:check": "astro check && astro build",
-    "lint": "prettier --write  \"**/*.{js,jsx,ts,tsx,md,mdx,astro}\" && eslint --fix \"src/**/*.{js,ts,jsx,tsx,astro}\"",
+    "lint": "prettier --check \"**/*.{js,jsx,ts,tsx,md,mdx,astro}\" && eslint \"src/**/*.{js,ts,jsx,tsx,astro}\"",
+    "lint:fix": "prettier --write \"**/*.{js,jsx,ts,tsx,md,mdx,astro}\" && eslint --fix \"src/**/*.{js,ts,jsx,tsx,astro}\"",
     "prebuild:check": "npm run lint",
     "postbuild": "pagefind --site dist/client/ && cp -r dist/client/pagefind .vercel/output/static/",
     "preview": "astro preview",
@@ -68,7 +69,6 @@
     "tailwindcss": "^3.4.3",
     "typescript": "^5.4.3"
   },
-  "packageManager": "pnpm@8.15.4",
   "engines": {
     "node": "22.x"
   }

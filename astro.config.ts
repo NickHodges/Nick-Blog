@@ -12,6 +12,7 @@ import icon from 'astro-icon';
 import vercelAdapter from '@astrojs/vercel';
 import db from '@astrojs/db';
 import respectify from '@respectify/astro';
+import { COMMENTS_API_PATH } from './src/lib/comments-config';
 
 import astroStarlightRemarkAsides from 'astro-starlight-remark-asides';
 import remarkDirective from 'remark-directive';
@@ -46,7 +47,7 @@ export default defineConfig({
         rehypeExternalLinks,
         {
           target: '_blank',
-          rel: ['nofollow, noopener, noreferrer'],
+          rel: ['nofollow', 'noopener', 'noreferrer'],
         },
       ],
     ],
@@ -59,7 +60,7 @@ export default defineConfig({
   integrations: [
     db(),
     respectify({
-      commentsApiPath: '/api/comments',
+      commentsApiPath: COMMENTS_API_PATH,
       getPostUrl: (slug, site) => `${site.replace(/\/$/, '')}/posts/${slug}/`,
     }),
     icon(),

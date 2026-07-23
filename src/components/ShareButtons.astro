@@ -23,37 +23,39 @@ const twitterUrl = `https://twitter.com/intent/tweet?text=${encodedTitle}&url=${
 const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
 const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`;
 const emailUrl = `mailto:?subject=${encodedTitle}&body=${encodedDescription}%0A%0A${encodedUrl}`;
+
+const focusRing = 'focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 dark:focus:ring-offset-gray-900';
 ---
 
-<div class="not-prose share-buttons mt-10 border-t border-gray-200 pt-8 dark:border-gray-700">
+<share-buttons class="not-prose share-buttons mt-10 block border-t border-gray-200 pt-8 dark:border-gray-700">
   <h3 class="mb-4 text-lg font-medium text-accent-2">Share this post</h3>
   <div class="flex flex-wrap gap-3">
-    <button id="web-share-btn" class="inline-flex items-center rounded-md bg-accent-2 px-4 py-2 text-sm text-white transition hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-accent-1 focus:ring-offset-2 dark:focus:ring-offset-gray-900" aria-label="Share this post" data-title={title} data-description={description} data-url={fullUrl}>
+    <button data-web-share class:list={['inline-flex items-center rounded-md bg-accent-2 px-4 py-2 text-sm text-white transition hover:bg-opacity-90', focusRing]} aria-label="Share this post" data-title={title} data-description={description} data-url={fullUrl}>
       <Icon name="mdi:share" class="mr-2 h-5 w-5" aria-hidden="true" />
       <span>Share</span>
     </button>
 
-    <a href={twitterUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center rounded-md bg-[#000000] px-4 py-2 text-sm text-white transition hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-accent-1 focus:ring-offset-2 dark:focus:ring-offset-gray-900" aria-label="Share on Twitter">
+    <a href={twitterUrl} target="_blank" rel="noopener noreferrer" class:list={['inline-flex items-center rounded-md bg-[#000000] px-4 py-2 text-sm text-white transition hover:bg-opacity-90', focusRing]} aria-label="Share on Twitter">
       <Icon name="mdi:twitter" class="mr-2 h-5 w-5" aria-hidden="true" />
       <span>X / Twitter</span>
     </a>
 
-    <a href={facebookUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center rounded-md bg-[#1877F2] px-4 py-2 text-sm text-white transition hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-accent-1 focus:ring-offset-2 dark:focus:ring-offset-gray-900" aria-label="Share on Facebook">
+    <a href={facebookUrl} target="_blank" rel="noopener noreferrer" class:list={['inline-flex items-center rounded-md bg-[#1877F2] px-4 py-2 text-sm text-white transition hover:bg-opacity-90', focusRing]} aria-label="Share on Facebook">
       <Icon name="mdi:facebook" class="mr-2 h-5 w-5" aria-hidden="true" />
       <span>Facebook</span>
     </a>
 
-    <a href={linkedinUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center rounded-md bg-[#0A66C2] px-4 py-2 text-sm text-white transition hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-accent-1 focus:ring-offset-2 dark:focus:ring-offset-gray-900" aria-label="Share on LinkedIn">
+    <a href={linkedinUrl} target="_blank" rel="noopener noreferrer" class:list={['inline-flex items-center rounded-md bg-[#0A66C2] px-4 py-2 text-sm text-white transition hover:bg-opacity-90', focusRing]} aria-label="Share on LinkedIn">
       <Icon name="mdi:linkedin" class="mr-2 h-5 w-5" aria-hidden="true" />
       <span>LinkedIn</span>
     </a>
 
-    <a href={emailUrl} class="inline-flex items-center rounded-md bg-[#4CAF50] px-4 py-2 text-sm text-white transition hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-accent-1 focus:ring-offset-2 dark:focus:ring-offset-gray-900" aria-label="Share via email">
+    <a href={emailUrl} class:list={['inline-flex items-center rounded-md bg-[#4CAF50] px-4 py-2 text-sm text-white transition hover:bg-opacity-90', focusRing]} aria-label="Share via email">
       <Icon name="mdi:email" class="mr-2 h-5 w-5" aria-hidden="true" />
       <span>Email</span>
     </a>
   </div>
-</div>
+</share-buttons>
 
 <script>
   import { logger } from '../lib/logger';
@@ -65,77 +67,57 @@ const emailUrl = `mailto:?subject=${encodedTitle}&body=${encodedDescription}%0A%
     const toast = document.createElement('div');
     toast.id = 'share-toast';
     toast.textContent = message;
-    toast.className = 'fixed bottom-4 left-1/2 -translate-x-1/2 z-50 rounded-md bg-gray-800 px-4 py-2 text-sm text-white shadow-lg dark:bg-gray-200 dark:text-gray-900';
+    toast.className =
+      'fixed bottom-4 left-1/2 -translate-x-1/2 z-50 rounded-md bg-gray-800 px-4 py-2 text-sm text-white shadow-lg dark:bg-gray-200 dark:text-gray-900';
     document.body.appendChild(toast);
     setTimeout(() => toast.remove(), 4000);
   }
 
-  // Web Share API support with proper cleanup
-  class ShareButtonManager {
-    private shareButton: HTMLButtonElement | null;
-    private shareLinks: NodeListOf<HTMLAnchorElement>;
+  class ShareButtonsElement extends HTMLElement {
     private shareClickHandler: (() => Promise<void>) | null = null;
-    private linkClickHandlers: Map<HTMLAnchorElement, (e: MouseEvent) => void> = new Map();
+    private linkClickHandlers = new Map<HTMLAnchorElement, (e: MouseEvent) => void>();
 
-    constructor() {
-      this.shareButton = document.getElementById('web-share-btn') as HTMLButtonElement | null;
-      this.shareLinks = document.querySelectorAll('.share-buttons a');
+    connectedCallback() {
+      const shareButton = this.querySelector<HTMLButtonElement>('[data-web-share]');
+      const shareLinks = this.querySelectorAll<HTMLAnchorElement>('a');
 
-      this.init();
-    }
-
-    init() {
-      if (!this.shareButton) {
+      if (!shareButton) {
         logger.error('Share button not found');
         return;
       }
 
       if (navigator.share) {
         this.shareClickHandler = async () => {
-          if (!this.shareButton) return;
-
           try {
-            const title = this.shareButton.dataset.title || '';
-            const description = this.shareButton.dataset.description || '';
-            const url = this.shareButton.dataset.url || '';
-
             await navigator.share({
-              title,
-              text: description,
-              url,
+              title: shareButton.dataset.title || '',
+              text: shareButton.dataset.description || '',
+              url: shareButton.dataset.url || '',
             });
           } catch (err) {
-            // Check if user cancelled (this is expected behavior)
-            if (err instanceof Error && err.name === 'AbortError') {
-              return; // User cancelled, no need to show error
-            }
+            if (err instanceof Error && err.name === 'AbortError') return;
             logger.error('Share failed:', err);
-            // Show user-friendly error message
             showShareToast('Unable to share. Please try using one of the social media buttons below.');
           }
         };
-        this.shareButton.addEventListener('click', this.shareClickHandler);
+        shareButton.addEventListener('click', this.shareClickHandler);
       } else {
-        this.shareButton.style.display = 'none';
+        shareButton.style.display = 'none';
       }
 
-      // Enhanced link behavior for social sharing
-      this.shareLinks.forEach((link) => {
+      shareLinks.forEach((link) => {
         const handler = (e: MouseEvent) => {
           try {
-            // If it's not the email link, prevent default and open in popup
             if (!link.href.startsWith('mailto:')) {
               e.preventDefault();
               const popup = window.open(link.href, 'share-popup', 'width=600,height=480');
               if (!popup) {
-                // Popup blocked - show message and open in new tab
                 showShareToast('Popup blocked. Opening in new tab instead.');
                 window.open(link.href, '_blank');
               }
             }
           } catch (err) {
             logger.error('Share error:', err);
-            // Don't prevent default - let the link work normally as fallback
           }
         };
         this.linkClickHandlers.set(link, handler);
@@ -143,22 +125,20 @@ const emailUrl = `mailto:?subject=${encodedTitle}&body=${encodedDescription}%0A%
       });
     }
 
-    cleanup() {
-      // Remove event listeners to prevent memory leaks
-      if (this.shareButton && this.shareClickHandler) {
-        this.shareButton.removeEventListener('click', this.shareClickHandler);
+    disconnectedCallback() {
+      const shareButton = this.querySelector<HTMLButtonElement>('[data-web-share]');
+      if (shareButton && this.shareClickHandler) {
+        shareButton.removeEventListener('click', this.shareClickHandler);
       }
-
       this.linkClickHandlers.forEach((handler, link) => {
         link.removeEventListener('click', handler);
       });
       this.linkClickHandlers.clear();
+      this.shareClickHandler = null;
     }
   }
 
-  // Initialize
-  const shareManager = new ShareButtonManager();
-
-  // Cleanup on page navigation (for SPAs) or beforeunload
-  window.addEventListener('beforeunload', () => shareManager.cleanup());
+  if (!customElements.get('share-buttons')) {
+    customElements.define('share-buttons', ShareButtonsElement);
+  }
 </script>

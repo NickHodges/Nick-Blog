@@ -23,11 +23,8 @@ const title = 'Admin Login';
       }
 
       body {
-        font-family:
-          system-ui,
-          -apple-system,
-          sans-serif;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        font-family: var(--font-mono, ui-monospace, monospace), system-ui, sans-serif;
+        background: #1d1f21;
         min-height: 100vh;
         display: flex;
         align-items: center;
@@ -36,9 +33,10 @@ const title = 'Admin Login';
       }
 
       .login-container {
-        background: white;
-        border-radius: 1rem;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        background: #fafafa;
+        border-radius: 0.5rem;
+        border-top: 3px solid #2bbc89;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
         padding: 3rem 2rem;
         width: 100%;
         max-width: 400px;
@@ -145,15 +143,15 @@ const title = 'Admin Login';
   </head>
   <body>
     <div class="login-container">
-      <h1>🔐 Admin Login</h1>
+      <h1>Admin Login</h1>
       <p class="subtitle">Sign in to access admin features</p>
 
       <div id="message" class="message"></div>
 
-      <form id="login-form" method="POST" action="/login">
+      <form id="login-form" method="POST">
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="email" id="email" name="email" required autocomplete="email" placeholder="nickhodges@gmail.com" />
+          <input type="email" id="email" name="email" required autocomplete="email" placeholder="you@example.com" />
         </div>
 
         <div class="form-group">
