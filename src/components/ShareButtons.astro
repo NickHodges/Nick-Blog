@@ -10,7 +10,7 @@ interface Props {
 const { title, url, description } = Astro.props;
 
 // Get full URL including domain
-const siteUrl = Astro.site || 'https://nickhodges.com/';
+const siteUrl = Astro.site || 'https://www.nickhodges.com/';
 const fullUrl = new URL(url, siteUrl).toString();
 
 // Encode parameters for sharing
