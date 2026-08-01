@@ -30,7 +30,7 @@
     "@respectify/client": "^0.2.3",
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
     "@vercel/analytics": "^1.2.2",
-    "astro": "^6.0.4",
+    "astro": "^7.1.6",
     "astro-icon": "^1.1.5",
     "astro-starlight-remark-asides": "^0.0.7",
     "ioredis": "^5.10.0",
