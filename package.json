@@ -26,7 +26,7 @@
     "@astrojs/sitemap": "^3.7.1",
     "@astrojs/tailwind": "^6.0.2",
     "@astrojs/vercel": "^10.0.0",
-    "@respectify/astro": "^0.1.8",
+    "@respectify/astro": "^0.1.9",
     "@respectify/client": "^0.2.3",
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
     "@vercel/analytics": "^1.2.2",
