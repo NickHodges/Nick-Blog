@@ -27,7 +27,7 @@ And does it make any sense that primaries in a few states that schedule their el
 
 And finally, I'll point out that primaries are divisive, and pit people against each other despite their common goal of getting a member of their party elected.
 
-I know, I know -- people think that we are a democracy. Of course we use democracy to choose our candidates! That's great for the general election. But as a private organization, a political party is not a democratic organization, and it really shouldn't be run like one. Everyone seems to have disdain for the "smoke-filled room," but the fact is that is just a euphemism for, you know, the actual members of the party getting together and choosing the candidate that they think best represents them and has the best chance of winning.
+I know, I know -- people think that we are a democracy. Of course we use democracy to choose our elected representatives! That's great for the general election. But as a private organization, a political party is not a democratic organization, and it really shouldn't be run like one. Everyone seems to have disdain for the "smoke-filled room," but the fact is that is just a euphemism for, you know, the actual members of the party getting together and choosing the candidate that they think best represents them and has the best chance of winning. And never mind that a political convention is a far cry from "smoke-filled rooms" of the past.
 
 Primaries have to go.
 
