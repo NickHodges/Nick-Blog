@@ -8,6 +8,7 @@ import Footer from '@components/layout/Footer.astro';
 import Header from '@components/layout/Header.astro';
 import AdSense from '@components/AdSense.astro';
 import CookieConsent from '@components/CookieConsent.astro';
+import Analytics from '@vercel/analytics/astro';
 import { siteConfig } from '@site-config';
 
 interface Props {
@@ -39,5 +40,6 @@ const {
       <Footer />
     </div>
     <CookieConsent />
+    <Analytics />
   </body>
 </html>
