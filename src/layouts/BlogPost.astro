@@ -6,8 +6,10 @@ import TOC from '@components/blog/TOC.astro';
 import ShareButtons from '@components/ShareButtons.astro';
 import NewsletterSignup from '@components/NewsletterSignup.astro';
 import BackToTop from '@components/BackToTop.astro';
+import ArticleSchema from '@components/ArticleSchema.astro';
 import CommentSection from '@respectify/astro/components/CommentSection.astro';
 import { COMMENTS_API_PATH } from '../lib/comments-config';
+import { siteConfig } from '@site-config';
 
 import BaseLayout from './Base.astro';
 
@@ -19,15 +21,18 @@ interface Props {
 
 const { post, headings, minutesRead } = Astro.props;
 const {
-  data: { description, ogImage, publishDate, title, updatedDate },
+  data: { author, description, ogImage, publishDate, tags, title, updatedDate },
   id,
 } = post;
 const socialImage = ogImage ?? `/og-image/${id}.png`;
 const articleDate = updatedDate?.toISOString() ?? publishDate.toISOString();
 const postUrl = `posts/${id}`;
+const canonicalURL = new URL(postUrl, Astro.site).toString();
+const socialImageURL = new URL(socialImage, Astro.site).toString();
 ---
 
 <BaseLayout meta={{ articleDate, description, ogImage: socialImage, title }}>
+  <ArticleSchema author={author ?? siteConfig.author} description={description} image={socialImageURL} publishDate={publishDate} tags={tags} title={title} updatedDate={updatedDate} url={canonicalURL} />
   <div class="gap-x-10 lg:flex lg:items-start">
     {!!headings.length && <TOC headings={headings} />}
     <article class="prose prose-cactus flex-grow break-words" data-pagefind-body>
