@@ -25,3 +25,4 @@ pnpm-debug.log*
 .astro
 .vercel
 lint_output.txt
+.gstack/
