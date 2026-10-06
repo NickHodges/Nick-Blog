@@ -1,0 +1,186 @@
+/* Super Star Trek: a teletype printout on green-bar tractor-feed paper; dark theme turns the paper into an amber CRT. */
+.startrek {
+  --st-ground: hsl(var(--theme-bg));
+  --st-ink: #23261f;
+  --st-muted: #5d6356;
+  --st-paper: #fbfaf3;
+  --st-bar: #dcebd6;
+  --st-rule: #b9c4b1;
+  --st-accent: #9b2c1c;
+  --st-key: #f4f2ea;
+  --st-key-shadow: #a9a596;
+  --st-line: 1.4em;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  font-family: var(--font-mono), ui-monospace, 'Courier New', monospace;
+}
+
+:root[data-theme='dark'] .startrek {
+  --st-ink: #ffb648;
+  --st-muted: #b98b4a;
+  --st-paper: #1d1810;
+  --st-bar: #241d12;
+  --st-rule: #4a3a20;
+  --st-accent: #ff7a45;
+  --st-key: #2a2216;
+  --st-key-shadow: #0b0906;
+}
+
+/* Tractor-feed margins: punched holes down both edges. */
+.startrek-printout {
+  min-width: 0;
+  padding-inline: 1.5rem;
+  background-color: var(--st-paper);
+  background-image: radial-gradient(circle at 0.75rem 0.7rem, var(--st-ground) 0.32rem, transparent 0.36rem), radial-gradient(circle at calc(100% - 0.75rem) 0.7rem, var(--st-ground) 0.32rem, transparent 0.36rem);
+  background-size: 100% 1.4rem;
+  border-inline: 1px dashed var(--st-rule);
+  color: var(--st-ink);
+}
+
+.startrek-paper {
+  height: min(72vh, 44rem);
+  overflow: auto;
+  padding: 0.75rem 0.75rem 2rem;
+  font-size: clamp(0.5rem, 1.85vw, 0.82rem);
+  line-height: var(--st-line);
+  white-space: pre;
+  font-variant-numeric: tabular-nums;
+  background-image: repeating-linear-gradient(to bottom, var(--st-bar) 0, var(--st-bar) calc(var(--st-line) * 3), transparent calc(var(--st-line) * 3), transparent calc(var(--st-line) * 6));
+  background-attachment: local;
+  background-position: 0 0.75rem;
+  cursor: text;
+}
+
+@media (max-width: 40rem) {
+  .startrek-printout {
+    padding-inline: 1.1rem;
+  }
+
+  .startrek-paper {
+    padding-inline: 0.4rem;
+  }
+}
+
+.startrek-entry {
+  display: inline;
+  margin: 0;
+}
+
+.startrek-input {
+  width: 24ch;
+  max-width: 60%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--st-accent);
+  font: inherit;
+  line-height: inherit;
+  text-transform: uppercase;
+  caret-color: var(--st-accent);
+  outline: none;
+}
+
+.startrek-input:disabled {
+  visibility: hidden;
+}
+
+.startrek-panel {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: 1.25rem 1.5rem;
+  align-items: start;
+}
+
+.startrek-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.startrek-heading {
+  margin: 0;
+  border-bottom: 1px dashed hsl(var(--theme-accent));
+  color: hsl(var(--theme-accent-2));
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.startrek-note {
+  margin: 0;
+  color: hsl(var(--theme-text));
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+
+.startrek-keys {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.4rem;
+}
+
+.startrek-key {
+  padding: 0.45rem 0;
+  border: 1px solid var(--st-rule);
+  border-radius: 0.35rem;
+  background: var(--st-key);
+  color: var(--st-ink);
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  box-shadow: 0 3px 0 var(--st-key-shadow);
+  cursor: pointer;
+}
+
+.startrek-key:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 var(--st-key-shadow);
+}
+
+.startrek-key:focus-visible {
+  outline: 2px solid var(--st-accent);
+  outline-offset: 2px;
+}
+
+.startrek-key-danger {
+  color: var(--st-accent);
+}
+
+.startrek-dial {
+  margin: 0;
+  color: hsl(var(--theme-text));
+  font-family: inherit;
+  font-size: 0.9rem;
+  line-height: 1.25;
+}
+
+.startrek-legend {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.2rem 0.9rem;
+  margin: 0;
+  font-size: 0.8rem;
+}
+
+.startrek-legend dt {
+  color: hsl(var(--theme-accent-2));
+  font-weight: 700;
+  white-space: pre;
+}
+
+.startrek-legend dd {
+  margin: 0;
+  color: hsl(var(--theme-text));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .startrek-key:active {
+    transform: none;
+  }
+}

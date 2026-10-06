@@ -1,0 +1,201 @@
+---
+import '@styles/startrek.css';
+
+interface Command {
+  code: string;
+  label: string;
+}
+
+interface SensorSymbol {
+  glyph: string;
+  meaning: string;
+}
+
+const commands: Command[] = [
+  { code: 'NAV', label: 'Set course' },
+  { code: 'SRS', label: 'Short range scan' },
+  { code: 'LRS', label: 'Long range scan' },
+  { code: 'PHA', label: 'Fire phasers' },
+  { code: 'TOR', label: 'Fire photon torpedoes' },
+  { code: 'SHE', label: 'Shield control' },
+  { code: 'DAM', label: 'Damage control' },
+  { code: 'COM', label: 'Library computer' },
+  { code: 'XXX', label: 'Resign command' },
+];
+
+const sensorSymbols: SensorSymbol[] = [
+  { glyph: '<*>', meaning: 'Enterprise' },
+  { glyph: '+K+', meaning: 'Klingon cruiser' },
+  { glyph: '>!<', meaning: 'Starbase' },
+  { glyph: ' * ', meaning: 'Star' },
+];
+
+const courseDial = ['  4  3  2', '   . . .', '    ...', '5 ---*--- 1', '    ...', '   . . .', '  6  7  8'].join('\n');
+---
+
+<div class="startrek not-prose">
+  <section class="startrek-printout" aria-label="Teletype printout">
+    <div class="startrek-paper" id="startrek-paper">
+      <span id="startrek-output"></span>
+      <form class="startrek-entry" id="startrek-entry" autocomplete="off">
+        <label class="sr-only" for="startrek-input">Your reply</label>
+        <input class="startrek-input" id="startrek-input" type="text" spellcheck="false" autocapitalize="characters" disabled />
+      </form>
+    </div>
+  </section>
+
+  <aside class="startrek-panel" aria-label="Bridge reference">
+    <section class="startrek-group">
+      <h2 class="startrek-heading">Commands</h2>
+      <div class="startrek-keys" id="startrek-keys">
+        {
+          commands.map((command) => (
+            <button class:list={['startrek-key', { 'startrek-key-danger': command.code === 'XXX' }]} type="button" data-command={command.code} title={command.label}>
+              {command.code}
+            </button>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="startrek-group">
+      <h2 class="startrek-heading">Course</h2>
+      <pre class="startrek-dial" aria-label="Course dial: 1 is right, 3 is up, 5 is left, 7 is down">{courseDial}</pre>
+      <p class="startrek-note">Fractions steer between headings: 1.5 is halfway from 1 to 2. Warp 1 crosses one quadrant.</p>
+    </section>
+
+    <section class="startrek-group">
+      <h2 class="startrek-heading">Sensor symbols</h2>
+      <dl class="startrek-legend">
+        {
+          sensorSymbols.map((symbol) => (
+            <>
+              <dt>{symbol.glyph}</dt>
+              <dd>{symbol.meaning}</dd>
+            </>
+          ))
+        }
+      </dl>
+      <p class="startrek-note">Long range scans read klingons, starbases, stars: 207 is two Klingons, no base, seven stars.</p>
+    </section>
+  </aside>
+</div>
+
+<script is:inline src="/startrek/wasm_exec.js"></script>
+
+<script>
+  const PROGRAM_URL = '/startrek/startrek.wasm';
+
+  /** Returns the element with the given id, or throws if the markup is missing it. */
+  function requireElement<T extends HTMLElement>(id: string, type: new () => T): T {
+    const element = document.getElementById(id);
+    if (!(element instanceof type)) {
+      throw new Error(`Star Trek page is missing #${id}`);
+    }
+    return element;
+  }
+
+  /** Downloads and instantiates the compiled game for the given Go runtime. */
+  async function loadProgram(go: Go): Promise<WebAssembly.Instance> {
+    const response = await fetch(PROGRAM_URL);
+    if (!response.ok) {
+      throw new Error(`startrek.wasm could not be loaded (HTTP ${response.status})`);
+    }
+    const { instance } = await WebAssembly.instantiate(await response.arrayBuffer(), go.importObject);
+    return instance;
+  }
+
+  function initStarTrek(): void {
+    const paper = requireElement('startrek-paper', HTMLDivElement);
+    const output = requireElement('startrek-output', HTMLSpanElement);
+    const entry = requireElement('startrek-entry', HTMLFormElement);
+    const input = requireElement('startrek-input', HTMLInputElement);
+    const keys = requireElement('startrek-keys', HTMLDivElement);
+
+    // The paper preserves whitespace, so drop the markup's indentation between elements.
+    for (const node of [...paper.childNodes]) {
+      if (node.nodeType === Node.TEXT_NODE) {
+        node.remove();
+      }
+    }
+
+    const history: string[] = [];
+    let historyIndex = 0;
+    let awaitingInput = false;
+
+    const print = (text: string): void => {
+      output.append(text);
+      paper.scrollTop = paper.scrollHeight;
+    };
+
+    const submit = (line: string): void => {
+      if (!awaitingInput || !window.startrekSubmit) {
+        return;
+      }
+      const reply = line.toUpperCase();
+      awaitingInput = false;
+      input.value = '';
+      input.disabled = true;
+      print(`${reply}\n`);
+      if (reply.trim() !== '') {
+        history.push(reply);
+      }
+      historyIndex = history.length;
+      window.startrekSubmit(reply);
+    };
+
+    window.startrekTerminal = {
+      write: print,
+      requestInput: () => {
+        awaitingInput = true;
+        input.disabled = false;
+        input.focus({ preventScroll: true });
+        paper.scrollTop = paper.scrollHeight;
+      },
+    };
+
+    entry.addEventListener('submit', (event) => {
+      event.preventDefault();
+      submit(input.value);
+    });
+
+    input.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowUp' && historyIndex > 0) {
+        historyIndex -= 1;
+        input.value = history[historyIndex] ?? '';
+        event.preventDefault();
+      } else if (event.key === 'ArrowDown' && historyIndex < history.length) {
+        historyIndex += 1;
+        input.value = history[historyIndex] ?? '';
+        event.preventDefault();
+      }
+    });
+
+    paper.addEventListener('click', () => {
+      if (awaitingInput && window.getSelection()?.isCollapsed !== false) {
+        input.focus({ preventScroll: true });
+      }
+    });
+
+    keys.addEventListener('click', (event) => {
+      const key = event.target instanceof Element ? event.target.closest('[data-command]') : null;
+      if (key instanceof HTMLElement && key.dataset['command']) {
+        submit(key.dataset['command']);
+      }
+    });
+
+    output.textContent = 'LOADING PROGRAM FROM TAPE . . .\n';
+    const go = new Go();
+    loadProgram(go)
+      .then((instance) => {
+        output.textContent = '';
+        return go.run(instance);
+      })
+      .catch((error: unknown) => {
+        const message = error instanceof Error ? error.message : String(error);
+        print(`\n?LOAD ERROR: ${message.toUpperCase()}\nTHE PROGRAM COULD NOT START. RELOAD THE PAGE TO TRY AGAIN.\n`);
+      });
+  }
+
+  initStarTrek();
+</script>

@@ -1,0 +1,16 @@
+---
+export const prerender = true;
+
+import PageLayout from '@layouts/Base.astro';
+import StarTrek from '@components/StarTrek.astro';
+---
+
+<PageLayout meta={{ title: 'Super Star Trek', description: 'Play the 1978 BASIC Super Star Trek game in your browser, ported to Go and compiled to WebAssembly.' }}>
+  <article class="prose prose-cactus mt-12 max-w-3xl">
+    <h1>Super Star Trek</h1>
+    <p>
+      The text-based Star Trek game from David Ahl's <em>BASIC Computer Games</em> (May 1978), descended from Mike Mayfield's 1971 original. This is a line-for-line port of the Microsoft BASIC listing to Go, compiled to WebAssembly. Type a command at the <code>COMMAND?</code> prompt, or use the keys below the printout.
+    </p>
+    <StarTrek />
+  </article>
+</PageLayout>
