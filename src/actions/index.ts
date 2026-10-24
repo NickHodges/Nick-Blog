@@ -11,7 +11,7 @@ export const server = {
     login: defineAction({
       accept: 'json',
       input: z.object({
-        email: z.string().email(),
+        email: z.email(),
         password: z.string().min(1),
       }),
       handler: async ({ email, password }, context) => {
