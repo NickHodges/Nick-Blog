@@ -38,7 +38,5 @@ export function getUniqueTags<T extends DatedEntry>(posts: Array<T>): string[] {
 }
 
 export function getUniqueTagsWithCount<T extends DatedEntry>(posts: Array<T>): Array<[string, number]> {
-  return [...getAllTags(posts).reduce((acc, t) => acc.set(t, (acc.get(t) || 0) + 1), new Map<string, number>())].sort(
-    (a, b) => b[1] - a[1],
-  );
+  return [...getAllTags(posts).reduce((acc, t) => acc.set(t, (acc.get(t) || 0) + 1), new Map<string, number>())].sort((a, b) => b[1] - a[1]);
 }

@@ -11,7 +11,7 @@ description: "I'm a big Medium fan and subscriber. There's a lot of great writin
 
 I'm a big [Medium ](https://medium.com/)fan and subscriber.  There's a lot of great writing there.  I recently came across this article,  [The Economics of Writing a Technical Book](https://blog.usejournal.com/the-economics-of-writing-a-technical-book-689d0c12fe39), and read it with great interest.  Having written three books of my own, I thought I'd write a bit about my experience with self-publishing a technical book.
 
-Suffice it to say that my experience has been very different than the author of the Medium article.  The TL;DR summary:  **I made a *lot* more money than they did, with a lot less hassle.**
+Suffice it to say that my experience has been very different than the author of the Medium article.  The TL;DR summary:  **I made a _lot_ more money than they did, with a lot less hassle.**
 
 I'll talk merely about my first book, [Coding in Delphi](http://www.codingindelphi.com/).  It has been my best selling book, and thus my most profitable.
 

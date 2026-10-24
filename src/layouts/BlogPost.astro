@@ -50,12 +50,7 @@ const socialImageURL = new URL(socialImage, Astro.site).toString();
         <NewsletterSignup />
 
         <div class="mt-12 border-t border-gray-200 dark:border-gray-700 pt-8 not-prose">
-          <CommentSection
-            postSlug={id}
-            apiPath={COMMENTS_API_PATH}
-            enableDelete
-            style="--rf-accent: hsl(var(--theme-accent)); --rf-accent-hover: hsl(var(--theme-accent-2));"
-          />
+          <CommentSection postSlug={id} apiPath={COMMENTS_API_PATH} enableDelete style="--rf-accent: hsl(var(--theme-accent)); --rf-accent-hover: hsl(var(--theme-accent-2));" />
         </div>
       </div>
     </article>

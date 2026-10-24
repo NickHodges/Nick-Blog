@@ -20,17 +20,17 @@
     "spellcheck:md": "cspell \"src/content/post/**/*.md\""
   },
   "dependencies": {
-    "@astrojs/db": "^0.20.0",
-    "@astrojs/mdx": "^5.0.0",
-    "@astrojs/rss": "^4.0.17",
-    "@astrojs/sitemap": "^3.7.1",
+    "@astrojs/db": "^0.20.1",
+    "@astrojs/mdx": "^5.0.6",
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.4",
     "@astrojs/tailwind": "^6.0.2",
-    "@astrojs/vercel": "^10.0.0",
+    "@astrojs/vercel": "^10.0.8",
     "@respectify/astro": "^0.1.8",
     "@respectify/client": "^0.2.3",
     "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
     "@vercel/analytics": "^1.2.2",
-    "astro": "^6.0.4",
+    "astro": "^6.4.8",
     "astro-icon": "^1.1.5",
     "astro-starlight-remark-asides": "^0.0.7",
     "ioredis": "^5.10.0",
@@ -42,7 +42,7 @@
     "typescript-eslint": "^8.8.1"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.7",
+    "@astrojs/check": "^0.9.12",
     "@eslint/js": "^9.3.0",
     "@iconify-json/mdi": "^1.1.64",
     "@pagefind/default-ui": "^1.0.4",
