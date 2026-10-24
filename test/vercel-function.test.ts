@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { execFileSync } from 'node:child_process';
+import { spawnSync } from 'node:child_process';
 import { cpSync, existsSync, mkdirSync, mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
@@ -9,7 +9,9 @@ import { after, before, describe, it } from 'node:test';
 // Vercel deploys it, so a module missing from the bundle can't quietly resolve from ./node_modules.
 const FUNCTION_DIR = resolve('.vercel/output/functions/_render.func');
 
-// Placeholders for the required astro:env secrets: never the real values
+// Placeholders for the required astro:env secrets: never the real values. A Vercel build bakes
+// VERCEL_ENV=production into the bundle, which selects Turso, so the Turso settings need placeholders
+// too; the .invalid host can't resolve, and the request below is rejected before any query.
 const PLACEHOLDER_ENV = {
   PATH: process.env.PATH ?? '',
   ADMIN_EMAIL: 'admin@example.test',
@@ -17,6 +19,8 @@ const PLACEHOLDER_ENV = {
   RESPECTIFY_EMAIL: 'respectify@example.test',
   RESPECTIFY_API_KEY: 'placeholder',
   REDIS_URL: 'redis://127.0.0.1:1',
+  ASTRO_DB_REMOTE_URL: 'libsql://placeholder.invalid',
+  ASTRO_DB_APP_TOKEN: 'placeholder',
 };
 
 // Loads the function and sends one request through its handler; prints the status or the load error
@@ -43,11 +47,10 @@ describe('Vercel server function', () => {
   });
 
   it('loads and serves a request with only the files in the bundle', () => {
-    const run = (): string => execFileSync(process.execPath, ['--input-type=module', '-e', REQUEST_SCRIPT], { cwd: isolatedDir, env: PLACEHOLDER_ENV, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
-    let status = '';
-    assert.doesNotThrow(() => {
-      status = run();
-    }, 'the server function failed to load or crashed');
-    assert.equal(status, '400', 'GET /api/comments without a slug should be rejected with 400');
+    const run = spawnSync(process.execPath, ['--input-type=module', '-e', REQUEST_SCRIPT], { cwd: isolatedDir, env: PLACEHOLDER_ENV, encoding: 'utf8' });
+    // The function's own error output, so a failure says why
+    const details = run.stderr.trim().split('\n').slice(0, 15).join('\n');
+    assert.equal(run.status, 0, `the server function failed to load or crashed:\n${details}`);
+    assert.equal(run.stdout, '400', `GET /api/comments without a slug should be rejected with 400:\n${details}`);
   });
 });
