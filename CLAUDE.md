@@ -32,14 +32,14 @@ Both `post` and `delphi` render at `/posts/[slug]`.
 
 ### UI
 
-- Tailwind CSS with custom `prose-cactus` typography
+- Tailwind CSS 4 via `@tailwindcss/vite`, configured in `src/styles/global.css` (`@theme`, dark variant on `data-theme`); `tailwind.config.ts` holds only the custom `prose-cactus` typography, loaded with `@config`
 - Astro components with minimal client-side JavaScript (custom elements)
 - No React runtime on pages
 
 ### Authentication
 
 - Single admin account via `ADMIN_EMAIL` / `ADMIN_PASSWORD` env vars
-- Astro 6 Sessions API with Redis (`REDIS_URL`)
+- Astro Sessions API with Redis (`REDIS_URL`)
 - Login at `/login`; session cookie name is `session`
 - Middleware in `src/middleware/index.ts` hydrates `context.locals.isAuthenticated`
 
