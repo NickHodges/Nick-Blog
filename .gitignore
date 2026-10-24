@@ -26,3 +26,6 @@ pnpm-debug.log*
 .vercel
 lint_output.txt
 .gstack/
+
+# local comments database (npm run db:local)
+.data/
