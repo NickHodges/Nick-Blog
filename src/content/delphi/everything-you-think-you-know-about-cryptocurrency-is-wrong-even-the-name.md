@@ -22,7 +22,7 @@ It's been crazy.  And I thought I was super-cool and understood it all.
 
 [At least until I read this](https://blog.chain.com/a-letter-to-jamie-dimon-de89d417cb80).  **Then I realized I was all wrong about cryptocurrencies**. I thought that they were a big deal before.  Now I realize that they are much more important than that.
 
-The article is entitled *A Letter to Jamie Dimon* and is written by a guy named [Adam Ludwin](https://twitter.com/adamludwin).  Mr Ludwin writes in response to some postings by Jamie Dimon that were less than kind to Bitcoin, and that showed, frankly, a willful ignorance about it.
+The article is entitled _A Letter to Jamie Dimon_ and is written by a guy named [Adam Ludwin](https://twitter.com/adamludwin).  Mr Ludwin writes in response to some postings by Jamie Dimon that were less than kind to Bitcoin, and that showed, frankly, a willful ignorance about it.
 
 Ludwin's article was a revelation to me.  It lead me to search further.  I found this article, _[Why Decentralization Matters](https://medium.com/@cdixon/why-decentralization-matters-5e3f79f7638e)_ by Chris Dixon, and finally, perhaps the most interesting one of all, *[Dawn of Autonomous Corporations, Powered by Bitcoin](https://btcgeek.com/dawn-of-autonomous-corporations/), *which was written, by the way, _five_ years ago.  Yikes.
 

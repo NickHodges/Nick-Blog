@@ -14,6 +14,6 @@ I’m quite happy to announce that I’ll be part of [Delphi Developer Days](htt
 There will be four events this year:
 
 - Chicago, USA: 14-15 November 2016 [Register](http://www.delphideveloperdays.com/price_us.html)- Copenhagen, Denmark: 24-25 November 2016 [Register](file:///C:/Users/Nick/Downloads/price_europe.html)- Frankfurt, Germany: 28-29 November 2016 [Register](file:///C:/Users/Nick/Downloads/price_europe.html)- Baltimore, USA: 5-6 December 2016 [Register](http://www.delphideveloperdays.com/price_us.html)
-  The complete agenda isn’t set yet, but we’ll get that out as soon as it is ready.  There is an “**_Very _**Early Bird” discount  of 25% for folks who sign up before August 12th.
+  The complete agenda isn’t set yet, but we’ll get that out as soon as it is ready.  There is an “**\_Very _**Early Bird” discount  of 25% for folks who sign up before August 12th.
 
 I’m really excited to do these events and so I hope that I see you there.

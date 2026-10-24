@@ -43,6 +43,6 @@ CQRS also encourages you not to violate what I consider to be a bedrock of sound
 procedure ProcessWidgets(aCollectionOfWidgets: TWidgetCollection; var aNumberOfProcessedWidgets: integer);
 ```
 
-This method is a clear violation of CQS [*NOTE:  I orginally had this as CQRS*] as it obviously is trying to be a command and altering the state of the system by processing widgets, but also tries to be a query by "returning" through a `var` parameter the number of processed widgets.  Instead, the system should have a simple command to process widgets and a separate query to return the number of widgets that were processed.  The procedure is trying to be two things at once, and all kinds of mischief comes from making one thing do two things.
+This method is a clear violation of CQS [_NOTE:  I orginally had this as CQRS_] as it obviously is trying to be a command and altering the state of the system by processing widgets, but also tries to be a query by "returning" through a `var` parameter the number of processed widgets.  Instead, the system should have a simple command to process widgets and a separate query to return the number of widgets that were processed.  The procedure is trying to be two things at once, and all kinds of mischief comes from making one thing do two things.
 
 Following the CQRS principle in the design of your code will help to ensure the proper separation of concerns, resulting in cleaner, easier to read and easier to maintain code.

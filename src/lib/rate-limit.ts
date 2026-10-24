@@ -1,11 +1,6 @@
 import { getRedisClient } from './redis';
 import { logger } from './logger';
-import {
-  createMemoryRateLimiter,
-  SlidingWindowRateLimiter,
-  type IRateLimiter,
-  type RateLimitResult,
-} from './memory-rate-limit';
+import { createMemoryRateLimiter, SlidingWindowRateLimiter, type IRateLimiter, type RateLimitResult } from './memory-rate-limit';
 
 export type { IRateLimiter, RateLimitResult };
 export { createMemoryRateLimiter };

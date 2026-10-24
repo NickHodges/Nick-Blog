@@ -30,7 +30,7 @@ This is a very basic Delphi interface.  Interfaces consist of a name (in this c
 
 Note that the declaration of the interface as a GUID right after the initial declaration. This GUID is used by the compiler to identify uniquely this interface.  Strictly speaking, you can use an interface without the GUID, but you can’t get very far using them as much of the RTL and most frameworks that take advantage of interfaces will require that they have a GUID.
 
-Of course, the purpose here is to create an implementing class that has some meaning when it goes into “Get me some HTML” mode.  For instance, you might have a series of visual components on form designer that represent a web page.  When it comes time to render the HTML for the page, you might iterate over all of them and call their GetHTML methods, regardless of what their type is.   The point is that it**_ doesn’t matter_** what the implementing objects are or what they do – they just produce HTML.
+Of course, the purpose here is to create an implementing class that has some meaning when it goes into “Get me some HTML” mode.  For instance, you might have a series of visual components on form designer that represent a web page.  When it comes time to render the HTML for the page, you might iterate over all of them and call their GetHTML methods, regardless of what their type is.   The point is that it**\_ doesn’t matter_** what the implementing objects are or what they do – they just produce HTML.
 
 ### Implementing an Interface
 

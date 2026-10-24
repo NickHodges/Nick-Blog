@@ -22,16 +22,7 @@ const dataAdFormat = format === 'fluid' ? 'fluid' : format;
 
 {
   shouldShow ? (
-    <ins
-      class="adsbygoogle"
-      style={displayStyle}
-      data-ad-client={clientId}
-      data-ad-slot={slot}
-      data-ad-format={dataAdFormat}
-      data-consent-ad
-      {...(layout && { 'data-ad-layout': layout })}
-      {...(isHorizontal && { 'data-full-width-responsive': 'true' })}
-    />
+    <ins class="adsbygoogle" style={displayStyle} data-ad-client={clientId} data-ad-slot={slot} data-ad-format={dataAdFormat} data-consent-ad {...(layout && { 'data-ad-layout': layout })} {...(isHorizontal && { 'data-full-width-responsive': 'true' })} />
   ) : (
     <div class="ad-placeholder">
       <span>Advertisement Placeholder ({format})</span>
