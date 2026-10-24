@@ -10,7 +10,6 @@ import rehypeExternalLinks from 'rehype-external-links';
 import { remarkReadingTime } from './src/utils/remark-reading-time';
 import icon from 'astro-icon';
 import vercelAdapter from '@astrojs/vercel';
-import db from '@astrojs/db';
 import respectify from '@respectify/astro';
 import { COMMENTS_API_PATH } from './src/lib/comments-config';
 
@@ -58,10 +57,9 @@ export default defineConfig({
     },
   },
   integrations: [
-    db(),
     respectify({
+      runtime: './src/respectify.runtime.ts',
       commentsApiPath: COMMENTS_API_PATH,
-      getPostUrl: (slug, site) => `${site.replace(/\/$/, '')}/posts/${slug}/`,
     }),
     icon(),
     tailwind({
@@ -100,8 +98,11 @@ export default defineConfig({
       ADMIN_EMAIL: envField.string({ context: 'server', access: 'secret' }),
       ADMIN_PASSWORD: envField.string({ context: 'server', access: 'secret' }),
       REDIS_URL: envField.string({ context: 'server', access: 'secret' }),
+      // The comments database (Turso). Required on Vercel deployments; local work uses .data/comments.db
       ASTRO_DB_REMOTE_URL: envField.string({ context: 'server', access: 'secret', optional: true }),
       ASTRO_DB_APP_TOKEN: envField.string({ context: 'server', access: 'secret', optional: true }),
+      // Set by Vercel on its deployments
+      VERCEL_ENV: envField.enum({ context: 'server', access: 'public', values: ['production', 'preview', 'development'], optional: true }),
     },
   },
   vite: {
