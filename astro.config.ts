@@ -1,7 +1,7 @@
 import { defineConfig, envField, fontProviders, sessionDrivers } from 'astro/config';
 import { loadEnv } from 'vite';
 import mdx from '@astrojs/mdx';
-import tailwind from '@astrojs/tailwind';
+import { unified } from '@astrojs/markdown-remark';
 
 const { REDIS_URL } = loadEnv(process.env.NODE_ENV ?? 'development', process.cwd(), '');
 import sitemap from '@astrojs/sitemap';
@@ -10,6 +10,7 @@ import rehypeExternalLinks from 'rehype-external-links';
 import { remarkReadingTime } from './src/utils/remark-reading-time';
 import icon from 'astro-icon';
 import vercelAdapter from '@astrojs/vercel';
+import tailwindcss from '@tailwindcss/vite';
 import respectify from '@respectify/astro';
 import { COMMENTS_API_PATH } from './src/lib/comments-config';
 
@@ -40,21 +41,24 @@ export default defineConfig({
   },
   markdown: {
     syntaxHighlight: 'prism',
-    remarkPlugins: [remarkUnwrapImages, remarkReadingTime, remarkDirective, astroStarlightRemarkAsides],
-    rehypePlugins: [
-      [
-        rehypeExternalLinks,
-        {
-          target: '_blank',
-          rel: ['nofollow', 'noopener', 'noreferrer'],
-        },
+    // The remark/rehype pipeline; Astro 7's default (Sätteri) doesn't run these plugins
+    processor: unified({
+      remarkPlugins: [remarkUnwrapImages, remarkReadingTime, remarkDirective, astroStarlightRemarkAsides],
+      rehypePlugins: [
+        [
+          rehypeExternalLinks,
+          {
+            target: '_blank',
+            rel: ['nofollow', 'noopener', 'noreferrer'],
+          },
+        ],
       ],
-    ],
-    remarkRehype: {
-      footnoteLabelProperties: {
-        className: [''],
+      remarkRehype: {
+        footnoteLabelProperties: {
+          className: [''],
+        },
       },
-    },
+    }),
   },
   integrations: [
     respectify({
@@ -62,12 +66,11 @@ export default defineConfig({
       commentsApiPath: COMMENTS_API_PATH,
     }),
     icon(),
-    tailwind({
-      applyBaseStyles: false,
-    }),
     sitemap(),
     mdx(),
   ],
+  // Astro 6's whitespace handling; Astro 7's default ('jsx') runs adjacent inline elements together
+  compressHTML: true,
   // https://docs.astro.build/en/guides/prefetch/
   prefetch: true,
   fonts: [
@@ -106,6 +109,7 @@ export default defineConfig({
     },
   },
   vite: {
+    plugins: [tailwindcss()],
     resolve: {
       alias: {
         '@components': '/src/components',

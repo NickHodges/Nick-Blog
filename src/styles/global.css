@@ -1,28 +1,69 @@
+@import 'tailwindcss';
 @import './prism.css';
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@plugin '@tailwindcss/typography';
+@config '../../tailwind.config.ts';
+
+/* The OG image route draws with Satori, not the site's CSS */
+@source not '../pages/og-image';
+
+/* Dark mode follows the data-theme attribute that ThemeProvider sets on <html> */
+@custom-variant dark (&:is([data-theme=dark] *));
+
+/* Tailwind 3's sans-serif stack; Tailwind 4's default swaps system-ui for a named-font list */
+@theme {
+  --font-sans: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+@theme inline {
+  --color-bgColor: hsl(var(--theme-bg));
+  --color-textColor: hsl(var(--theme-text));
+  --color-link: hsl(var(--theme-link));
+  --color-accent: hsl(var(--theme-accent));
+  --color-accent-2: hsl(var(--theme-accent-2));
+  --color-quote: hsl(var(--theme-quote));
+}
 
 @layer components {
   /* Theme toggle dropdown styles */
   #theme-dropdown {
-    @apply z-50 transition-all duration-200 transform;
+    @apply z-50 transition-all duration-200;
     transform-origin: top right;
   }
-  
+
   #theme-dropdown.hidden {
-    @apply opacity-0 scale-95 pointer-events-none;
+    @apply pointer-events-none scale-95 opacity-0;
   }
-  
+
   #theme-dropdown:not(.hidden) {
-    @apply opacity-100 scale-100 pointer-events-auto;
+    @apply pointer-events-auto scale-100 opacity-100;
   }
-  
+
   /* Active theme indicator */
   .theme-active-indicator::before {
-    content: "✓";
+    content: '✓';
     @apply mr-1;
+  }
+}
+
+/*
+ * Site classes that must outrank @tailwindcss/typography (as they did in Tailwind 3), which v4 puts
+ * in the utilities layer: e.g. .title sizes headings inside .prose
+ */
+@layer utilities {
+  .cactus-link {
+    background-image: linear-gradient(transparent, transparent 5px, hsl(var(--theme-text)) 5px, hsl(var(--theme-text)));
+    background-size: 100% 6px;
+    background-position: bottom;
+    background-repeat: repeat-x;
+
+    &:hover {
+      background-image: linear-gradient(transparent, transparent 4px, hsl(var(--theme-link)) 4px, hsl(var(--theme-link)));
+    }
+  }
+
+  .title {
+    @apply text-2xl font-semibold text-accent-2;
   }
 }
 
@@ -30,7 +71,6 @@
   :root,
   :root[data-theme='light'] {
     color-scheme: light;
-    /* https://tailwindcss.com/docs/customizing-colors#using-css-variables */
     --theme-bg: 0deg 0% 98%;
     --theme-link: 172deg 18% 41%;
     --theme-text: 203deg 11% 15%;
@@ -51,5 +91,28 @@
 
   html {
     @apply scroll-smooth;
+  }
+
+  /* Tailwind 3 defaults that Tailwind 4's preflight changed, kept so the site looks the same */
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--color-gray-400);
+  }
+
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
+
+  dialog {
+    margin: auto;
   }
 }
