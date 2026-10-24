@@ -12,7 +12,7 @@
     "lint": "prettier --check \"**/*.{js,jsx,ts,tsx,md,mdx,astro}\" && eslint \"src/**/*.{js,ts,jsx,tsx,astro}\"",
     "lint:fix": "prettier --write \"**/*.{js,jsx,ts,tsx,md,mdx,astro}\" && eslint --fix \"src/**/*.{js,ts,jsx,tsx,astro}\"",
     "prebuild:check": "npm run lint",
-    "postbuild": "pagefind --site dist/client/ && cp -r dist/client/pagefind .vercel/output/static/",
+    "postbuild": "pagefind --site dist/client/ && cp -r dist/client/pagefind .vercel/output/static/ && npm run test:function",
     "preview": "astro preview",
     "format": "prettier --write --cache '**/*.{js,jsx,ts,tsx,astro,html,css}'",
     "check": "astro check",
