@@ -1,0 +1,33 @@
+---
+import '@styles/everyday.css';
+---
+
+<figure class="everyday everyday-enso not-prose">
+  <svg viewBox="0 0 400 400" role="img" aria-label="An ink ensō circle with a crack mended in gold, and a red seal reading 日々, days">
+    <defs>
+      <filter id="everyday-enso-rough">
+        <feTurbulence type="fractalNoise" baseFrequency=".04" numOctaves="2" seed="4"></feTurbulence>
+        <feDisplacementMap in="SourceGraphic" scale="7"></feDisplacementMap>
+      </filter>
+      <linearGradient id="everyday-enso-gold" x1="0" x2="1">
+        <stop offset="0" stop-color="#f3d58a"></stop>
+        <stop offset=".5" stop-color="#c9973a"></stop>
+        <stop offset="1" stop-color="#f0cf7e"></stop>
+      </linearGradient>
+    </defs>
+    <circle cx="200" cy="200" r="190" fill="#1f2d4d"></circle>
+    <circle cx="200" cy="200" r="150" fill="#283a62"></circle>
+    <g filter="url(#everyday-enso-rough)">
+      <circle cx="200" cy="200" r="132" fill="none" stroke="#f3f0e8" stroke-width="30" stroke-linecap="round" stroke-dasharray="760 70" transform="rotate(-62 200 200)"></circle>
+      <circle cx="200" cy="200" r="132" fill="none" stroke="#f3f0e8" stroke-opacity=".35" stroke-width="10" stroke-dasharray="300 530" transform="rotate(80 200 200)"></circle>
+    </g>
+    <path d="M302 96 L318 120 L304 138 L326 160 L314 180" fill="none" stroke="url(#everyday-enso-gold)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+    <path d="M60 268 L84 280 L76 300" fill="none" stroke="url(#everyday-enso-gold)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+    <g transform="rotate(-5 320 318)">
+      <rect x="284" y="282" width="72" height="72" rx="6" fill="#cf3b2e"></rect>
+      <text class="everyday-enso-seal" x="320" y="312" text-anchor="middle">日</text>
+      <text class="everyday-enso-seal" x="320" y="343" text-anchor="middle">々</text>
+    </g>
+  </svg>
+  <figcaption lang="ja">日々の道 <span lang="en">· hibi no michi</span></figcaption>
+</figure>

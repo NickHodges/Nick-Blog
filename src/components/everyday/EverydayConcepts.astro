@@ -1,0 +1,85 @@
+---
+import '@styles/everyday.css';
+
+import { concepts, type ConceptGroup } from '@data/everyday-living';
+
+interface Props {
+  /** Which lesson's concepts to show. */
+  group: ConceptGroup;
+}
+
+const { group } = Astro.props;
+const cards = concepts.filter((concept) => concept.group === group);
+---
+
+<div class="everyday everyday-grid not-prose">
+  {
+    cards.map((concept) => (
+      <article class="everyday-card" id={`concept-${concept.id}`}>
+        <div class="everyday-kanji" lang="ja">
+          {concept.kanji}
+        </div>
+        <h3 class="everyday-romaji">{concept.romaji}</h3>
+        <p class="everyday-literal">{concept.literal}</p>
+        <p set:html={concept.what} />
+        <details class="everyday-more">
+          <summary>Study it</summary>
+          <dl>
+            <dt>Where it comes from</dt>
+            <dd set:html={concept.roots} />
+            <dt>In everyday life</dt>
+            <dd set:html={concept.daily} />
+            <dt>A careful note</dt>
+            <dd set:html={concept.care} />
+            <dt>Try this</dt>
+            <dd>{concept.tryThis}</dd>
+          </dl>
+        </details>
+        <button class="everyday-button everyday-learn" type="button" data-everyday-learn={concept.id} aria-pressed="false">
+          Mark learned
+        </button>
+      </article>
+    ))
+  }
+</div>
+
+<script>
+  import { EVERYDAY_KEYS, EVERYDAY_PROGRESS_EVENT, EVERYDAY_RESET_EVENT } from '../../lib/client/everyday-living';
+  import { everydayStore } from '../../lib/client/everyday-living-store';
+
+  /** Wires every concept card on the page, whichever lesson it sits in. */
+  function initEverydayConcepts(): void {
+    const buttons = [...document.querySelectorAll<HTMLButtonElement>('[data-everyday-learn]')];
+
+    const paint = (): void => {
+      const learned = new Set(everydayStore.readList(EVERYDAY_KEYS.learned) ?? []);
+      for (const button of buttons) {
+        const isLearned = learned.has(button.dataset['everydayLearn'] ?? '');
+        button.setAttribute('aria-pressed', String(isLearned));
+        button.textContent = isLearned ? 'Learned' : 'Mark learned';
+        button.closest('.everyday-card')?.classList.toggle('is-learned', isLearned);
+      }
+    };
+
+    for (const button of buttons) {
+      button.addEventListener('click', () => {
+        const id = button.dataset['everydayLearn'];
+        if (!id) {
+          return;
+        }
+        const learned = new Set(everydayStore.readList(EVERYDAY_KEYS.learned) ?? []);
+        if (!learned.delete(id)) {
+          learned.add(id);
+        }
+        everydayStore.write(EVERYDAY_KEYS.learned, [...learned]);
+        paint();
+        document.dispatchEvent(new CustomEvent(EVERYDAY_PROGRESS_EVENT));
+      });
+    }
+
+    document.addEventListener(EVERYDAY_RESET_EVENT, paint);
+    paint();
+  }
+
+  initEverydayConcepts();
+</script>

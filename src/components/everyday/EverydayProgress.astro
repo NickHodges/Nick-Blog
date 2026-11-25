@@ -1,0 +1,74 @@
+---
+import '@styles/everyday.css';
+
+import { concepts } from '@data/everyday-living';
+
+const total = concepts.length;
+const conceptIds = concepts.map((concept) => concept.id).join(' ');
+---
+
+<div class="everyday everyday-progress not-prose" data-everyday-progress data-concepts={conceptIds}>
+  <label class="everyday-progress-label">
+    <span>Concepts learned</span>
+    <progress max={total} value="0"></progress>
+  </label>
+  <span class="everyday-progress-count" data-everyday-count aria-live="polite">0 / {total}</span>
+  <button class="everyday-button" type="button" data-everyday-reset>Clear my progress</button>
+</div>
+
+<script>
+  import { EVERYDAY_KEYS, EVERYDAY_PROGRESS_EVENT, EVERYDAY_RESET_EVENT } from '../../lib/client/everyday-living';
+  import { everydayStore } from '../../lib/client/everyday-living-store';
+
+  const RESET_LABEL = 'Clear my progress';
+
+  function initEverydayProgress(): void {
+    const panels = [...document.querySelectorAll<HTMLElement>('[data-everyday-progress]')];
+
+    const paint = (): void => {
+      const learned = everydayStore.readList(EVERYDAY_KEYS.learned) ?? [];
+      for (const panel of panels) {
+        const known = new Set((panel.dataset['concepts'] ?? '').split(' '));
+        const count = learned.filter((id) => known.has(id)).length;
+        const bar = panel.querySelector('progress');
+        const label = panel.querySelector('[data-everyday-count]');
+        if (bar) {
+          bar.value = count;
+        }
+        if (label) {
+          label.textContent = `${count} / ${known.size}`;
+        }
+      }
+    };
+
+    for (const panel of panels) {
+      const reset = panel.querySelector<HTMLButtonElement>('[data-everyday-reset]');
+      if (!reset) {
+        continue;
+      }
+      // Clearing cannot be undone, so it takes a second press instead of a browser confirm dialog.
+      let armed = false;
+      reset.addEventListener('click', () => {
+        if (!armed) {
+          armed = true;
+          reset.textContent = 'Press again to clear everything';
+          return;
+        }
+        armed = false;
+        everydayStore.clear();
+        reset.textContent = 'Cleared';
+        document.dispatchEvent(new CustomEvent(EVERYDAY_RESET_EVENT));
+      });
+      reset.addEventListener('blur', () => {
+        armed = false;
+        reset.textContent = RESET_LABEL;
+      });
+    }
+
+    document.addEventListener(EVERYDAY_PROGRESS_EVENT, paint);
+    document.addEventListener(EVERYDAY_RESET_EVENT, paint);
+    paint();
+  }
+
+  initEverydayProgress();
+</script>

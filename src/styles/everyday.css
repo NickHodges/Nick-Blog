@@ -1,0 +1,632 @@
+/* The Way of Everyday Living: a study notebook. Rice-paper cards, one vermilion seal for what is learned, kintsugi gold for what is mended. */
+.everyday {
+  --el-ink: hsl(var(--theme-text));
+  --el-soft: color-mix(in srgb, hsl(var(--theme-text)) 68%, hsl(var(--theme-bg)));
+  --el-paper: #ffffff;
+  --el-line: #dcdde2;
+  --el-indigo: #1f2d4d;
+  --el-seal: #c23629;
+  --el-gold: #9a7020;
+  --el-serif: 'Hiragino Mincho ProN', 'Yu Mincho', 'Noto Serif CJK JP', 'Noto Serif JP', ui-serif, Georgia, serif;
+
+  margin-block: 1.5rem;
+  color: var(--el-ink);
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+:root[data-theme='dark'] .everyday {
+  --el-paper: #24282d;
+  --el-line: #3b4149;
+  --el-seal: #e8685b;
+  --el-gold: #d9ab4c;
+}
+
+.everyday p {
+  margin: 0 0 0.75rem;
+}
+
+.everyday h3 {
+  margin: 0 0 0.5rem;
+  font-family: var(--el-serif);
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.everyday a {
+  text-decoration: underline;
+  text-decoration-color: var(--el-seal);
+  text-underline-offset: 3px;
+}
+
+.everyday :focus-visible {
+  outline: 3px solid var(--el-seal);
+  outline-offset: 2px;
+}
+
+.everyday-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.everyday-button {
+  min-height: 2.75rem;
+  padding: 0.45rem 1.1rem;
+  border: 1.5px solid var(--el-ink);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--el-ink);
+  font-weight: 500;
+}
+
+.everyday-button-solid {
+  background: var(--el-ink);
+  color: hsl(var(--theme-bg));
+}
+
+.everyday-status {
+  min-height: 1.2rem;
+  margin: 0.5rem 0 0;
+  color: var(--el-soft);
+  font-size: 0.85rem;
+}
+
+.everyday-note {
+  padding: 0.25rem 0 0.25rem 1rem;
+  border-left: 3px solid var(--el-gold);
+  color: var(--el-soft);
+  font-size: 0.95rem;
+}
+
+.everyday-exercise,
+.everyday-panel {
+  padding: clamp(1.1rem, 3vw, 1.75rem);
+  border: 1px solid var(--el-line);
+  border-radius: 1rem;
+  background: var(--el-paper);
+}
+
+.everyday-two {
+  display: grid;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+@media (min-width: 40rem) {
+  .everyday-two {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+
+/* Opening figure */
+.everyday-enso svg {
+  display: block;
+  width: 100%;
+  max-width: 20rem;
+  height: auto;
+  margin-inline: auto;
+}
+
+.everyday-enso figcaption {
+  margin-top: 0.5rem;
+  color: var(--el-gold);
+  font-family: var(--el-serif);
+  font-size: 1.25rem;
+  text-align: center;
+}
+
+.everyday-enso-seal {
+  fill: #ffffff;
+  font-family: var(--el-serif);
+  font-size: 27px;
+  font-weight: 800;
+}
+
+/* Progress */
+.everyday-progress {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--el-line);
+  border-radius: 0.75rem;
+  background: var(--el-paper);
+  font-size: 0.9rem;
+}
+
+.everyday-progress-label {
+  display: flex;
+  flex: 1 1 14rem;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.everyday-progress progress {
+  flex: 1;
+  min-width: 5rem;
+  height: 0.5rem;
+  accent-color: var(--el-seal);
+}
+
+.everyday-progress-count {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.everyday-progress .everyday-button {
+  min-height: 2.25rem;
+  padding: 0.25rem 0.9rem;
+  font-size: 0.85rem;
+}
+
+/* Concept cards */
+.everyday-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+  gap: 1rem;
+}
+
+.everyday-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem;
+  border: 1px solid var(--el-line);
+  border-radius: 0.9rem;
+  background: var(--el-paper);
+  scroll-margin-top: 1rem;
+}
+
+.everyday-kanji {
+  font-family: var(--el-serif);
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.everyday h3.everyday-romaji {
+  margin: 0.4rem 0 0;
+  font-family: inherit;
+  font-size: 1.1rem;
+}
+
+.everyday p.everyday-literal {
+  color: var(--el-soft);
+  font-size: 0.9rem;
+}
+
+.everyday-more summary {
+  width: fit-content;
+  padding: 0.35rem 0;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.everyday-more dl {
+  margin: 0.25rem 0 0;
+}
+
+.everyday-more dt {
+  margin-top: 0.75rem;
+  color: var(--el-seal);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.everyday-more dd {
+  margin: 0.1rem 0 0;
+}
+
+.everyday-learn {
+  align-self: flex-start;
+  min-height: 2.5rem;
+  margin-top: 0.9rem;
+  border-color: var(--el-line);
+  font-size: 0.9rem;
+}
+
+.everyday-card.is-learned .everyday-learn {
+  border-color: var(--el-seal);
+  background: var(--el-seal);
+  color: #ffffff;
+}
+
+:root[data-theme='dark'] .everyday-card.is-learned .everyday-learn {
+  color: #1b1d20;
+}
+
+/* The seal stamped on a learned card: 学, "learned" */
+.everyday-card.is-learned::after {
+  content: '学';
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: grid;
+  place-items: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 0.35rem;
+  background: #c23629;
+  color: #ffffff;
+  font-family: var(--el-serif);
+  font-size: 1.1rem;
+  transform: rotate(-6deg);
+}
+
+/* Roots tabs */
+.everyday-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.everyday-chip {
+  min-height: 2.75rem;
+  padding: 0.4rem 1rem;
+  border: 1px solid var(--el-line);
+  border-radius: 999px;
+  background: var(--el-paper);
+  color: var(--el-ink);
+}
+
+.everyday-chip[aria-selected='true'] {
+  border-color: var(--el-ink);
+  background: var(--el-ink);
+  color: hsl(var(--theme-bg));
+}
+
+/* Suggestions for reflection */
+.everyday-reflect {
+  padding: 0.9rem 1.1rem;
+  border-left: 3px solid var(--el-seal);
+  border-radius: 0 0.6rem 0.6rem 0;
+  background: var(--el-paper);
+}
+
+.everyday p.everyday-reflect-label {
+  margin-bottom: 0.25rem;
+  color: var(--el-seal);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.everyday-reflect p:last-child {
+  margin-bottom: 0;
+}
+
+/* 24 seasons ring */
+.everyday p.everyday-seasons-info {
+  font-size: 1.1rem;
+}
+
+.everyday-ring {
+  display: block;
+  width: 100%;
+  max-width: 22rem;
+  height: auto;
+  margin-inline: auto;
+}
+
+.everyday-segment {
+  stroke: var(--el-paper);
+  stroke-width: 2;
+  opacity: 0.4;
+  cursor: pointer;
+}
+
+.everyday-segment.is-current {
+  opacity: 0.75;
+}
+
+.everyday-segment.is-selected {
+  opacity: 1;
+}
+
+.everyday-segment-spring {
+  fill: #d98ca0;
+}
+
+.everyday-segment-summer {
+  fill: #5f9a6e;
+}
+
+.everyday-segment-autumn {
+  fill: #c9733a;
+}
+
+.everyday-segment-winter {
+  fill: #5d6f9a;
+}
+
+.everyday-ring-kanji {
+  fill: currentColor;
+  font-family: var(--el-serif);
+  font-size: 34px;
+  font-weight: 700;
+}
+
+.everyday-ring-romaji {
+  fill: currentColor;
+  font-size: 13px;
+}
+
+/* Ma breathing */
+.everyday-breath {
+  text-align: center;
+}
+
+.everyday-breath .everyday-row {
+  justify-content: center;
+}
+
+.everyday-orb-stage {
+  display: grid;
+  place-items: center;
+  height: 15rem;
+}
+
+.everyday-orb {
+  display: grid;
+  place-items: center;
+  width: 7.5rem;
+  height: 7.5rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #4a5f8f, var(--el-indigo));
+  color: #ffffff;
+  font-family: var(--el-serif);
+  font-size: 1.9rem;
+  transition: transform 4s ease-in-out;
+}
+
+.everyday-orb.is-full {
+  transform: scale(1.75);
+}
+
+.everyday p.everyday-phase {
+  min-height: 2rem;
+  font-family: var(--el-serif);
+  font-size: 1.2rem;
+}
+
+/* Kintsugi bowl */
+.everyday-bowl {
+  display: block;
+  width: 100%;
+  max-width: 24rem;
+  height: auto;
+  margin-inline: auto;
+}
+
+.everyday-bowl-piece {
+  transform-box: view-box;
+  transform-origin: 160px 130px;
+  transition: transform 0.9s cubic-bezier(0.3, 0.7, 0.2, 1);
+}
+
+.everyday-bowl.is-broken .everyday-bowl-piece-left {
+  transform: translate(-16px, 8px) rotate(-7deg);
+}
+
+.everyday-bowl.is-broken .everyday-bowl-piece-right {
+  transform: translate(16px, 5px) rotate(6deg);
+}
+
+.everyday-bowl-seam {
+  stroke: #d9ab4c;
+  stroke-dasharray: 260;
+  stroke-dashoffset: 260;
+  transition: stroke-dashoffset 1.4s 0.2s;
+}
+
+.everyday-bowl.is-mended .everyday-bowl-seam {
+  stroke-dashoffset: 0;
+}
+
+/* Ikigai Venn */
+.everyday-venn svg {
+  display: block;
+  width: 100%;
+  max-width: 22rem;
+  height: auto;
+  margin-inline: auto;
+}
+
+.everyday-venn figcaption {
+  color: var(--el-soft);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.everyday-venn-love {
+  fill: var(--el-seal);
+  stroke: var(--el-seal);
+}
+
+.everyday-venn-good {
+  fill: var(--el-gold);
+  stroke: var(--el-gold);
+}
+
+.everyday-venn-needs {
+  fill: #4a6fa5;
+  stroke: #4a6fa5;
+}
+
+.everyday-venn-paid {
+  fill: var(--el-soft);
+  stroke: var(--el-soft);
+}
+
+/* Quiz */
+.everyday-quiz-meta {
+  display: flex;
+  justify-content: space-between;
+  color: var(--el-soft);
+  font-size: 0.9rem;
+}
+
+.everyday-question {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.everyday-question legend {
+  margin: 0.5rem 0 1rem;
+  padding: 0;
+  font-family: var(--el-serif);
+  font-size: 1.15rem;
+}
+
+.everyday-options {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.everyday-option {
+  min-height: 3rem;
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--el-line);
+  border-radius: 0.75rem;
+  background: var(--el-paper);
+  color: var(--el-ink);
+  text-align: left;
+}
+
+.everyday-option:disabled {
+  cursor: default;
+}
+
+.everyday-option.is-right {
+  border-color: var(--el-gold);
+  background: color-mix(in srgb, var(--el-gold) 18%, var(--el-paper));
+}
+
+.everyday-option.is-wrong {
+  border-color: var(--el-seal);
+  background: color-mix(in srgb, var(--el-seal) 14%, var(--el-paper));
+}
+
+.everyday p.everyday-feedback {
+  margin: 0.9rem 0 0;
+}
+
+.everyday-quiz [data-everyday-quiz-next] {
+  margin-top: 0.9rem;
+}
+
+/* Practice planner */
+.everyday-picks {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.everyday-pick {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  min-height: 2.75rem;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid var(--el-line);
+  border-radius: 0.75rem;
+  background: var(--el-paper);
+  cursor: pointer;
+}
+
+.everyday-pick input {
+  flex: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.2rem;
+  accent-color: var(--el-seal);
+}
+
+.everyday-pick small {
+  display: block;
+  color: var(--el-soft);
+}
+
+.everyday-week {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 9.5rem), 1fr));
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.everyday-day {
+  padding: 0.75rem;
+  border: 1px solid var(--el-line);
+  border-radius: 0.75rem;
+  background: var(--el-paper);
+  font-size: 0.9rem;
+}
+
+.everyday-day b {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-family: var(--el-serif);
+  font-size: 1.05rem;
+}
+
+.everyday-day ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.everyday-day li + li {
+  margin-top: 0.3rem;
+}
+
+.everyday-day ul.is-rest {
+  color: var(--el-soft);
+}
+
+/* Glossary */
+.everyday-glossary {
+  overflow-x: auto;
+}
+
+.everyday-glossary table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.everyday-glossary th,
+.everyday-glossary td {
+  padding: 0.5rem 0.6rem;
+  border-bottom: 1px solid var(--el-line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.everyday-glossary th {
+  color: var(--el-soft);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.everyday-glossary-kanji {
+  font-family: var(--el-serif);
+  font-size: 1.1rem;
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .everyday-orb,
+  .everyday-bowl-piece,
+  .everyday-bowl-seam {
+    transition: none;
+  }
+}

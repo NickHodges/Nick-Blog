@@ -1,0 +1,34 @@
+---
+import '@styles/everyday.css';
+
+import { conceptLessons, concepts } from '@data/everyday-living';
+---
+
+<div class="everyday everyday-glossary not-prose">
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Term</th>
+        <th scope="col">Romaji</th>
+        <th scope="col">In one line</th>
+        <th scope="col">Lesson</th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        concepts.map((concept) => (
+          <tr>
+            <td class="everyday-glossary-kanji" lang="ja">
+              {concept.kanji}
+            </td>
+            <td>
+              <a href={`#concept-${concept.id}`}>{concept.romaji}</a>
+            </td>
+            <td>{concept.literal}</td>
+            <td>{conceptLessons[concept.group]}</td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>

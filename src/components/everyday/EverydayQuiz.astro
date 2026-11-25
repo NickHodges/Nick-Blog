@@ -1,0 +1,173 @@
+---
+import '@styles/everyday.css';
+
+import { quizQuestions } from '@data/everyday-living';
+
+const total = quizQuestions.length;
+---
+
+<div class="everyday everyday-exercise everyday-quiz not-prose" data-everyday-quiz>
+  <div class="everyday-quiz-meta" data-everyday-quiz-meta>
+    <span data-everyday-quiz-position>Question 1 of {total}</span>
+    <span data-everyday-quiz-score>Score 0</span>
+  </div>
+  {
+    quizQuestions.map((question, index) => (
+      <fieldset class="everyday-question" data-everyday-question data-answer={question.answer} hidden={index !== 0}>
+        <legend>{question.prompt}</legend>
+        <div class="everyday-options">
+          {question.options.map((option, optionIndex) => (
+            <button class="everyday-option" type="button" data-everyday-option={optionIndex}>
+              {option}
+            </button>
+          ))}
+        </div>
+        <div aria-live="polite">
+          <p class="everyday-feedback" data-everyday-feedback hidden>
+            <strong data-everyday-verdict />
+            {question.explanation}
+          </p>
+        </div>
+      </fieldset>
+    ))
+  }
+  <button class="everyday-button everyday-button-solid" type="button" data-everyday-quiz-next hidden>Next question</button>
+  <div data-everyday-quiz-results hidden>
+    <h3 data-everyday-quiz-title></h3>
+    <p data-everyday-quiz-message></p>
+    <p class="everyday-status" data-everyday-quiz-best></p>
+    <button class="everyday-button everyday-button-solid" type="button" data-everyday-quiz-retry>Try again</button>
+  </div>
+</div>
+
+<script>
+  import { EVERYDAY_KEYS } from '../../lib/client/everyday-living';
+  import { everydayStore } from '../../lib/client/everyday-living-store';
+
+  const EXCELLENT_SCORE = 10;
+  const GOOD_SCORE = 7;
+
+  /** The closing remark for a final score. */
+  function verdictFor(score: number): string {
+    if (score >= EXCELLENT_SCORE) {
+      return "Excellent — you've absorbed the ideas and their origins.";
+    }
+    if (score >= GOOD_SCORE) {
+      return 'Good grasp. Revisit the cards you missed and read their "careful note."';
+    }
+    return "A beginner's mind is a fine place to start. Re-read lessons 2–8 and try again.";
+  }
+
+  function initEverydayQuiz(): void {
+    for (const quiz of document.querySelectorAll<HTMLElement>('[data-everyday-quiz]')) {
+      const questions = [...quiz.querySelectorAll<HTMLFieldSetElement>('[data-everyday-question]')];
+      const meta = quiz.querySelector<HTMLElement>('[data-everyday-quiz-meta]');
+      const position = quiz.querySelector<HTMLElement>('[data-everyday-quiz-position]');
+      const scoreLabel = quiz.querySelector<HTMLElement>('[data-everyday-quiz-score]');
+      const next = quiz.querySelector<HTMLButtonElement>('[data-everyday-quiz-next]');
+      const results = quiz.querySelector<HTMLElement>('[data-everyday-quiz-results]');
+      const title = quiz.querySelector<HTMLElement>('[data-everyday-quiz-title]');
+      const message = quiz.querySelector<HTMLElement>('[data-everyday-quiz-message]');
+      const best = quiz.querySelector<HTMLElement>('[data-everyday-quiz-best]');
+      const retry = quiz.querySelector<HTMLButtonElement>('[data-everyday-quiz-retry]');
+      if (!meta || !position || !scoreLabel || !next || !results || !title || !message || !best || !retry) {
+        continue;
+      }
+      const total = questions.length;
+      let current = 0;
+      let score = 0;
+
+      const optionsOf = (question: HTMLFieldSetElement): HTMLButtonElement[] => [...question.querySelectorAll<HTMLButtonElement>('[data-everyday-option]')];
+
+      const showQuestion = (): void => {
+        questions.forEach((question, index) => {
+          question.hidden = index !== current;
+        });
+        meta.hidden = false;
+        results.hidden = true;
+        next.hidden = true;
+        position.textContent = `Question ${current + 1} of ${total}`;
+        scoreLabel.textContent = `Score ${score}`;
+      };
+
+      const showResults = (): void => {
+        const bestScore = Math.max(score, everydayStore.readNumber(EVERYDAY_KEYS.bestScore));
+        everydayStore.write(EVERYDAY_KEYS.bestScore, bestScore);
+        for (const question of questions) {
+          question.hidden = true;
+        }
+        meta.hidden = true;
+        next.hidden = true;
+        results.hidden = false;
+        title.textContent = `You scored ${score} of ${total}`;
+        message.textContent = verdictFor(score);
+        best.textContent = `Best score in this browser: ${bestScore} / ${total}`;
+        retry.focus();
+      };
+
+      const restart = (): void => {
+        current = 0;
+        score = 0;
+        for (const question of questions) {
+          for (const option of optionsOf(question)) {
+            option.disabled = false;
+            option.classList.remove('is-right', 'is-wrong');
+          }
+          const feedback = question.querySelector<HTMLElement>('[data-everyday-feedback]');
+          if (feedback) {
+            feedback.hidden = true;
+          }
+        }
+        showQuestion();
+      };
+
+      questions.forEach((question) => {
+        const answer = Number(question.dataset['answer']);
+        const options = optionsOf(question);
+        options.forEach((option, optionIndex) => {
+          option.addEventListener('click', () => {
+            const isRight = optionIndex === answer;
+            if (isRight) {
+              score += 1;
+            }
+            options.forEach((other, otherIndex) => {
+              other.disabled = true;
+              other.classList.toggle('is-right', otherIndex === answer);
+              other.classList.toggle('is-wrong', other === option && !isRight);
+            });
+            const verdict = question.querySelector<HTMLElement>('[data-everyday-verdict]');
+            const feedback = question.querySelector<HTMLElement>('[data-everyday-feedback]');
+            if (verdict) {
+              verdict.textContent = isRight ? 'Yes. ' : 'Not quite. ';
+            }
+            if (feedback) {
+              feedback.hidden = false;
+            }
+            scoreLabel.textContent = `Score ${score}`;
+            next.textContent = current === total - 1 ? 'See results' : 'Next question';
+            next.hidden = false;
+            next.focus();
+          });
+        });
+      });
+
+      next.addEventListener('click', () => {
+        current += 1;
+        if (current >= total) {
+          showResults();
+          return;
+        }
+        showQuestion();
+        questions[current]?.querySelector<HTMLButtonElement>('[data-everyday-option]')?.focus();
+      });
+      retry.addEventListener('click', () => {
+        restart();
+        questions[0]?.querySelector<HTMLButtonElement>('[data-everyday-option]')?.focus();
+      });
+
+      showQuestion();
+    }
+  }
+
+  initEverydayQuiz();
+</script>

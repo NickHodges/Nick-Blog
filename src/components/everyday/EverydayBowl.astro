@@ -1,0 +1,71 @@
+---
+import '@styles/everyday.css';
+---
+
+<div class="everyday everyday-exercise everyday-two not-prose" data-everyday-bowl>
+  <div>
+    <div class="everyday-row">
+      <button class="everyday-button" type="button" data-everyday-bowl-action="break">Break</button>
+      <button class="everyday-button everyday-button-solid" type="button" data-everyday-bowl-action="mend">Mend with gold</button>
+      <button class="everyday-button" type="button" data-everyday-bowl-action="reset">Reset</button>
+    </div>
+    <p class="everyday-status" data-everyday-bowl-status aria-live="polite">A whole tea bowl.</p>
+  </div>
+  <svg class="everyday-bowl" viewBox="0 0 320 240" role="img" aria-label="Tea bowl" data-everyday-bowl-figure>
+    <defs>
+      <clipPath id="everyday-bowl-left"><polygon points="0,0 150,0 150,72 168,110 146,142 172,200 172,240 0,240"></polygon></clipPath>
+      <clipPath id="everyday-bowl-right"><polygon points="150,0 320,0 320,240 172,240 172,200 146,142 168,110 150,72"></polygon></clipPath>
+      <radialGradient id="everyday-bowl-glaze" cx=".35" cy=".3" r=".9">
+        <stop offset="0" stop-color="#55607a"></stop>
+        <stop offset=".6" stop-color="#2b3550"></stop>
+        <stop offset="1" stop-color="#171d2d"></stop>
+      </radialGradient>
+      <g id="everyday-bowl-shape">
+        <path d="M40 88 Q44 196 160 198 Q276 196 280 88 Z" fill="url(#everyday-bowl-glaze)"></path>
+        <path d="M48 112 Q160 140 272 112" stroke="#8a6b4e" stroke-width="3" fill="none" opacity=".55"></path>
+        <ellipse cx="160" cy="88" rx="120" ry="20" fill="#3a4561"></ellipse>
+        <ellipse cx="160" cy="90" rx="110" ry="15" fill="#10141f"></ellipse>
+        <path d="M60 150 Q70 120 64 100" stroke="#fff" stroke-opacity=".18" stroke-width="5" fill="none" stroke-linecap="round"></path>
+      </g>
+    </defs>
+    <ellipse cx="160" cy="214" rx="100" ry="10" fill="currentColor" opacity=".12"></ellipse>
+    <g class="everyday-bowl-piece everyday-bowl-piece-left" clip-path="url(#everyday-bowl-left)"><use href="#everyday-bowl-shape"></use></g>
+    <g class="everyday-bowl-piece everyday-bowl-piece-right" clip-path="url(#everyday-bowl-right)"><use href="#everyday-bowl-shape"></use></g>
+    <path class="everyday-bowl-seam" d="M150 74 L168 110 L146 142 L172 200" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+  </svg>
+</div>
+
+<script>
+  type BowlState = 'break' | 'mend' | 'reset';
+
+  const STATUS: Record<BowlState, string> = {
+    break: "Broken. In most traditions, this is the end of the bowl's story.",
+    mend: "Mended with gold. The crack is now the bowl's most admired feature.",
+    reset: 'A whole tea bowl.',
+  };
+
+  const isBowlState = (value: string | undefined): value is BowlState => value === 'break' || value === 'mend' || value === 'reset';
+
+  function initEverydayBowl(): void {
+    for (const container of document.querySelectorAll<HTMLElement>('[data-everyday-bowl]')) {
+      const figure = container.querySelector('[data-everyday-bowl-figure]');
+      const status = container.querySelector<HTMLElement>('[data-everyday-bowl-status]');
+      if (!figure || !status) {
+        continue;
+      }
+      for (const button of container.querySelectorAll<HTMLButtonElement>('[data-everyday-bowl-action]')) {
+        button.addEventListener('click', () => {
+          const action = button.dataset['everydayBowlAction'];
+          if (!isBowlState(action)) {
+            return;
+          }
+          figure.classList.toggle('is-broken', action === 'break');
+          figure.classList.toggle('is-mended', action === 'mend');
+          status.textContent = STATUS[action];
+        });
+      }
+    }
+  }
+
+  initEverydayBowl();
+</script>

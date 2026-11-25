@@ -1,0 +1,70 @@
+---
+import '@styles/everyday.css';
+---
+
+<div class="everyday everyday-exercise everyday-breath not-prose" data-everyday-breath>
+  <div class="everyday-orb-stage">
+    <div class="everyday-orb" lang="ja" aria-hidden="true" data-everyday-orb>間</div>
+  </div>
+  <p class="everyday-phase" data-everyday-phase aria-live="polite">Ready when you are</p>
+  <div class="everyday-row">
+    <button class="everyday-button everyday-button-solid" type="button" data-everyday-breath-start>Begin</button>
+    <button class="everyday-button" type="button" data-everyday-breath-stop>Stop</button>
+  </div>
+</div>
+
+<script>
+  interface BreathStep {
+    label: string;
+    /** Whether the orb is expanded during this step. */
+    full: boolean;
+  }
+
+  const STEP_MS = 4000;
+  const BREATHS = 4;
+  const READY = 'Ready when you are';
+  const STEPS: BreathStep[] = [
+    { label: 'Breathe in', full: true },
+    { label: 'Ma: rest in the full pause', full: true },
+    { label: 'Breathe out', full: false },
+    { label: 'Ma: rest in the empty pause', full: false },
+  ];
+
+  function initEverydayBreath(): void {
+    for (const container of document.querySelectorAll<HTMLElement>('[data-everyday-breath]')) {
+      const orb = container.querySelector<HTMLElement>('[data-everyday-orb]');
+      const phase = container.querySelector<HTMLElement>('[data-everyday-phase]');
+      const start = container.querySelector<HTMLButtonElement>('[data-everyday-breath-start]');
+      const stop = container.querySelector<HTMLButtonElement>('[data-everyday-breath-stop]');
+      if (!orb || !phase || !start || !stop) {
+        continue;
+      }
+      let timer: number | undefined;
+
+      const finish = (message: string): void => {
+        window.clearTimeout(timer);
+        orb.classList.remove('is-full');
+        phase.textContent = message;
+      };
+
+      const run = (stepNumber: number): void => {
+        const step = STEPS[stepNumber % STEPS.length];
+        if (stepNumber >= STEPS.length * BREATHS || !step) {
+          finish('Finished. Notice how the room sounds now.');
+          return;
+        }
+        phase.textContent = `${step.label} · breath ${Math.floor(stepNumber / STEPS.length) + 1} of ${BREATHS}`;
+        orb.classList.toggle('is-full', step.full);
+        timer = window.setTimeout(() => run(stepNumber + 1), STEP_MS);
+      };
+
+      start.addEventListener('click', () => {
+        finish(READY);
+        run(0);
+      });
+      stop.addEventListener('click', () => finish(READY));
+    }
+  }
+
+  initEverydayBreath();
+</script>
