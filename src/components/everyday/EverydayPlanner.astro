@@ -1,0 +1,125 @@
+---
+import '@styles/everyday.css';
+
+import { practices } from '@data/everyday-living';
+
+const DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+
+const frequency = (timesPerWeek: number): string => (timesPerWeek === DAYS.length ? 'daily' : `${timesPerWeek}× a week`);
+---
+
+<div class="everyday everyday-planner not-prose" data-everyday-planner>
+  <div class="everyday-picks">
+    {
+      practices.map((practice) => (
+        <label class="everyday-pick">
+          <input type="checkbox" value={practice.id} checked={practice.suggested} data-suggested={practice.suggested ? 'true' : 'false'} data-label={practice.label} data-times={practice.timesPerWeek} />
+          <span>
+            {practice.label}
+            <small>
+              {practice.concept} · {frequency(practice.timesPerWeek)}
+            </small>
+          </span>
+        </label>
+      ))
+    }
+  </div>
+  <div class="everyday-row">
+    <button class="everyday-button everyday-button-solid" type="button" data-everyday-plan-copy>Copy my plan</button>
+    <span class="everyday-status" data-everyday-plan-status aria-live="polite"></span>
+  </div>
+  <div class="everyday-week">
+    {
+      DAYS.map((day) => (
+        <div class="everyday-day">
+          <b>{day}</b>
+          <ul data-everyday-day={day} />
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  import { buildWeek, EVERYDAY_KEYS, EVERYDAY_RESET_EVENT, type PlannedPractice } from '../../lib/client/everyday-living';
+  import { everydayStore } from '../../lib/client/everyday-living-store';
+  import { logger } from '../../lib/logger';
+
+  const MAX_COMFORTABLE = 4;
+  const REST = 'Rest — this too is ma';
+
+  function initEverydayPlanner(): void {
+    for (const planner of document.querySelectorAll<HTMLElement>('[data-everyday-planner]')) {
+      const boxes = [...planner.querySelectorAll<HTMLInputElement>('input[type="checkbox"]')];
+      const days = [...planner.querySelectorAll<HTMLUListElement>('[data-everyday-day]')];
+      const status = planner.querySelector<HTMLElement>('[data-everyday-plan-status]');
+      const copy = planner.querySelector<HTMLButtonElement>('[data-everyday-plan-copy]');
+      if (!status || !copy) {
+        continue;
+      }
+
+      const suggested = (): string[] => boxes.filter((box) => box.dataset['suggested'] === 'true').map((box) => box.value);
+      // The order practices were chosen in decides which days they land on, so keep the list, not just the ticks.
+      let chosen = everydayStore.readList(EVERYDAY_KEYS.plan) ?? suggested();
+
+      const week = (): PlannedPractice[][] => {
+        const planned: PlannedPractice[] = [];
+        for (const id of chosen) {
+          const box = boxes.find((candidate) => candidate.value === id);
+          if (box) {
+            planned.push({ id, label: box.dataset['label'] ?? '', timesPerWeek: Number(box.dataset['times']) });
+          }
+        }
+        return buildWeek(planned);
+      };
+
+      const paint = (): void => {
+        for (const box of boxes) {
+          box.checked = chosen.includes(box.value);
+        }
+        const planned = week();
+        days.forEach((list, index) => {
+          const labels = (planned[index] ?? []).map((practice) => practice.label);
+          const items = (labels.length > 0 ? labels : [REST]).map((label) => {
+            const item = document.createElement('li');
+            item.textContent = label;
+            return item;
+          });
+          list.classList.toggle('is-rest', labels.length === 0);
+          list.replaceChildren(...items);
+        });
+        status.textContent = chosen.length > MAX_COMFORTABLE ? "That's a lot for one week — kaizen says start smaller." : '';
+      };
+
+      for (const box of boxes) {
+        box.addEventListener('change', () => {
+          chosen = box.checked ? [...chosen.filter((id) => id !== box.value), box.value] : chosen.filter((id) => id !== box.value);
+          everydayStore.write(EVERYDAY_KEYS.plan, chosen);
+          paint();
+        });
+      }
+
+      copy.addEventListener('click', () => {
+        const lines = week().map((practices, index) => `${days[index]?.dataset['everydayDay'] ?? ''}: ${practices.map((practice) => practice.label).join('; ') || 'Rest'}`);
+        navigator.clipboard
+          .writeText(['My week of everyday practice', ...lines].join('\n'))
+          .then(() => {
+            status.textContent = 'Copied.';
+          })
+          .catch((error: unknown) => {
+            logger.warn('Everyday Living: could not copy the plan', error);
+            status.textContent = 'Copy was blocked here — select the week below instead.';
+          });
+      });
+
+      document.addEventListener(EVERYDAY_RESET_EVENT, () => {
+        chosen = suggested();
+        paint();
+      });
+
+      paint();
+    }
+  }
+
+  initEverydayPlanner();
+</script>

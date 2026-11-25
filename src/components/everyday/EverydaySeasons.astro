@@ -1,0 +1,100 @@
+---
+import '@styles/everyday.css';
+
+import { sekki } from '@data/everyday-living';
+
+const CENTER = 160;
+const INNER_RADIUS = 92;
+const OUTER_RADIUS = 150;
+const GAP_RADIANS = 0.01;
+const SEASONS = ['spring', 'summer', 'autumn', 'winter'] as const;
+const TERMS_PER_SEASON = sekki.length / SEASONS.length;
+
+/** A point on the ring, with angle 0 at twelve o'clock and increasing clockwise. */
+const point = (radius: number, angle: number): string => `${(CENTER + radius * Math.sin(angle)).toFixed(2)} ${(CENTER - radius * Math.cos(angle)).toFixed(2)}`;
+
+const segments = sekki.map((term, index) => {
+  const start = (index / sekki.length) * 2 * Math.PI + GAP_RADIANS;
+  const end = ((index + 1) / sekki.length) * 2 * Math.PI - GAP_RADIANS;
+  return {
+    term,
+    index,
+    season: SEASONS[Math.floor(index / TERMS_PER_SEASON)] ?? 'spring',
+    path: `M${point(OUTER_RADIUS, start)}A${OUTER_RADIUS} ${OUTER_RADIUS} 0 0 1 ${point(OUTER_RADIUS, end)}L${point(INNER_RADIUS, end)}A${INNER_RADIUS} ${INNER_RADIUS} 0 0 0 ${point(INNER_RADIUS, start)}Z`,
+  };
+});
+---
+
+<div class="everyday everyday-exercise everyday-two not-prose" data-everyday-seasons>
+  <div>
+    <p class="everyday-seasons-info" data-everyday-season-info aria-live="polite">
+      <span data-part="lead">Tap a segment of the ring to read it.</span>
+      <strong data-part="romaji"></strong>
+      <span data-part="kanji" lang="ja"></span>
+      <span data-part="detail"></span>
+    </p>
+    <p class="everyday-note">Dates shift by a day or so from year to year. Tap any segment of the ring to read it.</p>
+  </div>
+  <svg class="everyday-ring" viewBox="0 0 320 320" role="group" aria-label="The 24 solar terms">
+    {segments.map(({ term, index, season, path }) => <path class={`everyday-segment everyday-segment-${season}`} d={path} tabindex="0" role="button" aria-label={`${term.romaji}, ${term.meaning}`} data-index={index} data-month={term.month} data-day={term.day} data-kanji={term.kanji} data-romaji={term.romaji} data-meaning={term.meaning} />)}
+    <text class="everyday-ring-kanji" x="160" y="158" text-anchor="middle" lang="ja" data-everyday-ring-kanji></text>
+    <text class="everyday-ring-romaji" x="160" y="186" text-anchor="middle" data-everyday-ring-romaji></text>
+  </svg>
+</div>
+
+<script>
+  import { currentTermIndex, type YearDay } from '../../lib/client/everyday-living';
+
+  const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+  function initEverydaySeasons(): void {
+    for (const container of document.querySelectorAll<HTMLElement>('[data-everyday-seasons]')) {
+      const segments = [...container.querySelectorAll<SVGPathElement>('.everyday-segment')];
+      const starts: YearDay[] = segments.map((segment) => ({ month: Number(segment.dataset['month']), day: Number(segment.dataset['day']) }));
+      const current = currentTermIndex(starts, new Date());
+      const part = (name: string): Element | null => container.querySelector(`[data-part="${name}"]`);
+      const ringKanji = container.querySelector('[data-everyday-ring-kanji]');
+      const ringRomaji = container.querySelector('[data-everyday-ring-romaji]');
+
+      const show = (index: number): void => {
+        const segment = segments[index];
+        const start = starts[index];
+        if (!segment || !start) {
+          return;
+        }
+        const { kanji = '', romaji = '', meaning = '' } = segment.dataset;
+        segments.forEach((other, otherIndex) => {
+          other.classList.toggle('is-selected', otherIndex === index);
+          other.classList.toggle('is-current', otherIndex === current);
+        });
+        const texts: Array<[Element | null, string]> = [
+          [ringKanji, kanji],
+          [ringRomaji, romaji],
+          [part('lead'), index === current ? 'Right now you are in' : 'You selected'],
+          [part('romaji'), romaji],
+          [part('kanji'), kanji],
+          [part('detail'), `("${meaning}"), beginning around ${MONTHS[start.month - 1] ?? ''} ${start.day}.`],
+        ];
+        for (const [element, text] of texts) {
+          if (element) {
+            element.textContent = text;
+          }
+        }
+      };
+
+      segments.forEach((segment, index) => {
+        segment.addEventListener('click', () => show(index));
+        segment.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            show(index);
+          }
+        });
+      });
+
+      show(current);
+    }
+  }
+
+  initEverydaySeasons();
+</script>

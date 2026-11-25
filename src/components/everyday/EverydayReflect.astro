@@ -1,0 +1,15 @@
+---
+import '@styles/everyday.css';
+
+interface Props {
+  /** A suggestion for the reader to think over; nothing is collected. */
+  suggestion: string;
+}
+
+const { suggestion } = Astro.props;
+---
+
+<aside class="everyday everyday-reflect not-prose">
+  <p class="everyday-reflect-label">To reflect on</p>
+  <p>{suggestion}</p>
+</aside>

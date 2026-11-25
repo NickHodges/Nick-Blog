@@ -1,0 +1,64 @@
+---
+import '@styles/everyday.css';
+
+import { roots } from '@data/everyday-living';
+---
+
+<div class="everyday everyday-roots not-prose" data-everyday-roots>
+  <div class="everyday-tabs" role="tablist" aria-label="The roots of everyday practice">
+    {
+      roots.map((root, index) => (
+        <button class="everyday-chip" type="button" role="tab" id={`everyday-root-tab-${root.id}`} aria-controls={`everyday-root-${root.id}`} aria-selected={index === 0 ? 'true' : 'false'} tabindex={index === 0 ? 0 : -1}>
+          {root.tab}
+        </button>
+      ))
+    }
+  </div>
+  {
+    roots.map((root, index) => (
+      <section class="everyday-panel" role="tabpanel" id={`everyday-root-${root.id}`} aria-labelledby={`everyday-root-tab-${root.id}`} hidden={index !== 0}>
+        <h3>{root.heading}</h3>
+        {root.paragraphs.map((paragraph) => (
+          <p set:html={paragraph} />
+        ))}
+        <p class="everyday-note">{root.note}</p>
+      </section>
+    ))
+  }
+</div>
+
+<script>
+  function initEverydayRoots(): void {
+    for (const container of document.querySelectorAll<HTMLElement>('[data-everyday-roots]')) {
+      const tabs = [...container.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
+
+      const select = (chosen: HTMLButtonElement): void => {
+        for (const tab of tabs) {
+          const isChosen = tab === chosen;
+          tab.setAttribute('aria-selected', String(isChosen));
+          tab.tabIndex = isChosen ? 0 : -1;
+          const panel = document.getElementById(tab.getAttribute('aria-controls') ?? '');
+          if (panel) {
+            panel.hidden = !isChosen;
+          }
+        }
+      };
+
+      tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => select(tab));
+        tab.addEventListener('keydown', (event) => {
+          const step = event.key === 'ArrowRight' ? 1 : event.key === 'ArrowLeft' ? -1 : 0;
+          const next = tabs[(index + step + tabs.length) % tabs.length];
+          if (step === 0 || !next) {
+            return;
+          }
+          event.preventDefault();
+          select(next);
+          next.focus();
+        });
+      });
+    }
+  }
+
+  initEverydayRoots();
+</script>
