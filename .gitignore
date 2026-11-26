@@ -29,3 +29,4 @@ lint_output.txt
 
 # local comments database (npm run db:local)
 .data/
+.env*.local
